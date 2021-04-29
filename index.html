@@ -78,14 +78,14 @@
 								</div>
 								<div class="form-row">
 									<div class="form-holder">
-										<fieldset>
+										<fieldset id="name-fieldset">
 											<legend>Nombre</legend>
 											<input type="text" class="form-control" id="first-name" name="first-name"
 												placeholder="Nombre" required>
 										</fieldset>
 									</div>
 									<div class="form-holder">
-										<fieldset>
+										<fieldset id="lastname-fieldset">
 											<legend>Apellido</legend>
 											<input type="text" class="form-control" id="last-name" name="last-name"
 												placeholder="Apellido" required>
@@ -94,7 +94,7 @@
 								</div>
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
-										<fieldset>
+										<fieldset id="email-fieldset">
 											<legend>Email</legend>
 											<input type="text" name="your_email" id="your_email" class="form-control"
 												pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="example@email.com"
@@ -113,7 +113,7 @@
 								</div>
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
-										<fieldset>
+										<fieldset id="description-fieldset">
 											<legend>Descripción</legend>
 											<textarea type="text" name="description" id="description"
 												class="form-control" placeholder="Nos gustaria saber más de vos"
@@ -123,7 +123,7 @@
 								</div>
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
-										<fieldset>
+										<fieldset id="image-fieldset">
 											<legend>Foto para el Flyer</legend>
 											<input type="file" name="image" id="image" class="form-control" required>
 										</fieldset>
@@ -145,7 +145,7 @@
 
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
-										<fieldset>
+										<fieldset id="title-fieldset">
 											<legend>Título</legend>
 											<input type="text" name="title" id="title" class="form-control"
 												placeholder="Título" required>
@@ -155,9 +155,9 @@
 
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
-										<fieldset>
+										<fieldset id="description2-fieldset">
 											<legend>Descripción</legend>
-											<textarea type="text" name="description" id="description"
+											<textarea type="text" name="description2" id="description2"
 												class="form-control"
 												placeholder="Lucite! ¿Como convencerias a alguien de asistir a tu charla?"
 												required></textarea>
@@ -248,8 +248,8 @@
 							<div class="inner">
 								<div class="wizard-header">
 									<h3 class="heading">Confirmación</h3>
-									<p>Estas a un click de postular tu charla. Cualquier cosa podes volver a los pasos
-										anteriores.</p>
+									<p>Estas a un click de postular tu charla. Podes volver a los pasos
+										anteriores si necesitas editar algún campo.</p>
 								</div>
 								<!-- <div class="form-row">
 									<div class="form-holder form-holder-2">

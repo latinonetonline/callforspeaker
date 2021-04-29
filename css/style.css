@@ -607,3 +607,7 @@ html {
     margin-right: auto;
     width: 40%;
   }
+
+.error {
+    border-color: red !important;
+}
