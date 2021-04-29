@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Call For Speaker</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="css/opensans-font.css">
+	<link rel="stylesheet" type="text/css"
+		href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+	<!-- Main Style Css -->
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body onload="mesOnChange()">
+	<div class="page-content vertical-center">
+		<div class="form-v1-content">
+			<div class="wizard-form">
+				<form class="form-register" action="#" method="post">
+					<div id="form-total">
+						<h2>
+							<p class="step-icon"><span>01</span></p>
+							<span class="step-text">Bienvenidos</span>
+						</h2>
+						<section>
+							<div class="inner">
+								<img class="img-center" src="images/logo.png" />
+								<div class="wizard-header">
+									<h3 class="heading welcome">Call For Speakers</h3>
+
+									<h4 style="margin-bottom: 0px;font-size: 20px;">El Call For Speaker de la comunidad
+									</h4>
+									<h4 style="margin-top: 5px;font-size: 20px;">Latino .NET Online</h4>
+
+									<p style="margin-top: 50px;">Desde el equipo de organización estamos agradecidos
+										de que dediques tu tiempo para proponer una charla para dar en uno de nuestros
+										sábados de webinar.
+									</p>
+									<p>
+										Estamos ansiosos por ver su propuesta!
+									</p>
+								</div>
+							</div>
+						</section>
+						<!-- SECTION 1 -->
+						<h2>
+							<p class="step-icon"><span>02</span></p>
+							<span class="step-text">Infomación Personal</span>
+						</h2>
+						<section>
+							<div class="inner">
+								<div class="wizard-header">
+									<h3 class="heading">Infomación Personal</h3>
+									<p>Atras de toda gran charla hay un gran speaker al cual todos nosotros queremos
+										conocer mejor.</p>
+								</div>
+								<div class="form-row">
+									<div class="form-holder">
+										<fieldset>
+											<legend>Nombre</legend>
+											<input type="text" class="form-control" id="first-name" name="first-name"
+												placeholder="Nombre" required>
+										</fieldset>
+									</div>
+									<div class="form-holder">
+										<fieldset>
+											<legend>Apellido</legend>
+											<input type="text" class="form-control" id="last-name" name="last-name"
+												placeholder="Apellido" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Email</legend>
+											<input type="text" name="your_email" id="your_email" class="form-control"
+												pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="example@email.com"
+												required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Twitter</legend>
+											<input type="text" name="twitter" id="twitter" class="form-control"
+												placeholder="@username" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Descripción</legend>
+											<textarea type="text" name="description" id="description"
+												class="form-control" placeholder="Nos gustaria saber más de vos"
+												required></textarea>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Foto para el Flyer</legend>
+											<input type="file" name="image" id="image" class="form-control" required>
+										</fieldset>
+									</div>
+								</div>
+							</div>
+						</section>
+						<!-- SECTION 2 -->
+						<h2>
+							<p class="step-icon"><span>03</span></p>
+							<span class="step-text">Presentación</span>
+						</h2>
+						<section>
+							<div class="inner">
+								<div class="wizard-header">
+									<h3 class="heading">Presentación</h3>
+									<p>Ahora si! Cuentanos sobre tu exposición.</p>
+								</div>
+
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Título</legend>
+											<input type="text" name="title" id="title" class="form-control"
+												placeholder="Título" required>
+										</fieldset>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Descripción</legend>
+											<textarea type="text" name="description" id="description"
+												class="form-control"
+												placeholder="Lúcete! ¿Como convencerias a alguien de asistir a tu charla?"
+												required></textarea>
+										</fieldset>
+									</div>
+								</div>
+
+								<div class="form-row form-row-date">
+									<div class="form-holder form-holder-2">
+										<label class="special-label">Elegi tu sábado:</label>
+										<select name="year" id="year">
+											<option value="2021" disabled selected>2021</option>
+										</select>
+										<select name="month" id="month" onchange="mesOnChange()" onload="mesOnChange()">
+											<option value="05" selected>May</option>
+											<option value="06">Jun</option>
+											<option value="07">Jul</option>
+											<option value="08">Ago</option>
+											<option value="09">Sep</option>
+											<option value="10">Oct</option>
+											<option value="11">Nov</option>
+											<option value="12">Dic</option>
+										</select>
+										<select name="date" id="date">
+
+										</select>
+
+
+									</div>
+								</div>
+							</div>
+						</section>
+						<!-- SECTION 3 -->
+						<h2>
+							<p class="step-icon"><span>04</span></p>
+							<span class="step-text">Sumemos Valor</span>
+						</h2>
+						<section>
+							<div class="inner">
+								<div class="wizard-header">
+									<h3 class="heading">Sumemos Valor</h3>
+									<p style="margin-bottom: 50px;">Nadie conoce este tema mejor que vos! Ayudanos a
+										crear el mejor contenido para
+										atraer más publico a tu webinar.</p>
+
+									<p style="margin-bottom: 50px;">Las siguientes preguntas son opcionales aunque nos
+										ayudarian para poder sumar más
+										valor a tu charla:</p>
+								</div>
+
+
+
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>¿Para quien es esta charla?</legend>
+											<textarea type="text" name="question1" id="question1" class="form-control"
+												placeholder="¿Para quien es esta charla?" required></textarea>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>¿Que podre hacer con este nuevo conocimiento?</legend>
+											<textarea type="text" name="question2" id="question2" class="form-control"
+												placeholder="¿Que podre hacer con este nuevo conocimiento?"
+												required></textarea>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>¿Te animas a contarnos un caso de uso?</legend>
+											<textarea type="text" name="question2" id="question2" class="form-control"
+												placeholder="¿Te animas a contarnos un caso de uso?"
+												required></textarea>
+										</fieldset>
+									</div>
+								</div>
+							</div>
+						</section>
+						<!-- SECTION 4 -->
+						<h2>
+							<p class="step-icon"><span>05</span></p>
+							<span class="step-text">Confirmación</span>
+						</h2>
+						<section>
+							<div class="inner">
+								<div class="wizard-header">
+									<h3 class="heading">Confirmación</h3>
+									<p>Estas a un click de postular tu charla. Cualquier cosa puedes volver a los pasos anteriores.</p>
+								</div>
+								<!-- <div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Descripción</legend>
+											<textarea type="text" name="description" id="description"
+												class="form-control"
+												placeholder="¿Como convencerias a alguien de asistir a tu charla?"
+												required></textarea>
+										</fieldset>
+									</div>
+								</div> -->
+							</div>
+						</section>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/jquery.steps.js"></script>
+	<script src="js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
