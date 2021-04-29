@@ -46,14 +46,6 @@ html {
 	display: -webkit-flex;
 }
 
-.vertical-center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-
 .form-v1-content .wizard-form {
 	width: 100%;
 }
@@ -598,9 +590,6 @@ html {
 	}
 }
 
-section {
-    height: 700px;
-}
 .img-center {
     display: block;
     margin-left: auto;
