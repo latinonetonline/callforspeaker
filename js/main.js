@@ -15,24 +15,31 @@ $(function () {
             finish: '<i class="zmdi zmdi-check"></i>',
             current: ''
         },
-        onStepChanging: function (event, currentIndex, newIndex) {
+        onStepChanging: async function (event, currentIndex, newIndex) {
             if (currentIndex == 1 && newIndex == 2)
-                return validarInformacionPersonal();
+                return await validarInformacionPersonal();
 
             if (currentIndex == 2 && newIndex == 3)
                 return validarPresentacion();
 
+            if (currentIndex == 3 && newIndex == 4)
+                return validarSumemosValor();
+
             return true;
         },
+        onFinishing: function (event, currentIndex) { return window.confirm('¿Desea enviar su propuesta para el webinar?'); },
+        onFinished: async function (event, currentIndex) { await registrarPropuesta() },
     })
 });
 
-function validarInformacionPersonal() {
+async function validarInformacionPersonal() {
     let name = document.getElementById("first-name").value;
     let lastName = document.getElementById("last-name").value;
     let email = document.getElementById("your_email").value;
     let description = document.getElementById("description").value;
-    let image = document.getElementById("image").value;
+    let twitter = document.getElementById("twitter").value;
+    let imageElement = document.getElementById("image");
+    let image = imageElement.value;
 
     let result = true;
 
@@ -43,6 +50,22 @@ function validarInformacionPersonal() {
     validateInput(ValidateEmail(email), "email-fieldset", errorHandle);
     validateInput(description, "description-fieldset", errorHandle);
     validateInput(image, "image-fieldset", errorHandle);
+
+    if (result) {
+        var base64 = await toBase64(imageElement.files[0]);
+        let confimacionImagenElement = document.getElementById("confirmacion-imagen");
+        confimacionImagenElement.src = base64;
+
+        document.getElementById("confirmacion-nombre").innerText = `${name.trim()} ${lastName.trim()}`
+        document.getElementById("confirmacion-email").innerText = email
+        if (twitter) {
+            document.getElementById("confirmacion-twitter").innerText = twitter.startsWith('@') ? twitter : `@${twitter}`
+
+        }
+
+        document.getElementById("confirmacion-descripcion").innerText = description
+
+    }
 
     return result;
 }
@@ -58,10 +81,32 @@ function validarPresentacion() {
     validateInput(title, "title-fieldset", errorHandle);
     validateInput(description, "description2-fieldset", errorHandle);
 
+    if (result) {
+
+        document.getElementById("confirmacion-titulo").innerText = title
+        document.getElementById("confirmacion-fecha").innerText = `Sábado ${document.getElementById("date").value} de ${getMonth(document.getElementById("month").value)} del ${document.getElementById("year").value}`
+
+        document.getElementById("confirmacion-charla-descripcion").innerText = description
+
+    }
+
     return result;
 }
 
+function validarSumemosValor() {
+    let respuesta1 = document.getElementById("question1").value;
+    let respuesta2 = document.getElementById("question2").value;
+    let respuesta3 = document.getElementById("question3").value;
 
+    let result = true;
+
+    document.getElementById("confirmacion-respuesta1").innerText = respuesta1
+    document.getElementById("confirmacion-respuesta2").innerText = respuesta2
+    document.getElementById("confirmacion-respuesta3").innerText = respuesta3
+
+
+    return result;
+}
 
 function validateInput(condition, fieldsetId, errorCallback) {
     var fieldset = document.getElementById(fieldsetId)
@@ -124,3 +169,87 @@ const toBase64 = file => new Promise((resolve, reject) => {
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
 });
+
+function loaderHide() {
+    let loader = document.getElementById("preloader")
+
+    if (!loader.classList.contains("hide")) {
+        loader.classList.add("hide");
+    }
+}
+
+function loaderShow() {
+    let loader = document.getElementById("preloader")
+
+    if (loader.classList.contains("hide")) {
+        loader.classList.remove("hide");
+    }
+}
+
+
+function completarConfirmación() {
+    let loader = document.getElementById("preloader")
+
+    if (loader.classList.contains("hide")) {
+        loader.classList.remove("hide");
+    }
+}
+
+function getMonth(monthNumber) {
+
+    switch (+monthNumber) {
+        case 1:
+            return "Enero"
+        case 2:
+            return "Febrero"
+        case 3:
+            return "Marzo"
+        case 4:
+            return "Abril"
+        case 5:
+            return "Mayo"
+        case 6:
+            return "Junio"
+        case 7:
+            return "Julio"
+        case 8:
+            return "Agosto"
+        case 9:
+            return "Septiembre"
+        case 10:
+            return "Octubre"
+        case 11:
+            return "Noviembre"
+        case 12:
+            return "Diciembre"
+
+    }
+}
+
+async function registrarPropuesta() {
+    const fileInput = document.getElementById("image");
+    const formData = new FormData();
+
+    formData.append('file', fileInput.files[0]);
+    formData.append('name', document.getElementById("first-name").value);
+    formData.append('lastName', document.getElementById("last-name").value);
+    formData.append('speakerDescription', document.getElementById("description").value);
+    formData.append('proposalTitle', document.getElementById("title").value);
+    formData.append('proposalDescription', document.getElementById("description2").value);
+    formData.append('date', `${document.getElementById("year").value}-${document.getElementById("month").value}-${document.getElementById("date").value}`);
+    formData.append('audienceAnswer', document.getElementById("question1").value);
+    formData.append('knowledgeAnswer', document.getElementById("question2").value);
+    formData.append('useCaseAnswer', document.getElementById("question3").value);
+
+    const options = {
+        method: 'POST',
+        body: formData,
+        // If you add this, upload won't work
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
+        // }
+    };
+
+    var response = await fetch('https://localhost:44354/api/proposals', options).then(data => data.json()).catch(error => alert("Ocurrio un error: No se pudo enviar su charla."));
+    console.log(response)
+}

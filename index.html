@@ -125,7 +125,8 @@
 									<div class="form-holder form-holder-2">
 										<fieldset id="image-fieldset">
 											<legend>Foto para el Flyer</legend>
-											<input type="file" name="image" id="image" class="form-control" required accept=".jpg, .jpeg, .png">
+											<input type="file" name="image" id="image" class="form-control" required
+												accept=".jpg, .jpeg, .png">
 										</fieldset>
 									</div>
 								</div>
@@ -251,17 +252,57 @@
 									<p>Estas a un click de postular tu charla. Podes volver a los pasos
 										anteriores si necesitas editar algún campo.</p>
 								</div>
-								<!-- <div class="form-row">
-									<div class="form-holder form-holder-2">
-										<fieldset>
-											<legend>Descripción</legend>
-											<textarea type="text" name="description" id="description"
-												class="form-control"
-												placeholder="¿Como convencerias a alguien de asistir a tu charla?"
-												required></textarea>
-										</fieldset>
+								<div class="contenerdor-resumen">
+									<div class="form-row">
+										<div class="form-holder">
+											<img width="200px" src="" id="confirmacion-imagen" />
+										</div>
+										<div class="form-holder">
+											<h4 class="word-break" id="confirmacion-nombre"></h4>
+											<p class="word-break" id="confirmacion-email"></p>
+											<p class="word-break" id="confirmacion-twitter"></p>
+										</div>
 									</div>
-								</div> -->
+									<div class="form-row">
+										<div class="form-holder form-holder-2">
+											<p class="word-break" id="confirmacion-descripcion"></p>
+										</div>
+									</div>
+								</div>
+								<div class="wizard-header">
+									<h4 class="heading">Subre tu charla</h4>
+								</div>
+								<div class="contenerdor-resumen">
+									<div class="form-row">
+										<div class="form-holder form-holder-2">
+											<p class="word-break" id="confirmacion-fecha"></p>
+											<h4 class="word-break" id="confirmacion-titulo"></h4>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-holder form-holder-2">
+											<p class="word-break" id="confirmacion-charla-descripcion"></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="wizard-header">
+									<h4 class="heading">Más detalles</h4>
+								</div>
+								<div class="contenerdor-resumen">
+									<div class="form-row">
+										<div class="form-holder form-holder-2">
+											<p class="word-break"><b>¿Para quien es esta charla?</b></p>
+											<p class="word-break" id="confirmacion-respuesta1"></p>
+
+											<p class="word-break"><b>¿Que podre hacer con este nuevo conocimiento?</b></p>
+											<p class="word-break" id="confirmacion-respuesta2"></p>
+
+											<p class="word-break"><b>¿Te animas a contarnos un caso de uso?</b></p>
+											<p class="word-break" id="confirmacion-respuesta3"></p>
+										</div>
+									</div>
+								</div>
 							</div>
 						</section>
 					</div>
@@ -269,6 +310,24 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="preloader hide">
+		<div class="sk-circle">
+			<div class="sk-circle1 sk-child"></div>
+			<div class="sk-circle2 sk-child"></div>
+			<div class="sk-circle3 sk-child"></div>
+			<div class="sk-circle4 sk-child"></div>
+			<div class="sk-circle5 sk-child"></div>
+			<div class="sk-circle6 sk-child"></div>
+			<div class="sk-circle7 sk-child"></div>
+			<div class="sk-circle8 sk-child"></div>
+			<div class="sk-circle9 sk-child"></div>
+			<div class="sk-circle10 sk-child"></div>
+			<div class="sk-circle11 sk-child"></div>
+			<div class="sk-circle12 sk-child"></div>
+		</div>
+	</div>
+
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/jquery.steps.js"></script>
 	<script src="js/main.js"></script>
