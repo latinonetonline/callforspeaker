@@ -1,6 +1,6 @@
 var dates = []
 
-
+var api = "https://latinonetonlinebackend.herokuapp.com"
 
 $(function () {
     $("#form-total").steps({
@@ -135,7 +135,7 @@ function validateInput(condition, fieldsetId, errorCallback) {
 function mesOnChange() {
     loaderShow();
 
-    fetch('https://localhost:44316/api/v1/proposals-module/Proposals/dates')
+    fetch(`${api}/api/v1/proposals-module/Proposals/dates`)
         .then(response => response.json())
         .then(data => {
             dates = data.result.dates.map(date => new Date(date));
@@ -273,7 +273,7 @@ function registrarPropuesta() {
         // }
     };
     loaderShow();
-    fetch('https://localhost:44316/api/v1/proposals-module/Proposals', options)
+    fetch(`${api}/api/v1/proposals-module/Proposals`, options)
         .then(response => response.json())
         .then(data => {
             if (data.isSuccess) {
