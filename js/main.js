@@ -18,9 +18,9 @@ $(function () {
             finish: '<i class="zmdi zmdi-check"></i>',
             current: ''
         },
-        onStepChanging: async function (event, currentIndex, newIndex) {
+        onStepChanging: function (event, currentIndex, newIndex) {
             if (currentIndex == 1 && newIndex == 2)
-                return await validarInformacionPersonal();
+                return validarInformacionPersonal();
 
             if (currentIndex == 2 && newIndex == 3)
                 return validarPresentacion();
@@ -31,11 +31,12 @@ $(function () {
             return true;
         },
         onFinishing: function (event, currentIndex) { return window.confirm('¿Desea enviar su propuesta para el webinar?'); },
-        onFinished: async function (event, currentIndex) { await registrarPropuesta() },
+        onFinished: function (event, currentIndex) {  registrarPropuesta() },
     })
 });
 
-async function validarInformacionPersonal() {
+function validarInformacionPersonal() {
+
     let name = document.getElementById("first-name").value;
     let lastName = document.getElementById("last-name").value;
     let email = document.getElementById("your_email").value;
@@ -55,12 +56,16 @@ async function validarInformacionPersonal() {
     validateInput(image, "image-fieldset", errorHandle);
 
     if (result) {
-        var base64 = await toBase64(imageElement.files[0]);
-        let confimacionImagenElement = document.getElementById("confirmacion-imagen");
-        confimacionImagenElement.src = base64;
+        toBase64(imageElement.files[0])
+            .then(base64 => {
+                let confimacionImagenElement = document.getElementById("confirmacion-imagen");
+                confimacionImagenElement.src = base64;
+            });
+
 
         document.getElementById("confirmacion-nombre").innerText = `${name.trim()} ${lastName.trim()}`
         document.getElementById("confirmacion-email").innerText = email
+
         if (twitter) {
             document.getElementById("confirmacion-twitter").innerText = twitter.startsWith('@') ? twitter : `@${twitter}`
 
