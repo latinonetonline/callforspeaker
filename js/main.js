@@ -147,12 +147,14 @@ function mesOnChange() {
         let selectMes = document.getElementById("month");
         let mes = selectMes.value;
         let año = document.getElementById("year").value;
-
+        const tiempoTranscurrido = Date.now();
+        const hoy = new Date(tiempoTranscurrido)
+        
         let sabados = [];
         for (let dia = 1; dia <= 31; dia++) {
 
             var fecha = new Date(`${año}-${mes}-${dia}`);
-
+            
             if (fecha.getUTCDay() == 6) {
                 sabados.push(dia)
             }
@@ -166,7 +168,7 @@ function mesOnChange() {
 
         for (let index = 0; index < sabados.length; index++) {
 
-            if (dates.filter(date => date.getDate() == sabados[index] && date.getUTCMonth() == mes - 1).length == 0) {
+            if (dates.filter(date => date.getDate() == sabados[index] && date.getUTCMonth() == mes - 1).length == 0 && hoy.getTime() < new Date(`${año}-${mes}-${sabados[index]}`) ) {
                 let option = document.createElement("option");
                 option.text = sabados[index];
                 option.value = sabados[index];
