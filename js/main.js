@@ -1,3 +1,7 @@
+var dates = []
+
+
+
 $(function () {
     $("#form-total").steps({
         headerTag: "h2",
@@ -6,7 +10,6 @@ $(function () {
         enableAllSteps: false,
         stepsOrientation: "vertical",
         autoFocus: true,
-        saveState: true,
         transitionEffectSpeed: 500,
         titleTemplate: '<div class="title">#title#</div>',
         labels: {
@@ -125,33 +128,46 @@ function validateInput(condition, fieldsetId, errorCallback) {
 
 
 function mesOnChange() {
-    let selectMes = document.getElementById("month");
-    let mes = selectMes.value;
-    let año = document.getElementById("year").value;
+    loaderShow();
 
-    let sabados = [];
-    for (let dia = 1; dia <= 31; dia++) {
+    fetch('https://localhost:44316/api/v1/proposals-module/Proposals/dates')
+        .then(response => response.json())
+        .then(data => {
+            dates = data.result.dates.map(date => new Date(date));
+            filtrarFechas();
+            loaderHide();
+        })
 
-        var fecha = new Date(`${año}-${mes}-${dia}`);
+    function filtrarFechas() {
+        let selectMes = document.getElementById("month");
+        let mes = selectMes.value;
+        let año = document.getElementById("year").value;
 
-        if (fecha.getUTCDay() == 6) {
-            sabados.push(dia)
+        let sabados = [];
+        for (let dia = 1; dia <= 31; dia++) {
+
+            var fecha = new Date(`${año}-${mes}-${dia}`);
+
+            if (fecha.getUTCDay() == 6) {
+                sabados.push(dia)
+            }
         }
-    }
 
-    let selectDia = document.getElementById("date");
+        let selectDia = document.getElementById("date");
 
-    for (const key in selectDia.options) {
-        selectDia.remove(key);
-    }
+        for (const key in selectDia.options) {
+            selectDia.remove(key);
+        }
 
-    for (let index = 0; index < sabados.length; index++) {
+        for (let index = 0; index < sabados.length; index++) {
 
-        let option = document.createElement("option");
-        option.text = sabados[index];
-        option.value = sabados[index];
-        selectDia.add(option);
-
+            if (dates.filter(date => date.getDate() == sabados[index] && date.getUTCMonth() == mes - 1).length == 0) {
+                let option = document.createElement("option");
+                option.text = sabados[index];
+                option.value = sabados[index];
+                selectDia.add(option);
+            }
+        }
     }
 }
 
@@ -226,13 +242,15 @@ function getMonth(monthNumber) {
     }
 }
 
-async function registrarPropuesta() {
+function registrarPropuesta() {
     const fileInput = document.getElementById("image");
     const formData = new FormData();
 
     formData.append('file', fileInput.files[0]);
     formData.append('name', document.getElementById("first-name").value);
     formData.append('lastName', document.getElementById("last-name").value);
+    formData.append('email', document.getElementById("your_email").value);
+    formData.append('twitter', document.getElementById("twitter").value);
     formData.append('speakerDescription', document.getElementById("description").value);
     formData.append('proposalTitle', document.getElementById("title").value);
     formData.append('proposalDescription', document.getElementById("description2").value);
@@ -249,7 +267,49 @@ async function registrarPropuesta() {
         //   'Content-Type': 'multipart/form-data',
         // }
     };
+    loaderShow();
+    fetch('https://localhost:44316/api/v1/proposals-module/Proposals', options)
+        .then(response => response.json())
+        .then(data => {
+            if (data.isSuccess) {
+                mostrarFinal(data.result.speaker.name)
+            }
+            else {
+                alert(data.error.code)
+            }
+            loaderHide();
 
-    var response = await fetch('https://localhost:44354/api/proposals', options).then(data => data.json()).catch(error => alert("Ocurrio un error: No se pudo enviar su charla."));
-    console.log(response)
+        })
+        .catch(error => {
+            loaderHide();
+            console.log(error)
+        });
+
+}
+
+function mostrarFinal(nombre) {
+    document.getElementById("thankyou-title").innerText = `Muchas Gracias ${nombre} Por Postular Su Charla`;
+
+    $("#form-total").steps("destroy");
+
+    let h2s = document.querySelectorAll("h2")
+    for (const h2 of h2s) {
+        if (!h2.classList.contains("hide")) {
+            h2.classList.add("hide");
+        }
+    }
+
+    let sections = document.querySelectorAll("section")
+    for (const section of sections) {
+        if (!section.classList.contains("hide")) {
+            section.classList.add("hide");
+        }
+    }
+
+    // let final = document.getElementById("thankyou")
+
+    // if (final.classList.contains("hide")) {
+    //     final.classList.remove("hide");
+    // }
+
 }
