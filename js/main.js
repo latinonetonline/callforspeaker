@@ -81,6 +81,7 @@ function validarInformacionPersonal() {
 function validarPresentacion() {
     let title = document.getElementById("title").value;
     let description = document.getElementById("description2").value;
+    let date = document.getElementById("date").value;
 
     let result = true;
 
@@ -88,6 +89,7 @@ function validarPresentacion() {
 
     validateInput(title, "title-fieldset", errorHandle);
     validateInput(description, "description2-fieldset", errorHandle);
+    validateInput(date, "sabado-fieldset", errorHandle);
 
     if (result) {
 

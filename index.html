@@ -170,25 +170,27 @@
 
 								<div class="form-row form-row-date">
 									<div class="form-holder form-holder-2">
-										<label class="special-label">Elegi tu sábado:</label>
-										<select name="year" id="year">
-											<option value="2021" disabled selected>2021</option>
-										</select>
-										<select name="month" id="month" onchange="mesOnChange()" onload="mesOnChange()">
-											<option value="05" selected>May</option>
-											<option value="06">Jun</option>
-											<option value="07">Jul</option>
-											<option value="08">Ago</option>
-											<option value="09">Sep</option>
-											<option value="10">Oct</option>
-											<option value="11">Nov</option>
-											<option value="12">Dic</option>
-										</select>
-										<select name="date" id="date">
+										<fieldset id="sabado-fieldset">
+											<label class="special-label">Elegi tu sábado:</label>
+											<select name="year" id="year">
+												<option value="2021" disabled selected>2021</option>
+											</select>
+											<select name="month" id="month" onchange="mesOnChange()"
+												onload="mesOnChange()">
+												<option value="05" selected>May</option>
+												<option value="06">Jun</option>
+												<option value="07">Jul</option>
+												<option value="08">Ago</option>
+												<option value="09">Sep</option>
+												<option value="10">Oct</option>
+												<option value="11">Nov</option>
+												<option value="12">Dic</option>
+											</select>
+											<select name="date" id="date">
 
-										</select>
+											</select>
 
-
+										</fieldset>
 									</div>
 								</div>
 							</div>
@@ -297,7 +299,8 @@
 											<p class="word-break"><b>¿Para quien es esta charla?</b></p>
 											<p class="word-break" id="confirmacion-respuesta1"></p>
 
-											<p class="word-break"><b>¿Que podre hacer con este nuevo conocimiento?</b></p>
+											<p class="word-break"><b>¿Que podre hacer con este nuevo conocimiento?</b>
+											</p>
 											<p class="word-break" id="confirmacion-respuesta2"></p>
 
 											<p class="word-break"><b>¿Te animas a contarnos un caso de uso?</b></p>
@@ -311,7 +314,8 @@
 							<div class="inner">
 								<img class="img-center" src="images/logo.png" />
 								<div class="wizard-header">
-									<h1 id="thankyou-title" class="heading welcome" style="text-align: center;">Muchas Gracias Por Postular
+									<h1 id="thankyou-title" class="heading welcome" style="text-align: center;">Muchas
+										Gracias Por Postular
 										Su Charla</h1>
 
 									<p style="margin-top: 50px; text-align: center;">Pronto estaremos contactandonos con
@@ -322,8 +326,10 @@
 									</p>
 
 									<div style="text-align: center;">
-										<a href="https://www.facebook.com/LatinoNETOnline" target="_blank" class="fa fa-facebook"></a>
-										<a href="https://twitter.com/latinonetonline" target="_blank" class="fa fa-twitter"></a>
+										<a href="https://www.facebook.com/LatinoNETOnline" target="_blank"
+											class="fa fa-facebook"></a>
+										<a href="https://twitter.com/latinonetonline" target="_blank"
+											class="fa fa-twitter"></a>
 									</div>
 
 								</div>
@@ -356,6 +362,6 @@
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/jquery.steps.js"></script>
 	<script src="js/main.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 
 </html>
