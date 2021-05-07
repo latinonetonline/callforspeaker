@@ -198,11 +198,17 @@ html {
     margin: 0;
 }
 
-.form-register .content .inner p {
-	color: #666;
+.form-register .content .inner p,
+.form-register .content .inner label {
+	color: #757575;
 	font-size: 14px;
 	font-weight: 600;
 }
+
+.form-register .content .inner label input {
+	width: auto;
+}
+
 .inner .form-row-total {
 	box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
 	-o-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.15);
@@ -311,6 +317,17 @@ html {
     -o-border-radius: 4px;
     -ms-border-radius: 4px;
 }
+
+.inner .form-row .form-holder input[type="checkbox"]
+{
+  appearance: none;
+  -moz-appearance: checkbox;
+  -webkit-appearance: checkbox;
+  -o-appearance: checkbox;
+  -ms-appearance: checkbox;
+
+}
+
 .inner .form-row .form-holder textarea {
     height: 100px;
 }
@@ -848,4 +865,17 @@ html {
 .fa-youtube {
   background: #bb0000;
   color: white;
+}
+
+#second-speaker-fieldset {
+  padding: 5px 18px 13px;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

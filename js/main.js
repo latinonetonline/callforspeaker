@@ -19,19 +19,28 @@ $(function () {
             current: ''
         },
         onStepChanging: function (event, currentIndex, newIndex) {
+
+            let secondSpeaker = document.getElementById('second-speaker').checked;
+
             if (currentIndex == 1 && newIndex == 2)
                 return validarInformacionPersonal();
 
-            if (currentIndex == 2 && newIndex == 3)
+
+            if (secondSpeaker && currentIndex == 2 && newIndex == 3)
+                return validarSegundoSpeakerInformacionPersonal();
+
+            if ((!secondSpeaker && currentIndex == 2 && newIndex == 3) ||
+                (secondSpeaker && currentIndex == 3 && newIndex == 4))
                 return validarPresentacion();
 
-            if (currentIndex == 3 && newIndex == 4)
+            if ((!secondSpeaker && currentIndex == 3 && newIndex == 4) ||
+                (secondSpeaker && currentIndex == 4 && newIndex == 5))
                 return validarSumemosValor();
 
             return true;
         },
         onFinishing: function (event, currentIndex) { return window.confirm('¿Desea enviar su propuesta para el webinar?'); },
-        onFinished: function (event, currentIndex) {  registrarPropuesta() },
+        onFinished: function (event, currentIndex) { registrarPropuesta() },
     })
 });
 
@@ -151,12 +160,12 @@ function mesOnChange() {
         let año = document.getElementById("year").value;
         const tiempoTranscurrido = Date.now();
         const hoy = new Date(tiempoTranscurrido)
-        
+
         let sabados = [];
         for (let dia = 1; dia <= 31; dia++) {
 
             var fecha = new Date(`${año}-${mes}-${dia}`);
-            
+
             if (fecha.getUTCDay() == 6) {
                 sabados.push(dia)
             }
@@ -170,7 +179,7 @@ function mesOnChange() {
 
         for (let index = 0; index < sabados.length; index++) {
 
-            if (dates.filter(date => date.getDate() == sabados[index] && date.getUTCMonth() == mes - 1).length == 0 && hoy.getTime() < new Date(`${año}-${mes}-${sabados[index]}`) ) {
+            if (dates.filter(date => date.getDate() == sabados[index] && date.getUTCMonth() == mes - 1).length == 0 && hoy.getTime() < new Date(`${año}-${mes}-${sabados[index]}`)) {
                 let option = document.createElement("option");
                 option.text = sabados[index];
                 option.value = sabados[index];
@@ -322,3 +331,62 @@ function mostrarFinal(nombre) {
     // }
 
 }
+
+
+function secondeSpeakerCheckboxOnChange() {
+    if (document.getElementById('second-speaker').checked) {
+        var html = document.getElementById("second-speaker-div").innerHTML
+        $("#form-total").steps("insert", 2, {
+            title: "<p class='step-icon'><span>2.2</span></p><span class='step-text'>Segundo Speaker</span>",
+            content: html
+        });
+
+    } else {
+        $("#form-total").steps("remove", 2);
+    }
+}
+
+
+function validarSegundoSpeakerInformacionPersonal() {
+
+    let name = document.getElementById("second-speaker-first-name").value;
+    let lastName = document.getElementById("second-speaker-last-name").value;
+    let email = document.getElementById("second-speaker-your_email").value;
+    let description = document.getElementById("second-speaker-description").value;
+    let twitter = document.getElementById("second-speaker-twitter").value;
+    let imageElement = document.getElementById("second-speaker-image");
+    let image = imageElement.value;
+
+    let result = true;
+
+    const errorHandle = () => result = false;
+
+    validateInput(name, "second-speaker-name-fieldset", errorHandle);
+    validateInput(lastName, "second-speaker-lastname-fieldset", errorHandle);
+    validateInput(ValidateEmail(email), "second-speaker-email-fieldset", errorHandle);
+    validateInput(description, "second-speaker-description-fieldset", errorHandle);
+    validateInput(image, "second-speaker-image-fieldset", errorHandle);
+
+    if (result) {
+        toBase64(imageElement.files[0])
+            .then(base64 => {
+                let confimacionImagenElement = document.getElementById("confirmacion-imagen");
+                confimacionImagenElement.src = base64;
+            });
+
+
+        document.getElementById("confirmacion-nombre").innerText = `${name.trim()} ${lastName.trim()}`
+        document.getElementById("confirmacion-email").innerText = email
+
+        if (twitter) {
+            document.getElementById("confirmacion-twitter").innerText = twitter.startsWith('@') ? twitter : `@${twitter}`
+
+        }
+
+        document.getElementById("confirmacion-descripcion").innerText = description
+
+    }
+
+    return result;
+}
+

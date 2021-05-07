@@ -94,6 +94,7 @@
 										</fieldset>
 									</div>
 								</div>
+								
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
 										<fieldset id="email-fieldset">
@@ -132,8 +133,20 @@
 										</fieldset>
 									</div>
 								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset id="second-speaker-fieldset">
+											<legend>Segundo Speaker</legend>
+											<label for="second-speaker" class="unselectable">
+												<input type="checkbox" name="second-speaker" id="second-speaker"
+													class="form-control" placeholder="@username" onclick="secondeSpeakerCheckboxOnChange();">
+												Agregar un segundo speaker</label>
+										</fieldset>
+									</div>
+								</div>
 							</div>
 						</section>
+						
 						<!-- SECTION 2 -->
 						<h2>
 							<p class="step-icon"><span>03</span></p>
@@ -310,6 +323,71 @@
 								</div>
 							</div>
 						</section>
+						<!-- SECTION 2.2 - Segundo Speaker -->
+						<div  id="second-speaker-div" class="hide">
+							<div class="inner">
+								<div class="wizard-header">
+									<h3 class="heading">Segundo Speaker</h3>
+									<p>Atras de toda gran charla hay un gran speaker al cual todos nosotros queremos
+										conocer.</p>
+								</div>
+								<div class="form-row">
+									<div class="form-holder">
+										<fieldset id="second-speaker-name-fieldset">
+											<legend>Nombre</legend>
+											<input type="text" class="form-control" id="second-speaker-first-name" name="second-speaker-first-name"
+												placeholder="Nombre" required>
+										</fieldset>
+									</div>
+									<div class="form-holder">
+										<fieldset id="second-speaker-lastname-fieldset">
+											<legend>Apellido</legend>
+											<input type="text" class="form-control" id="second-speaker-last-name" name="second-speaker-last-name"
+												placeholder="Apellido" required>
+										</fieldset>
+									</div>
+								</div>
+								
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset id="second-speaker-email-fieldset">
+											<legend>Email</legend>
+											<input type="text" name="second-speaker-your_email" id="second-speaker-your_email" class="form-control"
+												pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="example@email.com"
+												required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset>
+											<legend>Twitter</legend>
+											<input type="text" name="second-speaker-twitter" id="second-speaker-twitter" class="form-control"
+												placeholder="@username" required>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset id="second-speaker-description-fieldset">
+											<legend>Descripción</legend>
+											<textarea type="text" name="second-speaker-description" id="second-speaker-description"
+												class="form-control" placeholder="Nos gustaria saber más de vos"
+												required></textarea>
+										</fieldset>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<fieldset id="second-speaker-image-fieldset">
+											<legend>Foto para el Flyer</legend>
+											<input type="file" name="second-speaker-image" id="second-speaker-image" class="form-control" required
+												accept=".jpg, .jpeg, .png">
+										</fieldset>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div id="thankyou" class="hide">
 							<div class="inner">
 								<img class="img-center" src="images/logo.png" />
