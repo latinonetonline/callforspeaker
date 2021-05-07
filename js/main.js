@@ -1,5 +1,14 @@
 var dates = []
 
+var speaker1 = {}
+
+var speaker2 = {}
+
+var presentacion = {}
+
+var preguntas = {}
+
+
 var api = "https://latinonetonlinebackend.herokuapp.com"
 
 $(function () {
@@ -82,6 +91,14 @@ function validarInformacionPersonal() {
 
         document.getElementById("confirmacion-descripcion").innerText = description
 
+        speaker1 = {
+            name: name,
+            lastName: lastName,
+            email: email,
+            twitter: twitter,
+            description: description,
+        }
+
     }
 
     return result;
@@ -107,6 +124,12 @@ function validarPresentacion() {
 
         document.getElementById("confirmacion-charla-descripcion").innerText = description
 
+        presentacion = {
+            title: title,
+            description: description,
+            date:`${document.getElementById("year").value}-${document.getElementById("month").value}-${document.getElementById("date").value}`
+        }
+
     }
 
     return result;
@@ -123,6 +146,11 @@ function validarSumemosValor() {
     document.getElementById("confirmacion-respuesta2").innerText = respuesta2
     document.getElementById("confirmacion-respuesta3").innerText = respuesta3
 
+    preguntas = {
+        audienceAnswer: respuesta1,
+        knowledgeAnswer: respuesta2,
+        useCaseAnswer: respuesta3
+    }
 
     return result;
 }
@@ -167,7 +195,10 @@ function mesOnChange() {
             var fecha = new Date(`${año}-${mes}-${dia}`);
 
             if (fecha.getUTCDay() == 6) {
-                sabados.push(dia)
+                let diaStr = '' + dia
+                if (diaStr.length < 2)
+                diaStr = '0' + diaStr;
+                sabados.push(diaStr)
             }
         }
 
@@ -261,52 +292,112 @@ function getMonth(monthNumber) {
 }
 
 function registrarPropuesta() {
-    const fileInput = document.getElementById("image");
-    const formData = new FormData();
 
-    formData.append('file', fileInput.files[0]);
-    formData.append('name', document.getElementById("first-name").value);
-    formData.append('lastName', document.getElementById("last-name").value);
-    formData.append('email', document.getElementById("your_email").value);
-    formData.append('twitter', document.getElementById("twitter").value);
-    formData.append('speakerDescription', document.getElementById("description").value);
-    formData.append('proposalTitle', document.getElementById("title").value);
-    formData.append('proposalDescription', document.getElementById("description2").value);
-    formData.append('date', `${document.getElementById("year").value}-${document.getElementById("month").value}-${document.getElementById("date").value}`);
-    formData.append('audienceAnswer', document.getElementById("question1").value);
-    formData.append('knowledgeAnswer', document.getElementById("question2").value);
-    formData.append('useCaseAnswer', document.getElementById("question3").value);
-
-    const options = {
-        method: 'POST',
-        body: formData,
-        // If you add this, upload won't work
-        // headers: {
-        //   'Content-Type': 'multipart/form-data',
-        // }
-    };
     loaderShow();
-    fetch(`${api}/api/v1/proposals-module/Proposals`, options)
+
+    const secondSpeaker = document.getElementById('second-speaker').checked;
+
+
+    let options = buildFetchFileOptions("image");
+
+    fetch(`${api}/api/v1/proposals-module/Images`, options)
         .then(response => response.json())
         .then(data => {
             if (data.isSuccess) {
-                mostrarFinal(data.result.speaker.name)
+                speaker1.image = data.result;
+
+                if (secondSpeaker) {
+                    let options = buildFetchFileOptions("second-speaker-image");
+
+                    fetch(`${api}/api/v1/proposals-module/Images`, options)
+                        .then(response => response.json())
+                        .then(data => {
+
+                            if (data.isSuccess) {
+                                speaker2.image = data.result;
+
+                                fetchCreatePropusal();
+                            }
+                            else {
+                                alert(data.error.code)
+                            }
+                        })
+                }
+                else {
+                    fetchCreatePropusal()
+                }
+
             }
             else {
                 alert(data.error.code)
             }
-            loaderHide();
-
         })
         .catch(error => {
             loaderHide();
             console.log(error)
         });
 
+    function fetchCreatePropusal() {
+
+        const speakers = [speaker1]
+
+        if (secondSpeaker)
+            speakers.push(speaker2)
+
+        fetch(`${api}/api/v1/proposals-module/Proposals`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ...presentacion,
+                ...preguntas,
+                speakers: speakers
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.isSuccess) {
+                    mostrarFinal(data.result.speakers)
+                }
+                else {
+                    alert(data.error.code)
+                }
+                loaderHide();
+            })
+    }
+
+    function buildFetchFileOptions(inputFileId) {
+        const fileInput = document.getElementById(inputFileId);
+
+        const formData = new FormData();
+
+        formData.append('file', fileInput.files[0]);
+
+        const options = {
+            method: 'POST',
+            body: formData,
+            // If you add this, upload won't work
+            // headers: {
+            //   'Content-Type': 'multipart/form-data',
+            // }
+        };
+
+        return options
+    }
+
 }
 
-function mostrarFinal(nombre) {
-    document.getElementById("thankyou-title").innerText = `Muchas Gracias ${nombre} Por Postular Su Charla`;
+function mostrarFinal(speakers) {
+
+    const secondSpeaker = document.getElementById('second-speaker').checked;
+
+    let nombreSaludo = speakers[0].name;
+    if (secondSpeaker)
+        nombreSaludo = `${nombreSaludo} y ${speakers[1].name}`
+
+    document.getElementById("thankyou-title").innerText = `Muchas Gracias ${nombreSaludo} Por Postular Su Charla`;
 
     $("#form-total").steps("destroy");
 
@@ -324,6 +415,11 @@ function mostrarFinal(nombre) {
         }
     }
 
+    let segundoSpeakerDiv = document.getElementsByTagName("segundo-speaker")[0]
+    if (!segundoSpeakerDiv.classList.contains("hide")) {
+        segundoSpeakerDiv.classList.add("hide");
+    }
+
     // let final = document.getElementById("thankyou")
 
     // if (final.classList.contains("hide")) {
@@ -334,8 +430,9 @@ function mostrarFinal(nombre) {
 
 
 function secondeSpeakerCheckboxOnChange() {
+    toogleConfirmacionSegundoSpeaker();
     if (document.getElementById('second-speaker').checked) {
-        var html = document.getElementById("second-speaker-div").innerHTML
+        var html = document.getElementsByTagName("segundo-speaker")[0].innerHTML
         $("#form-total").steps("insert", 2, {
             title: "<p class='step-icon'><span>2.2</span></p><span class='step-text'>Segundo Speaker</span>",
             content: html
@@ -370,23 +467,48 @@ function validarSegundoSpeakerInformacionPersonal() {
     if (result) {
         toBase64(imageElement.files[0])
             .then(base64 => {
-                let confimacionImagenElement = document.getElementById("confirmacion-imagen");
+                let confimacionImagenElement = document.getElementById("second-speaker-confirmacion-imagen");
                 confimacionImagenElement.src = base64;
             });
 
 
-        document.getElementById("confirmacion-nombre").innerText = `${name.trim()} ${lastName.trim()}`
-        document.getElementById("confirmacion-email").innerText = email
+        document.getElementById("second-speaker-confirmacion-nombre").innerText = `${name.trim()} ${lastName.trim()}`
+        document.getElementById("second-speaker-confirmacion-email").innerText = email
 
         if (twitter) {
-            document.getElementById("confirmacion-twitter").innerText = twitter.startsWith('@') ? twitter : `@${twitter}`
+            document.getElementById("second-speaker-confirmacion-twitter").innerText = twitter.startsWith('@') ? twitter : `@${twitter}`
 
         }
 
-        document.getElementById("confirmacion-descripcion").innerText = description
+        document.getElementById("second-speaker-confirmacion-descripcion").innerText = description
 
+        speaker2 = {
+            name: name,
+            lastName: lastName,
+            email: email,
+            twitter: twitter,
+            description: description,
+        }
     }
 
     return result;
 }
 
+
+function toogleConfirmacionSegundoSpeaker() {
+    let secondSpeaker = document.getElementById('second-speaker').checked;
+
+    var secondSpeakerConfirmacion = document.getElementById('second-speaker-confirmacion')
+    if (secondSpeaker) {
+
+        if (secondSpeakerConfirmacion.classList.contains("hide")) {
+            secondSpeakerConfirmacion.classList.remove("hide");
+        }
+    }
+    else {
+
+        if (!secondSpeakerConfirmacion.classList.contains("hide")) {
+            secondSpeakerConfirmacion.classList.add("hide");
+        }
+    }
+}

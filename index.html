@@ -52,7 +52,7 @@
 								<div class="wizard-header">
 									<h3 class="heading welcome">Call For Speakers</h3>
 
-									<h4 style="margin-bottom: 0px;font-size: 20px;">El Call For Speaker de la comunidad
+									<h4 style="margin-bottom: 0px;font-size: 20px;">El Call For Speakers de la comunidad
 									</h4>
 									<h4 style="margin-top: 5px;font-size: 20px;">Latino .NET Online</h4>
 
@@ -190,8 +190,7 @@
 											</select>
 											<select name="month" id="month" onchange="mesOnChange()"
 												onload="mesOnChange()">
-												<option value="05" selected>May</option>
-												<option value="06">Jun</option>
+												<option value="06" selected>Jun</option>
 												<option value="07">Jul</option>
 												<option value="08">Ago</option>
 												<option value="09">Sep</option>
@@ -286,6 +285,25 @@
 										</div>
 									</div>
 								</div>
+
+								<div class="contenerdor-resumen hide" id="second-speaker-confirmacion">
+									<div class="form-row">
+										<div class="form-holder">
+											<img width="200px" src="" id="second-speaker-confirmacion-imagen" />
+										</div>
+										<div class="form-holder">
+											<h4 class="word-break" id="second-speaker-confirmacion-nombre"></h4>
+											<p class="word-break" id="second-speaker-confirmacion-email"></p>
+											<p class="word-break" id="second-speaker-confirmacion-twitter"></p>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-holder form-holder-2">
+											<p class="word-break" id="second-speaker-confirmacion-descripcion"></p>
+										</div>
+									</div>
+								</div>
+								
 								<div class="wizard-header">
 									<h4 class="heading">Subre tu charla</h4>
 								</div>
@@ -324,7 +342,7 @@
 							</div>
 						</section>
 						<!-- SECTION 2.2 - Segundo Speaker -->
-						<div  id="second-speaker-div" class="hide">
+						<segundo-speaker id="second-speaker-div" class="hide">
 							<div class="inner">
 								<div class="wizard-header">
 									<h3 class="heading">Segundo Speaker</h3>
@@ -387,7 +405,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</segundo-speaker>
 						<div id="thankyou" class="hide">
 							<div class="inner">
 								<img class="img-center" src="images/logo.png" />
