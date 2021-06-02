@@ -174,7 +174,7 @@ function validateInput(condition, fieldsetId, errorCallback) {
 function mesOnChange() {
     loaderShow();
 
-    fetch(`${api}/api/v1/proposals-module/Proposals/dates`)
+    fetch(`${api}/api/v1/callforspeakers-module/Proposals/dates`)
         .then(response => response.json())
         .then(data => {
             dates = data.result.dates.map(date => new Date(date));
@@ -300,7 +300,7 @@ function registrarPropuesta() {
 
     let options = buildFetchFileOptions("image");
 
-    fetch(`${api}/api/v1/proposals-module/Images`, options)
+    fetch(`${api}/api/v1/callforspeakers-module/Images`, options)
         .then(response => response.json())
         .then(data => {
             if (data.isSuccess) {
@@ -309,7 +309,7 @@ function registrarPropuesta() {
                 if (secondSpeaker) {
                     let options = buildFetchFileOptions("second-speaker-image");
 
-                    fetch(`${api}/api/v1/proposals-module/Images`, options)
+                    fetch(`${api}/api/v1/callforspeakers-module/Images`, options)
                         .then(response => response.json())
                         .then(data => {
 
@@ -344,7 +344,7 @@ function registrarPropuesta() {
         if (secondSpeaker)
             speakers.push(speaker2)
 
-        fetch(`${api}/api/v1/proposals-module/Proposals`, {
+        fetch(`${api}/api/v1/callforspeakers-module/Proposals`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
