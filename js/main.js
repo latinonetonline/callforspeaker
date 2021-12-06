@@ -11,6 +11,11 @@ var preguntas = {}
 
 var api = "https://latinonetonlinebackend.herokuapp.com"
 
+const monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+];
+
+
 $(function () {
     $("#form-total").steps({
         headerTag: "h2",
@@ -127,7 +132,7 @@ function validarPresentacion() {
         presentacion = {
             title: title,
             description: description,
-            date:`${document.getElementById("year").value}-${document.getElementById("month").value}-${document.getElementById("date").value}`
+            date: `${document.getElementById("year").value}-${document.getElementById("month").value}-${document.getElementById("date").value}`
         }
 
     }
@@ -169,6 +174,53 @@ function validateInput(condition, fieldsetId, errorCallback) {
         errorCallback()
     }
 }
+function yearOnChange() {
+
+    let selectMes = document.getElementById("month");
+    let año = document.getElementById("year").value;
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+
+    for (const key in selectMes.options) {
+        selectMes.remove(key);
+    }
+
+    if (año == currentYear) {
+
+        let firstMonthEnable = 1;
+
+        for (let index = 0; index < 12; index++) {
+
+            if (index >= currentMonth) {
+                firstMonthEnable = index + 1;
+                let option = document.createElement("option");
+                option.value = index + 1;
+                option.text = monthNames[index];
+
+                selectMes.add(option);
+            }
+        }
+
+        selectMes.value = firstMonthEnable;
+    }
+    else {
+        for (let index = 0; index < 12; index++) {
+
+
+            let option = document.createElement("option");
+            option.value = index + 1
+            option.text = monthNames[index];
+
+            selectMes.add(option);
+
+        }
+
+        selectMes.value = 1;
+    }
+
+    mesOnChange()
+}
+
 
 
 function mesOnChange() {
@@ -197,7 +249,7 @@ function mesOnChange() {
             if (fecha.getUTCDay() == 6) {
                 let diaStr = '' + dia
                 if (diaStr.length < 2)
-                diaStr = '0' + diaStr;
+                    diaStr = '0' + diaStr;
                 sabados.push(diaStr)
             }
         }

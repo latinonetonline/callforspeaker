@@ -36,7 +36,7 @@
 	<link rel="stylesheet" href="css/style.css" />
 </head>
 
-<body onload="mesOnChange()">
+<body onload="yearOnChange()">
 	<div class="page-content">
 		<div class="form-v1-content">
 			<div class="wizard-form">
@@ -185,17 +185,12 @@
 									<div class="form-holder form-holder-2">
 										<fieldset id="sabado-fieldset">
 											<label class="special-label">Elegi tu sábado:</label>
-											<select name="year" id="year">
-												<option value="2021" disabled selected>2021</option>
+											<select name="year" id="year" onchange="yearOnChange()" onload="yearOnChange()">
+												<option value="2021" selected>2021</option>
+												<option value="2022">2022</option>
 											</select>
-											<select name="month" id="month" onchange="mesOnChange()"
-												onload="mesOnChange()">
-												<option value="07" selected>Jul</option>
-												<option value="08">Ago</option>
-												<option value="09">Sep</option>
-												<option value="10">Oct</option>
-												<option value="11">Nov</option>
-												<option value="12">Dic</option>
+											<select name="month" id="month" onchange="mesOnChange()">
+												
 											</select>
 											<select name="date" id="date">
 
