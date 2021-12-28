@@ -132,7 +132,7 @@ function validarPresentacion() {
         presentacion = {
             title: title,
             description: description,
-            date: `${document.getElementById("year").value}-${document.getElementById("month").value}-${document.getElementById("date").value}`
+            date: new Date(document.getElementById("year").value, parseInt(document.getElementById("month").value) - 1, document.getElementById("date").value).toISOString()
         }
 
     }
