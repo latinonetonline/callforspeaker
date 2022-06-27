@@ -9,7 +9,7 @@ var presentacion = {}
 var preguntas = {}
 
 
-var api = "https://latinonetonlinebackend.herokuapp.com"
+var api = "https://api.latinonet.online"
 
 const monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
     "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
