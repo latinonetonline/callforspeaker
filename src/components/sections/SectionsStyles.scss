@@ -1,0 +1,198 @@
+#welcome-section,
+#personal-information-section,
+#presentation-section,
+#additional-info-section,
+#confirmation-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 50px;
+
+  & .description-text,
+  & .section-header {
+    text-align: center;
+    padding: 37px 30px 13px;
+
+    & p {
+      color: #757575;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+}
+
+#welcome-section {
+  & .description-text {
+    & .heading-welcome {
+      font-size: 40px;
+      color: #333;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    & .subtitle {
+      margin-bottom: 0;
+      font-size: 20px;
+    }
+
+    & .sub-subtitle {
+      margin-top: 5px;
+      font-size: 20px;
+    }
+
+    & .description {
+      margin-top: 50px;
+      line-height: 20px;
+    }
+  }
+}
+
+#personal-information-section,
+#presentation-section,
+#additional-info-section,
+#confirmation-section {
+  & .section-header {
+    & .heading {
+      font-size: 22px;
+      color: #333;
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+
+  & .form-row {
+    display: flex;
+    margin: 0 -10px;
+    width: 100%;
+  }
+}
+
+#presentation-section {
+  & .form-row-date {
+    & fieldset {
+      padding-bottom: 20px;
+
+      & .special-label {
+        display: block;
+        margin-top: 8px;
+        margin-bottom: 15px;
+        padding-right: 0;
+        color: #666;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    & .form-holder {
+      & select {
+        width: 20.6%;
+        margin-right: 15px;
+
+        font-size: 14px;
+        color: #666;
+        font-weight: 600;
+        background: #fff
+          url("https://latinonet.online/callforspeakers/images/form-v1-icon.png")
+          no-repeat scroll;
+        background-position: right 6px center;
+        z-index: 1;
+        cursor: pointer;
+        position: relative;
+        border: 2px solid #e5e5e5;
+        padding: 10.4px 13px;
+
+        appearance: unset;
+
+        & #year {
+          width: 27.28%;
+        }
+      }
+    }
+  }
+}
+
+#additional-info-section {
+  & .section-header {
+    & p {
+      margin-bottom: 50px;
+    }
+  }
+}
+
+#confirmation-section {
+  & .summary-container {
+    min-width: 400px;
+    padding: 20px;
+    border: 2px solid #e5e5e5;
+    border-radius: 4px;
+
+    & p {
+      color: #757575;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  & .word-break {
+    // word-break: break-all;
+  }
+}
+
+@media (max-width: 768px) {
+  #welcome-section,
+  #personal-information-section,
+  #presentation-section,
+  #additional-info-section,
+  #confirmation-section {
+    padding: 0 30px;
+
+    & .description-text,
+    & .section-header {
+      padding: 17px 10px 13px;
+    }
+  }
+
+  #presentation-section {
+    & .section-header {
+      & p {
+        margin-top: 25px;
+      }
+    }
+  }
+
+  #additional-info-section {
+    & .section-header {
+      & p {
+        margin-top: 25px;
+        margin-bottom: 35px;
+      }
+    }
+  }
+
+  #confirmation-section {
+    & .summary-container {
+      min-width: 270px;
+      width: 300px;
+    }
+
+    & .speaker-info {
+      flex-direction: column;
+      margin: 0;
+
+      & .form-holder:first-child {
+        align-self: center;
+        width: auto;
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  #welcome-section,
+  #personal-information-section,
+  #presentation-section,
+  #additional-info-section,
+  #confirmation-section {
+    padding: 0 50px;
+  }
+}

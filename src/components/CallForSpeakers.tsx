@@ -1,0 +1,137 @@
+import React, { useState } from "react";
+import "./CallForSpeakers.scss";
+import WelcomeSection from "./sections/WelcomeSection";
+import NextButton from "./buttons/NextButton";
+import PersonalInformation from "./sections/PersonalInformation";
+import TabComponent from "./TabComponent";
+import PresentationSection from "./sections/PresentationSection";
+import AdditionalInfoSection from "./sections/AdditionalInfoSection";
+import ConfirmationSection from "./sections/ConfirmationSection";
+import PrevButton from "./buttons/PrevButton";
+import CheckboxInput from "./inputs/CheckboxInput";
+import ConfirmButton from "./buttons/ConfirmButton";
+
+interface CallForSpeakersProps {}
+
+const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
+  const [showTab, setShowTab] = useState(1);
+
+  const handleShowTab = (tabId: number) => {
+    setShowTab(tabId);
+  };
+
+  const getActiveClassName = (tabId: number, className: string) =>
+    showTab === tabId ? className : "";
+
+  return (
+    <div id="call-for-speakers_container">
+      <div className="steps-section_container">
+        <ul>
+          <TabComponent
+            getActiveClassName={getActiveClassName}
+            tabId={1}
+            stepNumber={"01"}
+            stepTitle={"Bienvenidos"}
+          />
+          <TabComponent
+            getActiveClassName={getActiveClassName}
+            tabId={2}
+            stepNumber={"02"}
+            stepTitle={"Información Personal"}
+          />
+          <TabComponent
+            getActiveClassName={getActiveClassName}
+            tabId={3}
+            stepNumber={"03"}
+            stepTitle={"Presentación"}
+          />
+          <TabComponent
+            getActiveClassName={getActiveClassName}
+            tabId={4}
+            stepNumber={"04"}
+            stepTitle={"Sumemos Valor"}
+          />
+          <TabComponent
+            getActiveClassName={getActiveClassName}
+            tabId={5}
+            stepNumber={"05"}
+            stepTitle={"Confirmación"}
+          />
+        </ul>
+      </div>
+
+      <div className="steps-content_container">
+        <div className={`content ${getActiveClassName(1, "active-content")}`}>
+          <div className="tab-content">
+            <WelcomeSection />
+            <div className="button-next_container">
+              <div
+                className="next-btn_container"
+              >
+                <NextButton handleShowTab={handleShowTab} toTab={2} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={`content ${getActiveClassName(2, "active-content")}`}>
+          <div className="tab-content">
+            <PersonalInformation />
+            <div className="navigation-buttons_container">
+              <div
+                className="navigation-btn_container"
+              >
+                <PrevButton handleShowTab={handleShowTab} toTab={1} />
+                <NextButton handleShowTab={handleShowTab} toTab={3} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={`content ${getActiveClassName(3, "active-content")}`}>
+          <div className="tab-content">
+            <PresentationSection />
+            <div className="navigation-buttons_container">
+              <div
+                className="navigation-btn_container"
+              >
+                <PrevButton handleShowTab={handleShowTab} toTab={2} />
+                <NextButton handleShowTab={handleShowTab} toTab={4} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={`content ${getActiveClassName(4, "active-content")}`}>
+          <div className="tab-content">
+            <AdditionalInfoSection />
+            <div className="navigation-buttons_container">
+              <div
+                className="navigation-btn_container"
+              >
+                <PrevButton handleShowTab={handleShowTab} toTab={3} />
+                <NextButton handleShowTab={handleShowTab} toTab={5} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={`content ${getActiveClassName(5, "active-content")}`}>
+          <div className="tab-content">
+            <ConfirmationSection/>
+            <div className="navigation-buttons_container">
+              <div
+                className="navigation-btn_container"
+              >
+                <PrevButton handleShowTab={handleShowTab} toTab={4} />
+                <ConfirmButton />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CallForSpeakers;
