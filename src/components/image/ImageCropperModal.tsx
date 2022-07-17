@@ -52,7 +52,7 @@ const ImageCropperModal: React.FC<ImageCropperModalProps> = ({
         </div>
         <div className="upload-example__button-wrapper">
           <button className="upload-example__button" onClick={handleClick}>
-            Crop Image
+            Cortar foto
           </button>
         </div>
       </ReactModal>

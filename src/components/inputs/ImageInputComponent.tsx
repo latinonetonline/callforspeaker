@@ -84,7 +84,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
                 onChange={onLoadImage}
                 style={{ display: "none" }}
               />
-              Upload image
+              Agregar foto
             </button>
           </div>
         </div>
