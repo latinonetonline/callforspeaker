@@ -44,7 +44,11 @@
 .form-holder-2 {
   width: 100%;
 
-  .second-speaker-fieldset {
+  & .image-fieldset {
+    padding: 5px 20px 13px;
+  }
+
+  & .second-speaker-fieldset {
     padding: 5px 18px 13px;
 
     & label {
