@@ -4,6 +4,8 @@ import ShortInputComponent from "../inputs/ShortInputComponent";
 import LongInputComponent from "../inputs/LongInputComponent";
 import TextareaInput from "../inputs/TextareaInput";
 import CheckboxInput from "../inputs/CheckboxInput";
+import ImageInputComponent from "../inputs/ImageInputComponent";
+import ImageCropperModal from "../image/ImageCropperModal";
 
 interface PersonalInformationProps {}
 
@@ -62,12 +64,10 @@ const PersonalInformation: React.FC<PersonalInformationProps> = () => {
         />
       </div>
       <div className="form-row">
-        <LongInputComponent
+        <ImageInputComponent
           fieldsetId="image-fieldset"
           legend="Foto para el Flyer"
           inputId="image"
-          inputType="file"
-          placeholder=""
         />
       </div>
       <div className="form-row">
