@@ -1,0 +1,33 @@
+.modal-cropper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 600px;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+
+.upload-example__button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.upload-example__button {
+  background: #36393f;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  text-align: center;
+  transition: background 0.5s;
+  width: 100%;
+}
