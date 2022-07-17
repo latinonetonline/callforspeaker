@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./CallForSpeakers.scss";
+import 'animate.css';
 import WelcomeSection from "./sections/WelcomeSection";
 import NextButton from "./buttons/NextButton";
 import PersonalInformation from "./sections/PersonalInformation";
@@ -8,7 +9,6 @@ import PresentationSection from "./sections/PresentationSection";
 import AdditionalInfoSection from "./sections/AdditionalInfoSection";
 import ConfirmationSection from "./sections/ConfirmationSection";
 import PrevButton from "./buttons/PrevButton";
-import CheckboxInput from "./inputs/CheckboxInput";
 import ConfirmButton from "./buttons/ConfirmButton";
 
 interface CallForSpeakersProps {}
@@ -62,7 +62,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
 
       <div className="steps-content_container">
         <div className={`content ${getActiveClassName(1, "active-content")}`}>
-          <div className="tab-content">
+          <div className="tab-content animate__animated animate__fadeIn">
             <WelcomeSection />
             <div className="button-next_container">
               <div
@@ -75,7 +75,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
         </div>
 
         <div className={`content ${getActiveClassName(2, "active-content")}`}>
-          <div className="tab-content">
+          <div className="tab-content animate__animated animate__fadeIn">
             <PersonalInformation />
             <div className="navigation-buttons_container">
               <div
@@ -89,7 +89,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
         </div>
 
         <div className={`content ${getActiveClassName(3, "active-content")}`}>
-          <div className="tab-content">
+          <div className="tab-content animate__animated animate__fadeIn">
             <PresentationSection />
             <div className="navigation-buttons_container">
               <div
@@ -103,7 +103,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
         </div>
 
         <div className={`content ${getActiveClassName(4, "active-content")}`}>
-          <div className="tab-content">
+          <div className="tab-content animate__animated animate__fadeIn">
             <AdditionalInfoSection />
             <div className="navigation-buttons_container">
               <div
@@ -117,7 +117,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
         </div>
 
         <div className={`content ${getActiveClassName(5, "active-content")}`}>
-          <div className="tab-content">
+          <div className="tab-content animate__animated animate__fadeIn">
             <ConfirmationSection/>
             <div className="navigation-buttons_container">
               <div
