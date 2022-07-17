@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CallForSpeakers.scss";
-import 'animate.css';
+import "animate.css";
 import WelcomeSection from "./sections/WelcomeSection";
 import NextButton from "./buttons/NextButton";
 import PersonalInformation from "./sections/PersonalInformation";
@@ -10,15 +10,36 @@ import AdditionalInfoSection from "./sections/AdditionalInfoSection";
 import ConfirmationSection from "./sections/ConfirmationSection";
 import PrevButton from "./buttons/PrevButton";
 import ConfirmButton from "./buttons/ConfirmButton";
+import { useAuth } from "oidc-react";
 
 interface CallForSpeakersProps {}
 
 const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
   const [showTab, setShowTab] = useState(1);
-
+  const [isLogged, setIsLogged] = useState(false);
+  const auth = useAuth();
   const handleShowTab = (tabId: number) => {
     setShowTab(tabId);
   };
+
+
+  const handleLogout = () => {
+    auth.signOutRedirect()
+    setIsLogged(false);
+  }
+
+  useEffect(() => {
+    console.log("555")
+    auth.userManager.getUser().then((user) => {
+      if (user?.access_token) {
+        if (user.expired) {
+          setIsLogged(false);
+        } else {
+          setIsLogged(true);
+        }
+      }
+    });
+  }, [auth]);
 
   const getActiveClassName = (tabId: number, className: string) =>
     showTab === tabId ? className : "";
@@ -65,11 +86,18 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
           <div className="tab-content animate__animated animate__fadeIn">
             <WelcomeSection />
             <div className="button-next_container">
-              <div
-                className="next-btn_container"
-              >
-                <NextButton handleShowTab={handleShowTab} toTab={2} />
-              </div>
+              {isLogged ? (
+                <div className="navigation-btn_container">
+                  <div onClick={handleLogout} className="prev-button">
+                    Logout
+                  </div>
+                  <NextButton handleShowTab={handleShowTab} toTab={2} />
+                </div>
+              ) : (
+                <button onClick={() => auth.signIn()}>
+                  Inicie sesión para continuar
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -78,9 +106,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
           <div className="tab-content animate__animated animate__fadeIn">
             <PersonalInformation />
             <div className="navigation-buttons_container">
-              <div
-                className="navigation-btn_container"
-              >
+              <div className="navigation-btn_container">
                 <PrevButton handleShowTab={handleShowTab} toTab={1} />
                 <NextButton handleShowTab={handleShowTab} toTab={3} />
               </div>
@@ -92,9 +118,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
           <div className="tab-content animate__animated animate__fadeIn">
             <PresentationSection />
             <div className="navigation-buttons_container">
-              <div
-                className="navigation-btn_container"
-              >
+              <div className="navigation-btn_container">
                 <PrevButton handleShowTab={handleShowTab} toTab={2} />
                 <NextButton handleShowTab={handleShowTab} toTab={4} />
               </div>
@@ -106,9 +130,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
           <div className="tab-content animate__animated animate__fadeIn">
             <AdditionalInfoSection />
             <div className="navigation-buttons_container">
-              <div
-                className="navigation-btn_container"
-              >
+              <div className="navigation-btn_container">
                 <PrevButton handleShowTab={handleShowTab} toTab={3} />
                 <NextButton handleShowTab={handleShowTab} toTab={5} />
               </div>
@@ -118,11 +140,9 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
 
         <div className={`content ${getActiveClassName(5, "active-content")}`}>
           <div className="tab-content animate__animated animate__fadeIn">
-            <ConfirmationSection/>
+            <ConfirmationSection />
             <div className="navigation-buttons_container">
-              <div
-                className="navigation-btn_container"
-              >
+              <div className="navigation-btn_container">
                 <PrevButton handleShowTab={handleShowTab} toTab={4} />
                 <ConfirmButton />
               </div>
