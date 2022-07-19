@@ -5,6 +5,7 @@ import "react-advanced-cropper/dist/style.css";
 import { AuthProvider, AuthProviderProps } from "oidc-react";
 import CallbackPage from "./pages/CallbackPage";
 import SignOutRedirectPage from "./pages/SignOutRedirectPage";
+import { AppContextProvider } from "./data/AppContext";
 
 const oidcConfig: AuthProviderProps = {
   authority: "https://ids.latinonet.online",
@@ -20,18 +21,20 @@ const oidcConfig: AuthProviderProps = {
 const App = () => {
   return (
     <AuthProvider {...oidcConfig}>
-      <div id="app_container">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<CallForSpeakersPage />}></Route>
-            <Route path="/callback" element={<CallbackPage />}></Route>
-            <Route
-              path="/signout-redirect"
-              element={<SignOutRedirectPage />}
-            ></Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <AppContextProvider>
+        <div id="app_container">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<CallForSpeakersPage />}></Route>
+              <Route path="/callback" element={<CallbackPage />}></Route>
+              <Route
+                path="/signout-redirect"
+                element={<SignOutRedirectPage />}
+              ></Route>
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </AppContextProvider>
     </AuthProvider>
   );
 };
