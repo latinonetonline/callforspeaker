@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "./CallForSpeakers.scss";
+import "./CallForSpeakersPage.scss";
 import "animate.css";
-import WelcomeSection from "./sections/WelcomeSection";
-import NextButton from "./buttons/NextButton";
-import PersonalInformation from "./sections/PersonalInformation";
-import TabComponent from "./TabComponent";
-import PresentationSection from "./sections/PresentationSection";
-import AdditionalInfoSection from "./sections/AdditionalInfoSection";
-import ConfirmationSection from "./sections/ConfirmationSection";
-import PrevButton from "./buttons/PrevButton";
-import ConfirmButton from "./buttons/ConfirmButton";
+import WelcomeSection from "../components/sections/WelcomeSection";
+import NextButton from "../components/buttons/NextButton";
+import PersonalInformation from "../components/sections/PersonalInformation";
+import TabComponent from "../components/TabComponent";
+import PresentationSection from "../components/sections/PresentationSection";
+import AdditionalInfoSection from "../components/sections/AdditionalInfoSection";
+import ConfirmationSection from "../components/sections/ConfirmationSection";
+import PrevButton from "../components/buttons/PrevButton";
+import ConfirmButton from "../components/buttons/ConfirmButton";
 import { useAuth } from "oidc-react";
 
 interface CallForSpeakersProps {}
@@ -22,14 +22,13 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
     setShowTab(tabId);
   };
 
-
   const handleLogout = () => {
-    auth.signOutRedirect()
+    auth.signOutRedirect();
     setIsLogged(false);
-  }
+  };
 
   useEffect(() => {
-    console.log("555")
+    console.log("555");
     auth.userManager.getUser().then((user) => {
       if (user?.access_token) {
         if (user.expired) {

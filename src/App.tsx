@@ -1,13 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
-import CallForSpeakers from "./components/CallForSpeakers";
+import CallForSpeakersPage from "./pages/CallForSpeakersPage";
 import "react-advanced-cropper/dist/style.css";
 import { AuthProvider, AuthProviderProps } from "oidc-react";
 import CallbackPage from "./pages/CallbackPage";
 import SignOutRedirectPage from "./pages/SignOutRedirectPage";
 
 const oidcConfig: AuthProviderProps = {
-
   authority: "https://ids.latinonet.online",
   clientId: "callforspeakers_dev",
   redirectUri: "http://localhost:3000/callback",
@@ -15,7 +14,7 @@ const oidcConfig: AuthProviderProps = {
   responseType: "id_token token",
   postLogoutRedirectUri: "http://localhost:3000/signout-redirect",
   autoSignIn: false,
-  loadUserInfo: true
+  loadUserInfo: true,
 };
 
 const App = () => {
@@ -24,9 +23,12 @@ const App = () => {
       <div id="app_container">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<CallForSpeakers />}></Route>
+            <Route path="/" element={<CallForSpeakersPage />}></Route>
             <Route path="/callback" element={<CallbackPage />}></Route>
-            <Route path="/signout-redirect" element={<SignOutRedirectPage />}></Route>
+            <Route
+              path="/signout-redirect"
+              element={<SignOutRedirectPage />}
+            ></Route>
           </Routes>
         </BrowserRouter>
       </div>
