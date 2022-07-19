@@ -5,7 +5,9 @@ export const initialState: AppState = {
   callForSpeakers: {
     isLoading: false,
     hasSecondSpeaker: false,
-    currentStep: 1
+    currentStep: 1,
+    unavailableDates: [],
+    user: undefined
   }
 };
 

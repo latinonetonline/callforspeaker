@@ -17,6 +17,8 @@ export const AppContext = createContext<AppContextState>({
   dispatch: () => undefined,
 });
 
+export const useAppContext = () => React.useContext(AppContext)
+
 export const AppContextProvider: React.FC<AppContextProviderProps> = (
   props
 ) => {

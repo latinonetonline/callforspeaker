@@ -10,6 +10,10 @@ export function callForSpeakersReducer(
       return { ...state, currentStep: action.step };
     case "set-loading":
       return { ...state, isLoading: action.isLoading };
+    case "set-user":
+        return { ...state, user: action.user };    
+    case "set-unavailable-dates":
+        return { ...state, unavailableDates: action.dates };   
     case "set-has-second-speaker":
       return { ...state, hasSecondSpeaker: action.hasSecondSpeaker };
   }

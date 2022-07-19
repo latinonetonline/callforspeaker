@@ -11,10 +11,14 @@ import ConfirmationSection from "../components/sections/ConfirmationSection";
 import PrevButton from "../components/buttons/PrevButton";
 import ConfirmButton from "../components/buttons/ConfirmButton";
 import { useAuth } from "oidc-react";
+import { useAppContext } from "../data/AppContext";
+import { loadData } from "../data/call-for-speakers/callforspeakers.action";
 
 interface CallForSpeakersProps {}
 
 const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
+  const { state, dispatch } = useAppContext();
+
   const [showTab, setShowTab] = useState(1);
   const [isLogged, setIsLogged] = useState(false);
   const auth = useAuth();
@@ -28,7 +32,10 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
   };
 
   useEffect(() => {
-    console.log("555");
+    dispatch(loadData)
+  }, []);
+
+  useEffect(() => {
     auth.userManager.getUser().then((user) => {
       if (user?.access_token) {
         if (user.expired) {
