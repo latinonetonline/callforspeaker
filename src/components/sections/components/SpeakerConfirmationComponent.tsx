@@ -19,6 +19,7 @@ const SpeakerConfirmationComponent: React.FC<
             width="200px"
             src={image}
             id="confirmation-imagen"
+            alt=""
           />
         </div>
         <div className="form-holder">

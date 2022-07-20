@@ -4,7 +4,6 @@ import ShortInputComponent from "../inputs/ShortInputComponent";
 import LongInputComponent from "../inputs/LongInputComponent";
 import TextareaInput from "../inputs/TextareaInput";
 import ImageInputComponent from "../inputs/ImageInputComponent";
-import SecondSpeakerCheckboxInput from "./components/SecondSpeakerCheckboxInput";
 
 interface SecondPersonalInformationProps {}
 

@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Dispatch } from 'react';
-import { DispatchObject } from './types';
+import * as React from "react";
+import { Dispatch } from "react";
+import { DispatchObject } from "./types";
 
 type FuncType = (dispatch: React.Dispatch<any>) => Promise<DispatchObject>;
 
@@ -9,19 +9,19 @@ type FuncOrObjectType = FuncType | DispatchObject;
 function isObjectAction(
   dispatchFunc: FuncOrObjectType
 ): dispatchFunc is DispatchObject {
-  return (<DispatchObject>dispatchFunc)?.type !== undefined;
+  return (dispatchFunc as DispatchObject)?.type !== undefined;
 }
 
 function isPromise(obj: any) {
-  return typeof obj === 'object' && obj.then;
+  return typeof obj === "object" && obj.then;
 }
 
 function isAsyncFunction(obj: any) {
-  return obj.constructor?.name === 'AsyncFunction';
+  return obj.constructor?.name === "AsyncFunction";
 }
 
 function isFunction(obj: any) {
-  return typeof obj === 'function';
+  return typeof obj === "function";
 }
 
 export function wrapAsync(dispatch: Dispatch<DispatchObject>) {

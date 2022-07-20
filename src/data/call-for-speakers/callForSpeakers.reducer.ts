@@ -1,7 +1,6 @@
 import { CallForSpeakersActions } from "./callforspeakers.action";
 import { CallForSpeakersState } from "./callForSpeakers.state";
 import update from "immutability-helper";
-import { act } from "react-dom/test-utils";
 
 export function callForSpeakersReducer(
   state: CallForSpeakersState,
