@@ -19,12 +19,12 @@ interface CallForSpeakersProps {}
 const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
   const { state, dispatch } = useAppContext();
 
-  const [showTab, setShowTab] = useState(1);
+  // const [showTab, setShowTab] = useState(1);
   const [isLogged, setIsLogged] = useState(false);
   const auth = useAuth();
-  const handleShowTab = (tabId: number) => {
-    setShowTab(tabId);
-  };
+  // const handleShowTab = (tabId: number) => {
+  //   setShowTab(tabId);
+  // };
 
   const handleLogout = () => {
     auth.signOutRedirect();
@@ -32,7 +32,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
   };
 
   useEffect(() => {
-    dispatch(loadData)
+    dispatch(loadData);
   }, []);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
   }, [auth]);
 
   const getActiveClassName = (tabId: number, className: string) =>
-    showTab === tabId ? className : "";
+    state.callForSpeakers.currentStep === tabId ? className : "";
 
   return (
     <div id="call-for-speakers_container">
@@ -97,7 +97,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
                   <div onClick={handleLogout} className="prev-button">
                     Logout
                   </div>
-                  <NextButton handleShowTab={handleShowTab} toTab={2} />
+                  <NextButton />
                 </div>
               ) : (
                 <button onClick={() => auth.signIn()}>
@@ -113,8 +113,8 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
             <PersonalInformation />
             <div className="navigation-buttons_container">
               <div className="navigation-btn_container">
-                <PrevButton handleShowTab={handleShowTab} toTab={1} />
-                <NextButton handleShowTab={handleShowTab} toTab={3} />
+                <PrevButton />
+                <NextButton />
               </div>
             </div>
           </div>
@@ -125,8 +125,8 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
             <PresentationSection />
             <div className="navigation-buttons_container">
               <div className="navigation-btn_container">
-                <PrevButton handleShowTab={handleShowTab} toTab={2} />
-                <NextButton handleShowTab={handleShowTab} toTab={4} />
+                <PrevButton />
+                <NextButton />
               </div>
             </div>
           </div>
@@ -137,8 +137,8 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
             <AdditionalInfoSection />
             <div className="navigation-buttons_container">
               <div className="navigation-btn_container">
-                <PrevButton handleShowTab={handleShowTab} toTab={3} />
-                <NextButton handleShowTab={handleShowTab} toTab={5} />
+                <PrevButton />
+                <NextButton />
               </div>
             </div>
           </div>
@@ -149,7 +149,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
             <ConfirmationSection />
             <div className="navigation-buttons_container">
               <div className="navigation-btn_container">
-                <PrevButton handleShowTab={handleShowTab} toTab={4} />
+                <PrevButton />
                 <ConfirmButton />
               </div>
             </div>

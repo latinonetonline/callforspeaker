@@ -1,14 +1,19 @@
 import React from "react";
+import { useAppContext } from "../../data/AppContext";
+import { setCurrentStep } from "../../data/call-for-speakers/callforspeakers.action";
 import "./ButtonStyles.scss";
 
-interface NextButtonProps {
-  handleShowTab: (value: number) => void;
-  toTab: number;
-}
+interface NextButtonProps {}
 
-const NextButton: React.FC<NextButtonProps> = ({ handleShowTab, toTab }) => {
+const NextButton: React.FC<NextButtonProps> = () => {
+  const { state, dispatch } = useAppContext();
+
+  const handleClick = () => {
+    dispatch(setCurrentStep(state.callForSpeakers.currentStep + 1));
+  };
+  
   return (
-    <div onClick={() => handleShowTab(toTab)} className="next-button">
+    <div onClick={handleClick} className="next-button">
       <img src="/assets/arrow-right.png" alt="" />
     </div>
   );
