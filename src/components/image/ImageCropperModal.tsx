@@ -9,11 +9,6 @@ interface ImageCropperModalProps {
   onClose: () => void;
 }
 
-interface Image {
-  type?: string;
-  src: string;
-}
-
 const ImageCropperModal: React.FC<ImageCropperModalProps> = ({
   show,
   image,

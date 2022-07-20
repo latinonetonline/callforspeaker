@@ -6,13 +6,13 @@ import TextareaInput from "../inputs/TextareaInput";
 import ImageInputComponent from "../inputs/ImageInputComponent";
 import SecondSpeakerCheckboxInput from "./components/SecondSpeakerCheckboxInput";
 
-interface PersonalInformationProps {}
+interface SecondPersonalInformationProps {}
 
-const PersonalInformation: React.FC<PersonalInformationProps> = () => {
+const SecondPersonalInformation: React.FC<SecondPersonalInformationProps> = () => {
   return (
     <section id="personal-information-section">
       <div className="section-header">
-        <h3 className="heading">Información Personal</h3>
+        <h3 className="heading">Segundo Speaker</h3>
         <p>
           Atras de toda gran charla hay un gran speaker al cual todos nosotros
           queremos conocer.
@@ -69,11 +69,8 @@ const PersonalInformation: React.FC<PersonalInformationProps> = () => {
           inputId="image"
         />
       </div>
-      <div className="form-row">
-        <SecondSpeakerCheckboxInput />
-      </div>
     </section>
   );
 };
 
-export default PersonalInformation;
+export default SecondPersonalInformation;

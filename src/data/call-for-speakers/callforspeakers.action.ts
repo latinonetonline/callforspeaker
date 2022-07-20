@@ -1,9 +1,6 @@
-
-
-import { User } from 'oidc-react';
-import { ActionType, DispatchObject } from '../types';
-import { getUnavailableDates } from './callForSpeakers.api';
-
+import { Step } from "../../models/Step";
+import { ActionType, DispatchObject } from "../types";
+import { getUnavailableDates } from "./callForSpeakers.api";
 
 export const loadData =
   () => async (dispatch: React.Dispatch<DispatchObject>) => {
@@ -16,37 +13,52 @@ export const loadData =
   };
 export const setLoading = (isLoading: boolean) =>
   ({
-    type: 'set-loading',
+    type: "set-loading",
     isLoading,
   } as const);
 
 export const setCurrentStep = (step: number) =>
   ({
-    type: 'set-current-step',
+    type: "set-current-step",
     step,
   } as const);
 
-  export const setHasSecondSpeaker = (hasSecondSpeaker: boolean) =>
+export const setHasSecondSpeaker = (hasSecondSpeaker: boolean) =>
   ({
-    type: 'set-has-second-speaker',
+    type: "set-has-second-speaker",
     hasSecondSpeaker,
   } as const);
 
-  export const setUser = (user?: User) =>
+export const setIsAuthenticated = (isAuthenticated?: boolean) =>
   ({
-    type: 'set-user',
-    user,
+    type: "set-is-authenticated",
+    isAuthenticated,
   } as const);
 
-  export const setUnavailableDates = (dates: Date[]) =>
+export const setUnavailableDates = (dates: Date[]) =>
   ({
-    type: 'set-unavailable-dates',
+    type: "set-unavailable-dates",
     dates,
+  } as const);
+
+export const insertStep = (index: number, step: Step) =>
+  ({
+    type: "insert-step",
+    index,
+    step,
+  } as const);
+
+export const removeStep = (index: number) =>
+  ({
+    type: "remove-step",
+    index,
   } as const);
 
 export type CallForSpeakersActions =
   | ActionType<typeof setLoading>
-  | ActionType<typeof setUser>
+  | ActionType<typeof setIsAuthenticated>
   | ActionType<typeof setUnavailableDates>
   | ActionType<typeof setHasSecondSpeaker>
-  | ActionType<typeof setCurrentStep>;
+  | ActionType<typeof setCurrentStep>
+  | ActionType<typeof insertStep>
+  | ActionType<typeof removeStep>;
