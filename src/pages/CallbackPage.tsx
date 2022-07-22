@@ -16,6 +16,6 @@ const CallbackPage = () => {
     });
   }, []);
 
-  return <>Loading...</>;
+  return <div style={{color: 'white'}}>Loading...</div>;
 };
 export default CallbackPage;
