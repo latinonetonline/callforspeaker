@@ -68,6 +68,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
         <ul>
           {state.callForSpeakers.steps.map((step, index) => (
             <TabComponent
+              key={index}
               getActiveClassName={getActiveClassName}
               tabId={index + 1}
               stepNumber={step.number}

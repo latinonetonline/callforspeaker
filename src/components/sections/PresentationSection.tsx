@@ -1,5 +1,6 @@
 import React from "react";
 import LongInputComponent from "../inputs/LongInputComponent";
+import SaturdayInput from "../inputs/SaturdayInput";
 import TextareaInput from "../inputs/TextareaInput";
 
 interface PresentationSectionProps {}
@@ -30,14 +31,7 @@ const PresentationSection: React.FC<PresentationSectionProps> = () => {
         />
       </div>
       <div className="form-row form-row-date">
-        <div className="form-holder form-holder-2">
-          <fieldset className="saturday-fieldset">
-            <label className="special-label">Elegí tu sábado:</label>
-            <select name="year" id="year"></select>
-            <select name="month" id="month"></select>
-            <select name="date" id="date"></select>
-          </fieldset>
-        </div>
+        <SaturdayInput onChange={(date) => console.log(date)} />
       </div>
     </section>
   );
