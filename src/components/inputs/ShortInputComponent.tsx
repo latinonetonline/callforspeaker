@@ -4,7 +4,8 @@ import { FormInput } from "../../models/FormInput";
 
 interface ShortInputComponentProps {
   name: keyof FormInput;
-  error?: boolean
+  value?: string;
+  error?: boolean;
   legend: string;
   inputType: string;
   placeholder: string;
@@ -13,21 +14,28 @@ interface ShortInputComponentProps {
 }
 
 const ShortInputComponent: React.FC<ShortInputComponentProps> = (props) => {
-  const { name, legend, inputType, placeholder, required = false, pattern, error = false } = props;
+  const {
+    name,
+    value,
+    legend,
+    inputType,
+    placeholder,
+    required = false,
+    pattern,
+    error = false,
+  } = props;
 
   const { register } = useFormContext<FormInput>();
 
   return (
     <div className="form-holder">
-      <fieldset
-        id={name + "-fieldset"}
-        className={error ? "error" : ""}
-      >
+      <fieldset id={name + "-fieldset"} className={error ? "error" : ""}>
         <legend>{legend}</legend>
         <input
           type={inputType}
           className={`form-control`}
           placeholder={placeholder}
+          defaultValue={value}
           {...register(name, { required: required, pattern: pattern })}
         />
       </fieldset>

@@ -37,7 +37,6 @@ export const initialState: AppState = {
       speakerPhoto: "",
       speakerDescription: "",
       speakerTwitter: "",
-      hasSecondSpeaker: false,
       secondSpeakerName: "",
       secondSpeakerLastname: "",
       secondSpeakerEmail: "",

@@ -38,6 +38,7 @@ const PresentationSection: React.FC<PresentationSectionProps> = () => {
 
           <div className="form-row">
             <LongInputComponent
+              value={state.callForSpeakers.form.title}
               name="title"
               legend="Titulo"
               inputType="text"
@@ -48,6 +49,7 @@ const PresentationSection: React.FC<PresentationSectionProps> = () => {
           </div>
           <div className="form-row">
             <TextareaInput
+              value={state.callForSpeakers.form.description}
               name="description"
               legend="Descripción"
               placeholder="Lucite! ¿Como convencerias a alguien de asistir a tu charla?"
@@ -59,6 +61,7 @@ const PresentationSection: React.FC<PresentationSectionProps> = () => {
             <Controller
               name="date"
               control={control}
+              defaultValue={state.callForSpeakers.form.date}
               render={({ field }) => (
                 <SaturdayInput
                   value={field.value}

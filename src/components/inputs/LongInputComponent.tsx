@@ -4,6 +4,7 @@ import { FormInput } from "../../models/FormInput";
 
 interface LongInputComponentProps {
   name: keyof FormInput;
+  value?: string;
   error?: boolean;
   legend: string;
   inputType: string;
@@ -15,6 +16,7 @@ interface LongInputComponentProps {
 const LongInputComponent: React.FC<LongInputComponentProps> = (props) => {
   const {
     name,
+    value,
     legend,
     inputType,
     placeholder,
@@ -30,6 +32,7 @@ const LongInputComponent: React.FC<LongInputComponentProps> = (props) => {
       <fieldset id={name + "-fieldset"} className={error ? "error" : ""}>
         <legend>{legend}</legend>
         <input
+          defaultValue={value}
           type={inputType}
           className={`form-control`}
           placeholder={placeholder}

@@ -1,19 +1,19 @@
-import { useFormContext } from "react-hook-form";
 import { useAppContext } from "../../../data/AppContext";
 import {
   insertStep,
   removeStep,
   setHasSecondSpeaker,
 } from "../../../data/call-for-speakers/callforspeakers.action";
-import { FormInput } from "../../../models/FormInput";
 import CheckboxInput from "../../inputs/CheckboxInput";
 
 interface SecondSpeakerCheckboxInputProps {
   error?: boolean;
+  value?: boolean;
 }
 
 const SecondSpeakerCheckboxInput: React.FC<SecondSpeakerCheckboxInputProps> = ({
   error,
+  value,
 }) => {
   const { dispatch } = useAppContext();
 
@@ -31,6 +31,8 @@ const SecondSpeakerCheckboxInput: React.FC<SecondSpeakerCheckboxInputProps> = ({
       legend="Segundo Speaker"
       label="Agregar un segundo speaker"
       error={error}
+      value={value}
+      onChange={(e) => handleChange(e.target.checked)}
     />
   );
 };

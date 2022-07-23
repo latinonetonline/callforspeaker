@@ -24,7 +24,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = () => {
   const methods = useForm<PersonalInformationFormInput>();
   const {
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = methods;
   const { state, dispatch } = useAppContext();
 
@@ -49,6 +49,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = () => {
           <div className="form-row">
             <ShortInputComponent
               name="speakerName"
+              value={state.callForSpeakers.form.speakerName}
               legend="Name"
               inputType="text"
               placeholder="Nombre"
@@ -57,6 +58,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = () => {
             />
             <ShortInputComponent
               name="speakerLastname"
+              value={state.callForSpeakers.form.speakerLastname}
               legend="Apellido"
               inputType="text"
               placeholder="Apellido"
@@ -68,6 +70,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = () => {
           <div className="form-row">
             <LongInputComponent
               name="speakerEmail"
+              value={state.callForSpeakers.form.speakerEmail}
               legend="Email"
               inputType="text"
               placeholder="example@email.com"
@@ -79,6 +82,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = () => {
           <div className="form-row">
             <LongInputComponent
               name="speakerTwitter"
+              value={state.callForSpeakers.form.speakerTwitter}
               legend="Twitter"
               inputType="text"
               placeholder="@username"
@@ -89,6 +93,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = () => {
           <div className="form-row">
             <TextareaInput
               name="speakerDescription"
+              value={state.callForSpeakers.form.speakerDescription}
               legend="Descripción"
               placeholder="Nos gustaria saber más de vos"
               required={true}
@@ -103,9 +108,9 @@ const PersonalInformation: React.FC<PersonalInformationProps> = () => {
             />
           </div>
           <div className="form-row">
-
-            
-            <SecondSpeakerCheckboxInput />
+            <SecondSpeakerCheckboxInput
+              value={state.callForSpeakers.hasSecondSpeaker}
+            />
           </div>
         </section>
         <div className="navigation-buttons_container button_container">

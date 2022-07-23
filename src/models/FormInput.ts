@@ -5,7 +5,6 @@ export type PersonalInformationFormInput = {
   speakerPhoto: string;
   speakerTwitter: string;
   speakerEmail: string;
-  hasSecondSpeaker: boolean;
 };
 
 export type SecondPersonalInformationFormInput = {

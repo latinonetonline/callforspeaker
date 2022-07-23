@@ -43,6 +43,7 @@ const AdditionalInfoSection: React.FC<
 
           <div className="form-row">
             <TextareaInput
+              value={state.callForSpeakers.form.answer1}
               name="answer1"
               legend="¿Para quien es esta charla?"
               placeholder="Escribe tu respuesta..."
@@ -50,6 +51,7 @@ const AdditionalInfoSection: React.FC<
           </div>
           <div className="form-row">
             <TextareaInput
+              value={state.callForSpeakers.form.answer2}
               name="answer2"
               legend="¿Que podre hacer con este nuevo conocimiento?"
               placeholder="Escribe tu respuesta..."
@@ -57,6 +59,7 @@ const AdditionalInfoSection: React.FC<
           </div>
           <div className="form-row">
             <TextareaInput
+              value={state.callForSpeakers.form.answer3}
               name="answer3"
               legend="¿Te animas a contarnos un caso de uso?"
               placeholder="Escribe tu respuesta..."

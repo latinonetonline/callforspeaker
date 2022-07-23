@@ -3,19 +3,21 @@ import { useFormContext } from "react-hook-form";
 import { FormInput } from "../../models/FormInput";
 
 interface CheckboxInputProps {
-  name: keyof FormInput;
+  name: string;
   error?: boolean;
   legend: string;
   label: string;
+  value?: boolean;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 
 const CheckboxInput: React.FC<CheckboxInputProps> = ({
   name,
   legend,
   label,
+  value,
+  onChange
 }) => {
-  const { register } = useFormContext<FormInput>();
-
 
   return (
     <div className="form-holder-2">
@@ -26,8 +28,8 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({
             id={name}
             type="checkbox"
             className="second-speaker form-control"
-            {...register(name)}
-
+            checked={value}
+            onChange={onChange}
           />
           {label}
         </label>
