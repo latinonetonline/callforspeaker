@@ -1,12 +1,20 @@
+import { useFormContext } from "react-hook-form";
 import { useAppContext } from "../../../data/AppContext";
 import {
   insertStep,
   removeStep,
   setHasSecondSpeaker,
 } from "../../../data/call-for-speakers/callforspeakers.action";
+import { FormInput } from "../../../models/FormInput";
 import CheckboxInput from "../../inputs/CheckboxInput";
 
-const SecondSpeakerCheckboxInput = () => {
+interface SecondSpeakerCheckboxInputProps {
+  error?: boolean;
+}
+
+const SecondSpeakerCheckboxInput: React.FC<SecondSpeakerCheckboxInputProps> = ({
+  error,
+}) => {
   const { dispatch } = useAppContext();
 
   const handleChange = (value: boolean) => {
@@ -19,11 +27,10 @@ const SecondSpeakerCheckboxInput = () => {
 
   return (
     <CheckboxInput
-      fieldsetId="second-speaker-fieldset"
+      name="hasSecondSpeaker"
       legend="Segundo Speaker"
-      inputId="second-speaker"
-      onChange={handleChange}
       label="Agregar un segundo speaker"
+      error={error}
     />
   );
 };

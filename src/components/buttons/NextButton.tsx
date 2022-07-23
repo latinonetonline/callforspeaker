@@ -1,23 +1,14 @@
 import React from "react";
-import { useAppContext } from "../../data/AppContext";
-import { setCurrentStep } from "../../data/call-for-speakers/callforspeakers.action";
 import "./ButtonStyles.scss";
 
 interface NextButtonProps {
-  canNavigate?: () => boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  type?: "submit" | "reset" | "button";
 }
 
-const NextButton: React.FC<NextButtonProps> = ({ canNavigate }) => {
-  const { state, dispatch } = useAppContext();
-
-  const handleClick = () => {
-    if (!canNavigate || canNavigate()) {
-      dispatch(setCurrentStep(state.callForSpeakers.currentStep + 1));
-    }
-  };
-
+const NextButton: React.FC<NextButtonProps> = ({ onClick, type }) => {
   return (
-    <button type="submit" onClick={handleClick} className="next-button">
+    <button type={type} onClick={onClick} className="next-button">
       <img src="/assets/arrow-right.png" alt="" />
     </button>
   );

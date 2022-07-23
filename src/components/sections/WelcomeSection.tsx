@@ -1,5 +1,6 @@
 import React from "react";
 import { useAppContext } from "../../data/AppContext";
+import { setCurrentStep } from "../../data/call-for-speakers/callforspeakers.action";
 import LoginButton from "../buttons/LoginButton";
 import LogoutButton from "../buttons/LogoutButton";
 import NextButton from "../buttons/NextButton";
@@ -8,7 +9,12 @@ import "./SectionsStyles.scss";
 interface WelcomeSectionProps {}
 
 const WelcomeSection: React.FC<WelcomeSectionProps> = () => {
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
+
+  const handleNextClick = () => {
+    dispatch(setCurrentStep(state.callForSpeakers.currentStep + 1));
+  }
+
   return (
     <>
       <section id="welcome-section">
@@ -42,7 +48,7 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = () => {
           {state.callForSpeakers.isAuthenticated ? (
             <div className="navigation-btn_container">
               <LogoutButton />
-              <NextButton />
+              <NextButton onClick={handleNextClick}/>
             </div>
           ) : (
             <LoginButton />

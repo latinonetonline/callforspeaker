@@ -7,6 +7,7 @@ interface Month {
 }
 
 interface SaturdayInputProps {
+  value?: Date;
   onChange: (date: Date) => void;
 }
 
@@ -26,16 +27,18 @@ const monthNames: Month[] = [
 ];
 
 const getCurrentMonth = (): number => new Date().getUTCMonth() + 1;
-const getCurrentYear = (): number => new Date().getFullYear();
+const getCurrentYear = (): number => new Date().getUTCFullYear();
 
 const getDaysInMonth = (year: number, month: number) =>
   new Date(year, month, 0).getUTCDate();
 
-const SaturdayInput: React.FC<SaturdayInputProps> = ({ onChange }) => {
+const SaturdayInput: React.FC<SaturdayInputProps> = ({ onChange, value }) => {
   const { state } = useAppContext();
-  const [date, setDate] = useState<number>(0);
-  const [month, setMonth] = useState<number>(getCurrentMonth());
-  const [year, setYear] = useState<number>(getCurrentYear());
+  const [date, setDate] = useState<number>(value?.getUTCDate() ?? 0);
+  const [month, setMonth] = useState<number>(
+    value ? value.getUTCMonth() + 1 : getCurrentMonth()
+  );
+  const [year, setYear] = useState<number>(value?.getUTCFullYear() ?? getCurrentYear());
   const [saturdays, setSaturdays] = useState<Date[]>([]);
 
   useEffect(() => {
@@ -103,7 +106,6 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({ onChange }) => {
 
   const dateOnChange = (day: number) => {
     setDate(day);
-    
   };
 
   return (

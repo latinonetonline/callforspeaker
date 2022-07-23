@@ -1,31 +1,33 @@
 import React from "react";
+import { useFormContext } from "react-hook-form";
+import { FormInput } from "../../models/FormInput";
 
 interface CheckboxInputProps {
-  fieldsetId: string;
+  name: keyof FormInput;
+  error?: boolean;
   legend: string;
-  inputId: string;
   label: string;
-  onChange: (value: boolean) => void;
 }
 
 const CheckboxInput: React.FC<CheckboxInputProps> = ({
-  onChange,
-  inputId,
+  name,
   legend,
-  fieldsetId,
   label,
 }) => {
+  const { register } = useFormContext<FormInput>();
+
+
   return (
     <div className="form-holder-2">
-      <fieldset className={fieldsetId}>
+      <fieldset id={name + "-fieldset"}>
         <legend>{legend}</legend>
-        <label htmlFor={inputId} className="unselectable">
+        <label htmlFor={name} className="unselectable">
           <input
-            id={inputId}
+            id={name}
             type="checkbox"
-            onChange={(e) => onChange(e.target.checked)}
-            name="second-speaker"
             className="second-speaker form-control"
+            {...register(name)}
+
           />
           {label}
         </label>
