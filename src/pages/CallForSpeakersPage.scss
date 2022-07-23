@@ -132,6 +132,10 @@
       }
     }
   }
+
+  & .error {
+    border-color: red;
+  }
 }
 
 @media (max-width: 449px) {

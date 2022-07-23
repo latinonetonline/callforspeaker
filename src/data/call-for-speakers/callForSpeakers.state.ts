@@ -1,4 +1,5 @@
 import { User } from "oidc-react";
+import { FormInput } from "../../models/FormInput";
 import { Step } from "../../models/Step";
 
 export interface CallForSpeakersState {
@@ -8,5 +9,6 @@ export interface CallForSpeakersState {
     isAuthenticated?: boolean;
     unavailableDates: Date[];
     steps: Step[];
+    form: FormInput;
   }
   

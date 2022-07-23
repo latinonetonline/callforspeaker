@@ -1,6 +1,7 @@
 import { CallForSpeakersActions } from "./callforspeakers.action";
 import { CallForSpeakersState } from "./callForSpeakers.state";
 import update from "immutability-helper";
+import { format } from "path";
 
 export function callForSpeakersReducer(
   state: CallForSpeakersState,
@@ -17,6 +18,8 @@ export function callForSpeakersReducer(
       return { ...state, unavailableDates: action.dates };
     case "set-has-second-speaker":
       return { ...state, hasSecondSpeaker: action.hasSecondSpeaker };
+    case "update-form-state":
+      return { ...state, form: {...state.form, ...action.form }};
     case "insert-step":
       return {
         ...state,

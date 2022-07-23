@@ -22,25 +22,22 @@ const AdditionalInfoSection: React.FC<
 
       <div className="form-row">
         <TextareaInput
-          fieldsetId=""
+          name="answer1"
           legend="¿Para quien es esta charla?"
-          inputId="question1"
           placeholder="Escribe tu respuesta..."
         />
       </div>
       <div className="form-row">
         <TextareaInput
-          fieldsetId=""
+          name="answer2"
           legend="¿Que podre hacer con este nuevo conocimiento?"
-          inputId="question2"
           placeholder="Escribe tu respuesta..."
         />
       </div>
       <div className="form-row">
         <TextareaInput
-          fieldsetId=""
+          name="answer3"
           legend="¿Te animas a contarnos un caso de uso?"
-          inputId="question3"
           placeholder="Escribe tu respuesta..."
         />
       </div>

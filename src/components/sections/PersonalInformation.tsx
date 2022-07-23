@@ -1,78 +1,131 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "../inputs/InputsStyles.scss";
 import ShortInputComponent from "../inputs/ShortInputComponent";
 import LongInputComponent from "../inputs/LongInputComponent";
 import TextareaInput from "../inputs/TextareaInput";
 import ImageInputComponent from "../inputs/ImageInputComponent";
 import SecondSpeakerCheckboxInput from "./components/SecondSpeakerCheckboxInput";
+import {
+  Controller,
+  FormProvider,
+  useForm,
+  useFormContext,
+} from "react-hook-form";
+import {
+  FormInput,
+  PersonalInformationFormInput,
+} from "../../models/FormInput";
+import NextButton from "../buttons/NextButton";
+import PrevButton from "../buttons/PrevButton";
+import { useAppContext } from "../../data/AppContext";
+import { setCurrentStep, updateFormState } from "../../data/call-for-speakers/callforspeakers.action";
+
+const regExpEmail =
+  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 interface PersonalInformationProps {}
 
 const PersonalInformation: React.FC<PersonalInformationProps> = () => {
+  const methods = useForm<PersonalInformationFormInput>();
+  const refFrom = useRef<HTMLFormElement>(null);
+  const {
+    handleSubmit,
+    getValues,
+    formState: { errors, isValid },
+  } = methods;
+  const { state, dispatch } = useAppContext();
+
+  const onValidSubmit = (data: PersonalInformationFormInput) => {
+    dispatch(updateFormState(data));
+
+  };
+
+  const handleCanNavigate = (): boolean => {
+    return isValid;
+  };
+
   return (
-    <section id="personal-information-section">
-      <div className="section-header">
-        <h3 className="heading">Información Personal</h3>
-        <p>
-          Atras de toda gran charla hay un gran speaker al cual todos nosotros
-          queremos conocer.
-        </p>
-      </div>
+    <>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onValidSubmit)} ref={refFrom}>
+          <section id="personal-information-section">
+            <div className="section-header">
+              <h3 className="heading">Información Personal</h3>
+              <p>
+                Atras de toda gran charla hay un gran speaker al cual todos
+                nosotros queremos conocer.
+              </p>
+            </div>
 
-      <div className="form-row">
-        <ShortInputComponent
-          fieldsetId="name-fieldset"
-          legend="Name"
-          inputId="first-name"
-          inputType="text"
-          placeholder="Nombre"
-        />
-        <ShortInputComponent
-          fieldsetId="lastname-fieldset"
-          legend="Apellido"
-          inputId="last-name"
-          inputType="text"
-          placeholder="Apellido"
-        />
-      </div>
+            <div className="form-row">
+              <ShortInputComponent
+                name="speakerName"
+                legend="Name"
+                inputType="text"
+                placeholder="Nombre"
+                required={true}
+                error={!!errors.speakerName}
+              />
+              <ShortInputComponent
+                name="speakerLastname"
+                legend="Apellido"
+                inputType="text"
+                placeholder="Apellido"
+                required={true}
+                error={!!errors.speakerLastname}
+              />
+            </div>
 
-      <div className="form-row">
-        <LongInputComponent
-          fieldsetId="email-fieldset"
-          legend="Email"
-          inputId="your_email"
-          inputType="text"
-          placeholder="example@email.com"
-        />
-      </div>
-      <div className="form-row">
-        <LongInputComponent
-          fieldsetId=""
-          legend="Twitter"
-          inputId="twitter"
-          inputType="text"
-          placeholder="@username"
-        />
-      </div>
-      <div className="form-row">
-        <TextareaInput
-          fieldsetId="description-fieldset"
-          legend="Descripción"
-          inputId="description"
-          placeholder="Nos gustaria saber más de vos"
-        />
-      </div>
-      <div className="form-row">
-        <ImageInputComponent
-          fieldsetId="image-fieldset"
-          legend="Foto para el Flyer"
-          inputId="image"
-        />
-      </div>
-      <div className="form-row">
-        <SecondSpeakerCheckboxInput />
-      </div>
-    </section>
+            <div className="form-row">
+              <LongInputComponent
+                name="speakerEmail"
+                legend="Email"
+                inputType="text"
+                placeholder="example@email.com"
+                required={true}
+                pattern={regExpEmail}
+                error={!!errors.speakerEmail}
+              />
+            </div>
+            <div className="form-row">
+              <LongInputComponent
+                name="speakerTwitter"
+                legend="Twitter"
+                inputType="text"
+                placeholder="@username"
+                pattern={/(^|[^@\w])@(\w{1,15})\b/g}
+                error={!!errors.speakerTwitter}
+              />
+            </div>
+            <div className="form-row">
+              <TextareaInput
+                name="speakerDescription"
+                legend="Descripción"
+                placeholder="Nos gustaria saber más de vos"
+                required={true}
+                error={!!errors.speakerDescription}
+              />
+            </div>
+            <div className="form-row">
+              <ImageInputComponent
+                fieldsetId="image-fieldset"
+                legend="Foto para el Flyer"
+                inputId="image"
+              />
+            </div>
+            <div className="form-row">
+              <SecondSpeakerCheckboxInput />
+            </div>
+          </section>
+          <div className="navigation-buttons_container button_container">
+            <div className="navigation-btn_container">
+              <PrevButton />
+              <NextButton canNavigate={handleCanNavigate} />
+            </div>
+          </div>
+        </form>
+      </FormProvider>
+    </>
   );
 };
 

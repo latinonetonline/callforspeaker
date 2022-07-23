@@ -3,19 +3,23 @@ import { useAppContext } from "../../data/AppContext";
 import { setCurrentStep } from "../../data/call-for-speakers/callforspeakers.action";
 import "./ButtonStyles.scss";
 
-interface NextButtonProps {}
+interface NextButtonProps {
+  canNavigate?: () => boolean;
+}
 
-const NextButton: React.FC<NextButtonProps> = () => {
+const NextButton: React.FC<NextButtonProps> = ({ canNavigate }) => {
   const { state, dispatch } = useAppContext();
 
   const handleClick = () => {
-    dispatch(setCurrentStep(state.callForSpeakers.currentStep + 1));
+    if (!canNavigate || canNavigate()) {
+      dispatch(setCurrentStep(state.callForSpeakers.currentStep + 1));
+    }
   };
-  
+
   return (
-    <div onClick={handleClick} className="next-button">
+    <button type="submit" onClick={handleClick} className="next-button">
       <img src="/assets/arrow-right.png" alt="" />
-    </div>
+    </button>
   );
 };
 

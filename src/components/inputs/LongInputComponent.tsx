@@ -1,31 +1,39 @@
 import React from "react";
+import { useFormContext } from "react-hook-form";
+import { FormInput } from "../../models/FormInput";
 
 interface LongInputComponentProps {
-  fieldsetId: string;
+  name: keyof FormInput;
+  error?: boolean;
   legend: string;
-  inputId: string;
   inputType: string;
   placeholder: string;
+  required?: boolean;
+  pattern?: RegExp;
 }
 
-const LongInputComponent: React.FC<LongInputComponentProps> = ({
-  fieldsetId,
-  legend,
-  inputId,
-  inputType,
-  placeholder,
-}) => {
+const LongInputComponent: React.FC<LongInputComponentProps> = (props) => {
+  const {
+    name,
+    legend,
+    inputType,
+    placeholder,
+    required = false,
+    pattern,
+    error = false,
+  } = props;
+
+  const { register } = useFormContext<FormInput>();
+
   return (
     <div className="form-holder-2">
-      <fieldset className={fieldsetId}>
+      <fieldset id={name + "-fieldset"} className={error ? "error" : ""}>
         <legend>{legend}</legend>
         <input
           type={inputType}
-          name={inputId}
-          className={`form-control ${inputId}`}
-          pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"
+          className={`form-control`}
           placeholder={placeholder}
-          accept=".jpg, .jpeg, .png"
+          {...register(name, { required: required, pattern: pattern })}
         />
       </fieldset>
     </div>

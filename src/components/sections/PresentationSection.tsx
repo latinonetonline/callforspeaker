@@ -15,19 +15,18 @@ const PresentationSection: React.FC<PresentationSectionProps> = () => {
 
       <div className="form-row">
         <LongInputComponent
-          fieldsetId="title-fieldset"
+          name="title"
           legend="Titulo"
-          inputId="title"
           inputType="text"
           placeholder="Titulo"
         />
       </div>
       <div className="form-row">
         <TextareaInput
-          fieldsetId="description2-fieldset"
+          name="description"
           legend="Descripción"
-          inputId="description2"
           placeholder="Lucite! ¿Como convencerias a alguien de asistir a tu charla?"
+          required={true}
         />
       </div>
       <div className="form-row form-row-date">

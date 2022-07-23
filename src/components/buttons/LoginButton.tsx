@@ -8,7 +8,7 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
   const auth = useAuth();
 
   return (
-    <button onClick={() => auth.signIn()}>Inicie sesión para continuar</button>
+    <button type="button" onClick={() => auth.signIn()}>Inicie sesión para continuar</button>
   );
 };
 

@@ -1,3 +1,4 @@
+import { FormInput } from "../../models/FormInput";
 import { Step } from "../../models/Step";
 import { ActionType, DispatchObject } from "../types";
 import { getUnavailableDates } from "./callForSpeakers.api";
@@ -54,11 +55,18 @@ export const removeStep = (index: number) =>
     index,
   } as const);
 
+  export const updateFormState = (form: Partial<FormInput>) =>
+  ({
+    type: "update-form-state",
+    form,
+  } as const);
+
 export type CallForSpeakersActions =
   | ActionType<typeof setLoading>
   | ActionType<typeof setIsAuthenticated>
   | ActionType<typeof setUnavailableDates>
   | ActionType<typeof setHasSecondSpeaker>
   | ActionType<typeof setCurrentStep>
+  | ActionType<typeof updateFormState>
   | ActionType<typeof insertStep>
   | ActionType<typeof removeStep>;

@@ -7,7 +7,9 @@ import ImageInputComponent from "../inputs/ImageInputComponent";
 
 interface SecondPersonalInformationProps {}
 
-const SecondPersonalInformation: React.FC<SecondPersonalInformationProps> = () => {
+const SecondPersonalInformation: React.FC<
+  SecondPersonalInformationProps
+> = () => {
   return (
     <section id="personal-information-section">
       <div className="section-header">
@@ -20,16 +22,15 @@ const SecondPersonalInformation: React.FC<SecondPersonalInformationProps> = () =
 
       <div className="form-row">
         <ShortInputComponent
-          fieldsetId="name-fieldset"
+          name="secondSpeakerName"
           legend="Name"
-          inputId="first-name"
           inputType="text"
           placeholder="Nombre"
         />
         <ShortInputComponent
-          fieldsetId="lastname-fieldset"
+          name="secondSpeakerLastname"
           legend="Apellido"
-          inputId="last-name"
+          // inputId="last-name"
           inputType="text"
           placeholder="Apellido"
         />
@@ -37,28 +38,26 @@ const SecondPersonalInformation: React.FC<SecondPersonalInformationProps> = () =
 
       <div className="form-row">
         <LongInputComponent
-          fieldsetId="email-fieldset"
+          name="secondSpeakerEmail"
           legend="Email"
-          inputId="your_email"
           inputType="text"
           placeholder="example@email.com"
         />
       </div>
       <div className="form-row">
         <LongInputComponent
-          fieldsetId=""
+          name="secondSpeakerTwitter"
           legend="Twitter"
-          inputId="twitter"
           inputType="text"
           placeholder="@username"
         />
       </div>
       <div className="form-row">
         <TextareaInput
-          fieldsetId="description-fieldset"
+          name="secondSpeakerDescription"
           legend="Descripción"
-          inputId="description"
           placeholder="Nos gustaria saber más de vos"
+          required={true}
         />
       </div>
       <div className="form-row">

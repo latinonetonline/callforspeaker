@@ -59,10 +59,6 @@ const StepSeccionTabContent: React.FC<StepSeccionTabContentProps> = ({
     <div className={`content ${getActiveClassName("active-content")}`}>
       <div className="tab-content animate__animated animate__fadeIn">
         <stepSeccion.seccion />
-        {/* <div className="navigation-buttons_container"> */}
-        <div className={`${state.callForSpeakers.isAuthenticated ? 'navigation-buttons_container button_container' : 'login-btn_container button_container'}`}>
-          {getButtons()}
-        </div>
       </div>
     </div>
   );

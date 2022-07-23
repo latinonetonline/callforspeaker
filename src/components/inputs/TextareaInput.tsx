@@ -1,26 +1,34 @@
 import React from "react";
+import { useFormContext } from "react-hook-form";
+import { FormInput } from "../../models/FormInput";
 
 interface TextareaInputProps {
-  fieldsetId: string;
+  name: keyof FormInput;
+  error?: boolean
   legend: string;
-  inputId: string;
   placeholder: string;
+  required?: boolean;
+  pattern?: RegExp;
 }
 
-const TextareaInput: React.FC<TextareaInputProps> = ({
-  fieldsetId,
-  legend,
-  inputId,
-  placeholder,
-}) => {
+const TextareaInput: React.FC<TextareaInputProps> = (props) => {
+
+  const { name, legend, placeholder, required = false, pattern, error = false } = props;
+  const { register } = useFormContext<FormInput>();
+
+
   return (
     <div className="form-holder-2">
-      <fieldset className={fieldsetId}>
+      <fieldset
+        id={name + "-fieldset"}
+        className={error ? "error" : ""}
+      >
         <legend>{legend}</legend>
         <textarea
-          name={inputId}
-          className={`form-control ${inputId}`}
+          className={`form-control`}
           placeholder={placeholder}
+          {...register(name, { required: required, pattern: pattern })}
+
         ></textarea>
       </fieldset>
     </div>

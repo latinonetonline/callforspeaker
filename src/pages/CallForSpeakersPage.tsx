@@ -58,7 +58,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
       (_, index) => index === currentStep - 1
     );
 
-    const stepSeccion = stepSeccions.find(x => x.number === step?.number)!
+    const stepSeccion = stepSeccions.find((x) => x.number === step?.number)!;
     return stepSeccion;
   };
 
@@ -77,10 +77,9 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
           ))}
         </ul>
       </div>
-
-      <div className="steps-content_container">
-        <StepSeccionTabContent stepSeccion={getStepSeccion()} />
-      </div>
+        <div className="steps-content_container">
+          <StepSeccionTabContent stepSeccion={getStepSeccion()} />
+        </div>
     </div>
   );
 };
