@@ -74,7 +74,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
         )}
         <div className="upload-example">
           <div className="buttons-wrapper">
-            <button className="button" onClick={onUpload}>
+            <button type="button" className="button" onClick={onUpload}>
               <input
                 ref={inputRef}
                 className={`form-control ${inputId}`}

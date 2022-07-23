@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./CallForSpeakersPage.scss";
 import "animate.css";
 import WelcomeSection from "../components/sections/WelcomeSection";
-import PersonalInformation from "../components/sections/PersonalInformation";
+import PersonalInformation from "../components/sections/PersonalInformationSeccion";
 import TabComponent from "../components/TabComponent";
 import PresentationSection from "../components/sections/PresentationSection";
 import AdditionalInfoSection from "../components/sections/AdditionalInfoSection";
@@ -11,7 +11,7 @@ import { useAppContext } from "../data/AppContext";
 import { loadData } from "../data/call-for-speakers/callforspeakers.action";
 import { StepSeccion } from "../models/StepSeccion";
 import StepSeccionTabContent from "../components/sections/components/StepSeccionTabContent";
-import SecondPersonalInformation from "../components/sections/SecondPersonalInformation";
+import SecondPersonalInformation from "../components/sections/SecondPersonalInformationSeccion";
 
 interface CallForSpeakersProps {}
 

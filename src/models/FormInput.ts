@@ -1,4 +1,4 @@
-export type PersonalInformationFormInput = {
+export type PersonalInformationSeccionFormInput = {
   speakerName: string;
   speakerLastname: string;
   speakerDescription: string;
@@ -7,7 +7,7 @@ export type PersonalInformationFormInput = {
   speakerEmail: string;
 };
 
-export type SecondPersonalInformationFormInput = {
+export type SecondPersonalInformationSeccionFormInput = {
   secondSpeakerName: string;
   secondSpeakerLastname: string;
   secondSpeakerDescription: string;
@@ -28,7 +28,7 @@ export type AdditionalInfoSectionFormInput = {
   answer3: string;
 };
 
-export type FormInput = PersonalInformationFormInput &
-  SecondPersonalInformationFormInput &
+export type FormInput = PersonalInformationSeccionFormInput &
+  SecondPersonalInformationSeccionFormInput &
   PresentationSectionFormInput &
   AdditionalInfoSectionFormInput;

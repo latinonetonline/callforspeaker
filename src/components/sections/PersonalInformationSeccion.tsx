@@ -4,29 +4,31 @@ import ShortInputComponent from "../inputs/ShortInputComponent";
 import LongInputComponent from "../inputs/LongInputComponent";
 import TextareaInput from "../inputs/TextareaInput";
 import ImageInputComponent from "../inputs/ImageInputComponent";
-import { SecondPersonalInformationFormInput } from "../../models/FormInput";
-import { useAppContext } from "../../data/AppContext";
+import SecondSpeakerCheckboxInput from "./components/SecondSpeakerCheckboxInput";
 import { FormProvider, useForm } from "react-hook-form";
+import { PersonalInformationSeccionFormInput } from "../../models/FormInput";
+import NextButton from "../buttons/NextButton";
+import PrevButton from "../buttons/PrevButton";
+import { useAppContext } from "../../data/AppContext";
 import {
   setCurrentStep,
   updateFormState,
 } from "../../data/call-for-speakers/callforspeakers.action";
-import NextButton from "../buttons/NextButton";
-import PrevButton from "../buttons/PrevButton";
 
-interface SecondPersonalInformationProps {}
+const regExpEmail =
+  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-const SecondPersonalInformation: React.FC<
-  SecondPersonalInformationProps
-> = () => {
-  const methods = useForm<SecondPersonalInformationFormInput>();
+interface PersonalInformationSeccionProps {}
+
+const PersonalInformationSeccion: React.FC<PersonalInformationSeccionProps> = () => {
+  const methods = useForm<PersonalInformationSeccionFormInput>();
   const {
     handleSubmit,
     formState: { errors },
   } = methods;
   const { state, dispatch } = useAppContext();
 
-  const onValidSubmit = (data: SecondPersonalInformationFormInput) => {
+  const onValidSubmit = (data: PersonalInformationSeccionFormInput) => {
     console.log(data);
     dispatch(updateFormState(data));
     dispatch(setCurrentStep(state.callForSpeakers.currentStep + 1));
@@ -37,7 +39,7 @@ const SecondPersonalInformation: React.FC<
       <form onSubmit={handleSubmit(onValidSubmit)}>
         <section id="personal-information-section">
           <div className="section-header">
-            <h3 className="heading">Segundo Speaker</h3>
+            <h3 className="heading">Información Personal</h3>
             <p>
               Atras de toda gran charla hay un gran speaker al cual todos
               nosotros queremos conocer.
@@ -46,49 +48,56 @@ const SecondPersonalInformation: React.FC<
 
           <div className="form-row">
             <ShortInputComponent
-              name="secondSpeakerName"
+              name="speakerName"
+              value={state.callForSpeakers.form.speakerName}
               legend="Name"
               inputType="text"
               placeholder="Nombre"
-              error={!!errors.secondSpeakerName}
-              value={state.callForSpeakers.form.secondSpeakerName}
+              required={true}
+              error={!!errors.speakerName}
             />
             <ShortInputComponent
-              name="secondSpeakerLastname"
+              name="speakerLastname"
+              value={state.callForSpeakers.form.speakerLastname}
               legend="Apellido"
               inputType="text"
               placeholder="Apellido"
-              error={!!errors.secondSpeakerLastname}
-              value={state.callForSpeakers.form.secondSpeakerLastname}
+              required={true}
+              error={!!errors.speakerLastname}
             />
           </div>
 
           <div className="form-row">
             <LongInputComponent
-              name="secondSpeakerEmail"
+              name="speakerEmail"
+              value={state.callForSpeakers.form.speakerEmail}
               legend="Email"
               inputType="text"
               placeholder="example@email.com"
-              error={!!errors.secondSpeakerEmail}
-              value={state.callForSpeakers.form.secondSpeakerEmail}
+              required={true}
+              pattern={regExpEmail}
+              error={!!errors.speakerEmail}
             />
           </div>
           <div className="form-row">
             <LongInputComponent
-              name="secondSpeakerTwitter"
+              name="speakerTwitter"
+              value={state.callForSpeakers.form.speakerTwitter}
               legend="Twitter"
               inputType="text"
               placeholder="@username"
+              pattern={/(^|[^@\w])@(\w{1,15})\b/g}
+              error={!!errors.speakerTwitter}
             />
           </div>
           <div className="form-row">
             <TextareaInput
-              name="secondSpeakerDescription"
+              name="speakerDescription"
+              value={state.callForSpeakers.form.speakerDescription}
               legend="Descripción"
               placeholder="Nos gustaria saber más de vos"
               required={true}
-              error={!!errors.secondSpeakerDescription}
-              value={state.callForSpeakers.form.secondSpeakerDescription}
+              error={!!errors.speakerDescription}
             />
           </div>
           <div className="form-row">
@@ -96,6 +105,11 @@ const SecondPersonalInformation: React.FC<
               fieldsetId="image-fieldset"
               legend="Foto para el Flyer"
               inputId="image"
+            />
+          </div>
+          <div className="form-row">
+            <SecondSpeakerCheckboxInput
+              value={state.callForSpeakers.hasSecondSpeaker}
             />
           </div>
         </section>
@@ -110,4 +124,4 @@ const SecondPersonalInformation: React.FC<
   );
 };
 
-export default SecondPersonalInformation;
+export default PersonalInformationSeccion;
