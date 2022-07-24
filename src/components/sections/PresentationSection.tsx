@@ -1,7 +1,10 @@
 import React from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { useAppContext } from "../../data/AppContext";
-import { setCurrentStep, updateFormState } from "../../data/call-for-speakers/callforspeakers.action";
+import {
+  setCurrentStep,
+  updateFormState,
+} from "../../data/call-for-speakers/callforspeakers.action";
 import { PresentationSectionFormInput } from "../../models/FormInput";
 import NextButton from "../buttons/NextButton";
 import PrevButton from "../buttons/PrevButton";
@@ -24,7 +27,6 @@ const PresentationSection: React.FC<PresentationSectionProps> = () => {
     console.log(data);
     dispatch(updateFormState(data));
     dispatch(setCurrentStep(state.callForSpeakers.currentStep + 1));
-
   };
 
   return (
@@ -62,10 +64,12 @@ const PresentationSection: React.FC<PresentationSectionProps> = () => {
               name="date"
               control={control}
               defaultValue={state.callForSpeakers.form.date}
-              render={({ field }) => (
+              rules={{ required: true }}
+              render={({ field, formState: { errors } }) => (
                 <SaturdayInput
                   value={field.value}
                   onChange={(date) => field.onChange(date)}
+                  error={!!errors.date}
                 />
               )}
             />

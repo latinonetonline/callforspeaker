@@ -45,7 +45,7 @@ export const initialState: AppState = {
       secondSpeakerTwitter: "",
       title: "",
       description: "",
-      date: new Date(),
+      date: null,
       answer1: "",
       answer2: "",
       answer3: "",

@@ -19,7 +19,7 @@ export type SecondPersonalInformationSeccionFormInput = {
 export type PresentationSectionFormInput = {
   title: string;
   description: string;
-  date: Date;
+  date: Date | null;
 };
 
 export type AdditionalInfoSectionFormInput = {

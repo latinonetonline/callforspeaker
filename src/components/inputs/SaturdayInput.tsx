@@ -7,8 +7,9 @@ interface Month {
 }
 
 interface SaturdayInputProps {
-  value?: Date;
-  onChange: (date: Date) => void;
+  value?: Date | null;
+  onChange: (date: Date | null) => void;
+  error?: boolean;
 }
 
 const monthNames: Month[] = [
@@ -32,13 +33,20 @@ const getCurrentYear = (): number => new Date().getUTCFullYear();
 const getDaysInMonth = (year: number, month: number) =>
   new Date(year, month, 0).getUTCDate();
 
-const SaturdayInput: React.FC<SaturdayInputProps> = ({ onChange, value }) => {
+const SaturdayInput: React.FC<SaturdayInputProps> = ({
+  onChange,
+  value,
+  error,
+}) => {
+  console.log(value);
   const { state } = useAppContext();
-  const [date, setDate] = useState<number>(value?.getUTCDate() ?? 0);
+  const [date, setDate] = useState(value?.getUTCDate());
   const [month, setMonth] = useState<number>(
     value ? value.getUTCMonth() + 1 : getCurrentMonth()
   );
-  const [year, setYear] = useState<number>(value?.getUTCFullYear() ?? getCurrentYear());
+  const [year, setYear] = useState<number>(
+    value?.getUTCFullYear() ?? getCurrentYear()
+  );
   const [saturdays, setSaturdays] = useState<Date[]>([]);
 
   useEffect(() => {
@@ -50,13 +58,17 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({ onChange, value }) => {
   }, [year, month]);
 
   useEffect(() => {
-    onChange(new Date(`${year}-${month}-${date}`));
+    if (date) {
+      console.log(new Date(`${year}-${month}-${date}`));
+      onChange(new Date(`${year}-${month}-${date}`));
+    } else {
+      onChange(null);
+    }
   }, [date]);
 
   const getMonths = (): Month[] =>
-    monthNames.filter(
-      (m) => m.number >= getCurrentMonth() || getCurrentYear() != year
-    );
+    monthNames
+      .filter((m) => m.number >= getCurrentMonth() || getCurrentYear() != year);
 
   const filtrarFechas = () => {
     let dates: Date[] = state.callForSpeakers.unavailableDates ?? [];
@@ -96,6 +108,8 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({ onChange, value }) => {
 
     if (saturdaysTemp[0]) {
       setDate(saturdaysTemp[0].getUTCDate());
+    } else {
+      setDate(undefined);
     }
   };
 
@@ -110,7 +124,7 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({ onChange, value }) => {
 
   return (
     <div className="form-holder form-holder-2">
-      <fieldset className="saturday-fieldset">
+      <fieldset className={"saturday-fieldset " + (error ? "error" : "")}>
         <label className="special-label">Elegí tu sábado:</label>
         <select
           name="year"
