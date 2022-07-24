@@ -20,7 +20,9 @@ const regExpEmail =
 
 interface PersonalInformationSeccionProps {}
 
-const PersonalInformationSeccion: React.FC<PersonalInformationSeccionProps> = () => {
+const PersonalInformationSeccion: React.FC<
+  PersonalInformationSeccionProps
+> = () => {
   const methods = useForm<PersonalInformationSeccionFormInput>();
   const {
     handleSubmit,
@@ -102,9 +104,11 @@ const PersonalInformationSeccion: React.FC<PersonalInformationSeccionProps> = ()
           </div>
           <div className="form-row">
             <ImageInputComponent
+              name="speakerPhoto"
               fieldsetId="image-fieldset"
               legend="Foto para el Flyer"
               inputId="image"
+              value={state.callForSpeakers.form.speakerPhoto}
             />
           </div>
           <div className="form-row">

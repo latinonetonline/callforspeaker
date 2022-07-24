@@ -93,9 +93,11 @@ const SecondPersonalInformationSeccion: React.FC<
           </div>
           <div className="form-row">
             <ImageInputComponent
+              name="secondSpeakerPhoto"
               fieldsetId="image-fieldset"
               legend="Foto para el Flyer"
               inputId="image"
+              value={state.callForSpeakers.form.secondSpeakerPhoto}
             />
           </div>
         </section>

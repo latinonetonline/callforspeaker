@@ -5,24 +5,40 @@ import {
   CropperImage,
   CropperState,
 } from "react-advanced-cropper";
+import { useFormContext } from "react-hook-form";
+import { FormInput } from "../../models/FormInput";
 import ImageCropperModal from "../image/ImageCropperModal";
 
 interface ImageInputComponentProps {
+  name: keyof FormInput;
   fieldsetId: string;
   legend: string;
   inputId: string;
+  value: Blob | null;
 }
 
 const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
+  name,
   fieldsetId,
   legend,
   inputId,
+  value,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [src, setSrc] = useState<string>();
   const [state, setState] = useState<CropperState | null>(null);
   const [image, setImage] = useState<CropperImage | null>(null);
+
+  const { setValue } = useFormContext<FormInput>();
+
+  useEffect(() => {
+    if (value) {
+      const blob = URL.createObjectURL(value);
+
+      setSrc(blob);
+    }
+  }, [value]);
 
   const onUpload = () => {
     if (inputRef.current) {
@@ -47,8 +63,13 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
     setState(cropper.getState());
     setImage(cropper.getImage());
   };
-  
-  const handleCropperModalClose = () => {
+
+  const handleCropperModalClose = (cropper: CropperRef | null) => {
+    // console.log(cropper?.getCanvas()?.toDataURL());
+    cropper?.getCanvas()?.toBlob((blob) => {
+      setSrc(URL.createObjectURL(blob!));
+      setValue(name, blob!);
+    });
     setShowModal(false);
   };
 
@@ -65,12 +86,14 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
       <fieldset className={fieldsetId}>
         <legend>{legend}</legend>
 
-        {image && (
+        {image ? (
           <CropperPreview
             className="image-preview"
             image={image}
             state={state}
           />
+        ) : (
+          src && <img src={src} className="image-preview" alt="" />
         )}
         <div className="upload-example">
           <div className="buttons-wrapper">

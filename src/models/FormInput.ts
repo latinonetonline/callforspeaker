@@ -2,7 +2,7 @@ export type PersonalInformationSeccionFormInput = {
   speakerName: string;
   speakerLastname: string;
   speakerDescription: string;
-  speakerPhoto: string;
+  speakerPhoto: Blob | null;
   speakerTwitter: string;
   speakerEmail: string;
 };
@@ -11,7 +11,7 @@ export type SecondPersonalInformationSeccionFormInput = {
   secondSpeakerName: string;
   secondSpeakerLastname: string;
   secondSpeakerDescription: string;
-  secondSpeakerPhoto: string;
+  secondSpeakerPhoto: Blob | null;
   secondSpeakerTwitter: string;
   secondSpeakerEmail: string;
 };
