@@ -14,6 +14,10 @@ import {
 import NextButton from "../buttons/NextButton";
 import PrevButton from "../buttons/PrevButton";
 
+const regExpEmail =
+  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+
 interface SecondPersonalInformationSeccionProps {}
 
 const SecondPersonalInformationSeccion: React.FC<
@@ -50,6 +54,7 @@ const SecondPersonalInformationSeccion: React.FC<
               legend="Name"
               inputType="text"
               placeholder="Nombre"
+              required={true}
               error={!!errors.secondSpeakerName}
               value={state.callForSpeakers.form.secondSpeakerName}
             />
@@ -58,6 +63,7 @@ const SecondPersonalInformationSeccion: React.FC<
               legend="Apellido"
               inputType="text"
               placeholder="Apellido"
+              required={true}
               error={!!errors.secondSpeakerLastname}
               value={state.callForSpeakers.form.secondSpeakerLastname}
             />
@@ -69,6 +75,8 @@ const SecondPersonalInformationSeccion: React.FC<
               legend="Email"
               inputType="text"
               placeholder="example@email.com"
+              required={true}
+              pattern={regExpEmail}
               error={!!errors.secondSpeakerEmail}
               value={state.callForSpeakers.form.secondSpeakerEmail}
             />
@@ -79,6 +87,9 @@ const SecondPersonalInformationSeccion: React.FC<
               legend="Twitter"
               inputType="text"
               placeholder="@username"
+              error={!!errors.secondSpeakerTwitter}
+              pattern={/(^|[^@\w])@(\w{1,15})\b/g}
+              value={state.callForSpeakers.form.secondSpeakerTwitter}
             />
           </div>
           <div className="form-row">
@@ -96,6 +107,8 @@ const SecondPersonalInformationSeccion: React.FC<
               name="secondSpeakerPhoto"
               legend="Foto para el Flyer"
               value={state.callForSpeakers.form.secondSpeakerPhoto}
+              required={true}
+              error={!!errors.secondSpeakerPhoto}
             />
           </div>
         </section>

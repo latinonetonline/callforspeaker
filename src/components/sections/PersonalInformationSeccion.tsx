@@ -107,6 +107,8 @@ const PersonalInformationSeccion: React.FC<
               name="speakerPhoto"
               legend="Foto para el Flyer"
               value={state.callForSpeakers.form.speakerPhoto}
+              required={true}
+              error={!!errors.speakerPhoto}
             />
           </div>
           <div className="form-row">

@@ -13,12 +13,16 @@ interface ImageInputComponentProps {
   name: keyof FormInput;
   legend: string;
   value: Blob | null;
+  required?: boolean;
+  error?: boolean;
 }
 
 const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
   name,
   legend,
   value,
+  required = false,
+  error = false,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -26,13 +30,14 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
   const [state, setState] = useState<CropperState | null>(null);
   const [image, setImage] = useState<CropperImage | null>(null);
 
-  const { setValue } = useFormContext<FormInput>();
+  const { setValue, register } = useFormContext<FormInput>();
 
   useEffect(() => {
     if (value) {
-      const blob = URL.createObjectURL(value);
+      const blobUrl = URL.createObjectURL(value);
 
-      setSrc(blob);
+      setSrc(blobUrl);
+      setValue(name, value!);
     }
   }, [value]);
 
@@ -61,9 +66,8 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
   };
 
   const handleCropperModalClose = (cropper: CropperRef | null) => {
-    // console.log(cropper?.getCanvas()?.toDataURL());
     cropper?.getCanvas()?.toBlob((blob) => {
-      setSrc(URL.createObjectURL(blob!));
+      // setSrc(URL.createObjectURL(blob!));
       setValue(name, blob!);
     });
     setShowModal(false);
@@ -79,7 +83,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
   }, [image]);
   return (
     <div className="form-holder-2">
-      <fieldset className="image-fieldset">
+      <fieldset className={"image-fieldset " + (error && !src ? "error" : "")}>
         <legend>{legend}</legend>
 
         {image ? (
@@ -93,6 +97,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
         )}
         <div className="upload-example">
           <div className="buttons-wrapper">
+            <input type="hidden" {...register(name, { required: required })} />
             <button type="button" className="button" onClick={onUpload}>
               <input
                 ref={inputRef}
@@ -102,7 +107,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
                 onChange={onLoadImage}
                 style={{ display: "none" }}
               />
-              Agregar foto
+              {src ? "Cambiar foto" : "Agregar foto"}
             </button>
           </div>
         </div>
