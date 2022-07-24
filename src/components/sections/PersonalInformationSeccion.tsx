@@ -105,9 +105,7 @@ const PersonalInformationSeccion: React.FC<
           <div className="form-row">
             <ImageInputComponent
               name="speakerPhoto"
-              fieldsetId="image-fieldset"
               legend="Foto para el Flyer"
-              inputId="image"
               value={state.callForSpeakers.form.speakerPhoto}
             />
           </div>

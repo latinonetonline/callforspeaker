@@ -11,17 +11,13 @@ import ImageCropperModal from "../image/ImageCropperModal";
 
 interface ImageInputComponentProps {
   name: keyof FormInput;
-  fieldsetId: string;
   legend: string;
-  inputId: string;
   value: Blob | null;
 }
 
 const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
   name,
-  fieldsetId,
   legend,
-  inputId,
   value,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -83,7 +79,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
   }, [image]);
   return (
     <div className="form-holder-2">
-      <fieldset className={fieldsetId}>
+      <fieldset className="image-fieldset">
         <legend>{legend}</legend>
 
         {image ? (
@@ -100,9 +96,8 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
             <button type="button" className="button" onClick={onUpload}>
               <input
                 ref={inputRef}
-                className={`form-control ${inputId}`}
+                className="form-control"
                 accept=".jpg, .jpeg, .png"
-                name={inputId}
                 type="file"
                 onChange={onLoadImage}
                 style={{ display: "none" }}

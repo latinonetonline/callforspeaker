@@ -24,6 +24,10 @@
     font-size: 14px;
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
+
+    &:focus{
+      outline: none;
+    }
   }
 
   & textarea {
@@ -48,7 +52,7 @@
     padding: 10px 20px 13px;
   }
 
-  & .second-speaker-fieldset {
+  & .checkbox-fieldset {
     padding: 5px 18px 13px;
 
     & label {

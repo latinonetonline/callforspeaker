@@ -21,7 +21,7 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({
 
   return (
     <div className="form-holder-2">
-      <fieldset id={name + "-fieldset"}>
+      <fieldset id={name + "-fieldset"} className="checkbox-fieldset">
         <legend>{legend}</legend>
         <label htmlFor={name} className="unselectable">
           <input
