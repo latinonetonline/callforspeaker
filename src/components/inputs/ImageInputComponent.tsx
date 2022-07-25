@@ -6,6 +6,7 @@ import {
   CropperState,
 } from "react-advanced-cropper";
 import { useFormContext } from "react-hook-form";
+import useObjectURL from "../../hooks/useObjectURL";
 import { FormInput } from "../../models/FormInput";
 import ImageCropperModal from "../image/ImageCropperModal";
 
@@ -25,8 +26,11 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
   error = false,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { objectURL, setObject } = useObjectURL(value);
+
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [src, setSrc] = useState<string>();
+  // const [src, setSrc] = useState<string>();
   const [state, setState] = useState<CropperState | null>(null);
   const [image, setImage] = useState<CropperImage | null>(null);
 
@@ -34,9 +38,6 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
 
   useEffect(() => {
     if (value) {
-      const blobUrl = URL.createObjectURL(value);
-
-      setSrc(blobUrl);
       setValue(name, value!);
     }
   }, [value]);
@@ -51,9 +52,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
     const { files } = event.target;
 
     if (files && files[0]) {
-      const blob = URL.createObjectURL(files[0]);
-
-      setSrc(blob);
+      setObject(files[0]);
       setShowModal(true);
     }
     // Clear the event target value to give the possibility to upload the same image:
@@ -83,7 +82,9 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
   }, [image]);
   return (
     <div className="form-holder-2">
-      <fieldset className={"image-fieldset " + (error && !src ? "error" : "")}>
+      <fieldset
+        className={"image-fieldset " + (error && !objectURL ? "error" : "")}
+      >
         <legend>{legend}</legend>
 
         {image ? (
@@ -93,7 +94,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
             state={state}
           />
         ) : (
-          src && <img src={src} className="image-preview" alt="" />
+          objectURL && <img src={objectURL} className="image-preview" alt="" />
         )}
         <div className="upload-example">
           <div className="buttons-wrapper">
@@ -107,14 +108,14 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
                 onChange={onLoadImage}
                 style={{ display: "none" }}
               />
-              {src ? "Cambiar foto" : "Agregar foto"}
+              {objectURL ? "Cambiar foto" : "Agregar foto"}
             </button>
           </div>
         </div>
       </fieldset>
       <ImageCropperModal
         show={showModal}
-        image={src}
+        image={objectURL ? objectURL : undefined}
         onChange={handleCropperChange}
         onClose={handleCropperModalClose}
       />
