@@ -1,5 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { useAppContext } from "../../data/AppContext";
+import { ChangeEvent, useState } from "react";
 
 interface Month {
   name: string;
@@ -58,23 +57,21 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({
       const fecha = new Date(`${year}-${month}-${dia}`);
 
       if (fecha.getUTCDay() == 6) {
-        let diaStr = "" + dia;
-        if (diaStr.length < 2) diaStr = "0" + diaStr;
         sabados.push(fecha);
       }
     }
-    const tiempoTranscurrido = Date.now();
-    const hoy = new Date(tiempoTranscurrido);
 
+    //Filtro los sabados que no esten en UnavailableDates y que sean mayor a hoy
     sabados = sabados.filter(
       (s) =>
         unavailableDates.filter(
           (u) =>
             u.getUTCDate() == s.getUTCDate() &&
-            getCurrentMonth() == u.getUTCMonth()
-        ).length == 0 && hoy.getTime() < s.getTime()
+            u.getUTCMonth() == s.getUTCMonth()
+        ).length == 0 && Date.now() < s.getTime()
     );
 
+    // Transformo los días en 2 caracteres. EJ: un 1 en 01, 2 en 02, 23 en 23
     return sabados.map((s) => {
       let diaStr = "" + s.getUTCDate();
       if (diaStr.length < 2) diaStr = "0" + diaStr;
@@ -110,7 +107,7 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({
     if (e.target.name == "date") {
       date.setUTCDate(parseInt(e.target.value));
     }
-    setDate(new Date(date))
+    setDate(new Date(date));
     onChange(new Date(date));
   };
 
