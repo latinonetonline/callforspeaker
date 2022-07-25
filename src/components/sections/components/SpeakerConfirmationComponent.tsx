@@ -18,6 +18,7 @@ const SpeakerConfirmationComponent: React.FC<
           <img
             width="200px"
             src={image}
+            className="image-preview"
             id="confirmation-imagen"
             alt=""
           />
@@ -30,9 +31,7 @@ const SpeakerConfirmationComponent: React.FC<
       </div>
       <div className="form-row">
         <div className="form-holder form-holder-2">
-          <p className="word-break confirmation-description">
-            {description}
-          </p>
+          <p className="word-break confirmation-description">{description}</p>
         </div>
       </div>
     </div>

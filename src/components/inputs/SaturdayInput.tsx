@@ -50,10 +50,6 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({
   const [saturdays, setSaturdays] = useState<Date[]>([]);
 
   useEffect(() => {
-    mesOnChange(month);
-  }, []);
-
-  useEffect(() => {
     filtrarFechas();
   }, [year, month]);
 
@@ -67,8 +63,9 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({
   }, [date]);
 
   const getMonths = (): Month[] =>
-    monthNames
-      .filter((m) => m.number >= getCurrentMonth() || getCurrentYear() != year);
+    monthNames.filter(
+      (m) => m.number >= getCurrentMonth() || getCurrentYear() != year
+    );
 
   const filtrarFechas = () => {
     let dates: Date[] = state.callForSpeakers.unavailableDates ?? [];
