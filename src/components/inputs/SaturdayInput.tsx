@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useAppContext } from "../../data/AppContext";
 
 interface Month {
@@ -10,24 +10,25 @@ interface SaturdayInputProps {
   value?: Date | null;
   onChange: (date: Date | null) => void;
   error?: boolean;
+  unavailableDates?: Date[];
 }
 
 const monthNames: Month[] = [
-  { name: "Ene", number: 1 },
-  { name: "Feb", number: 2 },
-  { name: "Mar", number: 3 },
-  { name: "Abr", number: 4 },
-  { name: "May", number: 5 },
-  { name: "Jun", number: 6 },
-  { name: "Jul", number: 7 },
-  { name: "Ago", number: 8 },
-  { name: "Sep", number: 9 },
-  { name: "Oct", number: 10 },
-  { name: "Nov", number: 11 },
-  { name: "Dic", number: 12 },
+  { name: "Ene", number: 0 },
+  { name: "Feb", number: 1 },
+  { name: "Mar", number: 2 },
+  { name: "Abr", number: 3 },
+  { name: "May", number: 4 },
+  { name: "Jun", number: 5 },
+  { name: "Jul", number: 6 },
+  { name: "Ago", number: 7 },
+  { name: "Sep", number: 8 },
+  { name: "Oct", number: 9 },
+  { name: "Nov", number: 10 },
+  { name: "Dic", number: 11 },
 ];
 
-const getCurrentMonth = (): number => new Date().getUTCMonth() + 1;
+const getCurrentMonth = (): number => new Date().getUTCMonth();
 const getCurrentYear = (): number => new Date().getUTCFullYear();
 
 const getDaysInMonth = (year: number, month: number) =>
@@ -37,86 +38,80 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({
   onChange,
   value,
   error,
+  unavailableDates = [],
 }) => {
-  console.log(value);
-  const { state } = useAppContext();
-  const [date, setDate] = useState(value?.getUTCDate());
-  const [month, setMonth] = useState<number>(
-    value ? value.getUTCMonth() + 1 : getCurrentMonth()
-  );
-  const [year, setYear] = useState<number>(
-    value?.getUTCFullYear() ?? getCurrentYear()
-  );
-  const [saturdays, setSaturdays] = useState<Date[]>([]);
-
-  useEffect(() => {
-    filtrarFechas();
-  }, [year, month]);
-
-  useEffect(() => {
-    if (date) {
-      console.log(new Date(`${year}-${month}-${date}`));
-      onChange(new Date(`${year}-${month}-${date}`));
-    } else {
-      onChange(null);
-    }
-  }, [date]);
+  const [date, setDate] = useState(value ?? new Date());
 
   const getMonths = (): Month[] =>
     monthNames.filter(
-      (m) => m.number >= getCurrentMonth() || getCurrentYear() != year
+      (m) =>
+        m.number >= getCurrentMonth() ||
+        getCurrentYear() != date.getUTCFullYear()
     );
 
-  const filtrarFechas = () => {
-    let dates: Date[] = state.callForSpeakers.unavailableDates ?? [];
+  const getSaturdays = (month: number, year: number): string[] => {
+    let sabados: Date[] = [];
 
-    const tiempoTranscurrido = Date.now();
-    const hoy = new Date(tiempoTranscurrido);
-
-    let sabados: string[] = [];
-
-    for (let dia = 1; dia <= getDaysInMonth(year, month); dia++) {
+    const daysInMonth = getDaysInMonth(month, year);
+    // Obtener los sabados del mes
+    for (let dia = 1; dia <= daysInMonth; dia++) {
       const fecha = new Date(`${year}-${month}-${dia}`);
 
       if (fecha.getUTCDay() == 6) {
         let diaStr = "" + dia;
         if (diaStr.length < 2) diaStr = "0" + diaStr;
-        sabados.push(diaStr);
+        sabados.push(fecha);
+      }
+    }
+    const tiempoTranscurrido = Date.now();
+    const hoy = new Date(tiempoTranscurrido);
+
+    sabados = sabados.filter(
+      (s) =>
+        unavailableDates.filter(
+          (u) =>
+            u.getUTCDate() == s.getUTCDate() &&
+            getCurrentMonth() == u.getUTCMonth()
+        ).length == 0 && hoy.getTime() < s.getTime()
+    );
+
+    return sabados.map((s) => {
+      let diaStr = "" + s.getUTCDate();
+      if (diaStr.length < 2) diaStr = "0" + diaStr;
+
+      return diaStr;
+    });
+  };
+
+  const handleDateChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.name == "month") {
+      date.setUTCMonth(parseInt(e.target.value));
+    }
+
+    if (e.target.name == "year") {
+      date.setUTCFullYear(parseInt(e.target.value));
+    }
+
+    if (["month", "year"].includes(e.target.name)) {
+      const saturdays = getSaturdays(
+        date.getUTCMonth() + 1,
+        date.getUTCFullYear()
+      );
+
+      if (saturdays[0]) {
+        date.setUTCDate(parseInt(saturdays[0]));
+      } else {
+        date.setUTCDate(0);
+        onChange(null);
+        return;
       }
     }
 
-    const saturdaysTemp: Date[] = [];
-    for (let index = 0; index < sabados.length; index++) {
-      const fecha = new Date(`${year}-${month}-${sabados[index]}`);
-
-      if (
-        dates.filter(
-          (date) =>
-            date.getUTCDate() == parseInt(sabados[index]) &&
-            getCurrentMonth() == month
-        ).length == 0 &&
-        hoy.getTime() < fecha.getTime()
-      ) {
-        saturdaysTemp.push(fecha);
-      }
+    if (e.target.name == "date") {
+      date.setUTCDate(parseInt(e.target.value));
     }
-
-    setSaturdays(saturdaysTemp);
-
-    if (saturdaysTemp[0]) {
-      setDate(saturdaysTemp[0].getUTCDate());
-    } else {
-      setDate(undefined);
-    }
-  };
-
-  const mesOnChange = (month: number) => {
-    setMonth(month);
-    setSaturdays([]);
-  };
-
-  const dateOnChange = (day: number) => {
-    setDate(day);
+    setDate(new Date(date))
+    onChange(new Date(date));
   };
 
   return (
@@ -126,8 +121,8 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({
         <select
           name="year"
           id="year"
-          defaultValue={year}
-          onChange={(e) => setYear(parseInt(e.target.value))}
+          defaultValue={date.getUTCFullYear()}
+          onChange={handleDateChange}
         >
           <option value={getCurrentYear()}>{getCurrentYear()}</option>
           {getCurrentMonth() >= 9 && (
@@ -137,8 +132,8 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({
         <select
           name="month"
           id="month"
-          onChange={(e) => mesOnChange(parseInt(e.target.value))}
-          value={month}
+          onChange={handleDateChange}
+          value={date.getUTCMonth()}
         >
           {getMonths().map((m, i) => {
             return (
@@ -151,16 +146,18 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({
         <select
           name="date"
           id="date"
-          value={date}
-          onChange={(e) => dateOnChange(parseInt(e.target.value))}
+          value={date.getUTCDate()}
+          onChange={handleDateChange}
         >
-          {saturdays.map((s, i) => {
-            return (
-              <option key={i} value={s.getUTCDate()}>
-                {s.getUTCDate()}
-              </option>
-            );
-          })}
+          {getSaturdays(date.getUTCMonth() + 1, date.getUTCFullYear()).map(
+            (s, i) => {
+              return (
+                <option key={i} value={parseInt(s)}>
+                  {s}
+                </option>
+              );
+            }
+          )}
         </select>
       </fieldset>
     </div>

@@ -70,6 +70,7 @@ const PresentationSection: React.FC<PresentationSectionProps> = () => {
                   value={field.value}
                   onChange={(date) => field.onChange(date)}
                   error={!!errors.date}
+                  unavailableDates={state.callForSpeakers.unavailableDates}
                 />
               )}
             />
