@@ -57,9 +57,7 @@ const StepSeccionTabContent: React.FC<StepSeccionTabContentProps> = ({
 
   return (
     <div className={`content ${getActiveClassName("active-content")}`}>
-      <div className="tab-content animate__animated animate__fadeIn">
-        <stepSeccion.seccion />
-      </div>
+      <stepSeccion.seccion />
     </div>
   );
 };

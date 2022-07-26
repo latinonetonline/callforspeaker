@@ -18,7 +18,7 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
   );
 
   return (
-    <>
+    <div className="tab-content animate__animated animate__fadeIn">
       <section id="confirmation-section">
         <div className="section-header">
           <h3 className="heading">Confirmación</h3>
@@ -101,7 +101,7 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
           <ConfirmButton />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

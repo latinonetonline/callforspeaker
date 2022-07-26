@@ -13,10 +13,10 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = () => {
 
   const handleNextClick = () => {
     dispatch(setCurrentStep(state.callForSpeakers.currentStep + 1));
-  }
+  };
 
   return (
-    <>
+    <div className="tab-content animate__animated animate__fadeIn">
       <section id="welcome-section">
         <img
           src="https://latinonet.online/callforspeakers/images/logo.png"
@@ -48,14 +48,14 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = () => {
           {state.callForSpeakers.isAuthenticated ? (
             <div className="navigation-btn_container">
               <LogoutButton />
-              <NextButton onClick={handleNextClick}/>
+              <NextButton onClick={handleNextClick} />
             </div>
           ) : (
             <LoginButton />
           )}
         </>
       </div>
-    </>
+    </div>
   );
 };
 
