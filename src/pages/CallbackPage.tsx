@@ -1,6 +1,7 @@
 import { useAuth } from "oidc-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import SpinnerLoading from "../components/SpinnerLoading";
 import { useAppContext } from "../data/AppContext";
 import { setIsAuthenticated } from "../data/call-for-speakers/callforspeakers.action";
 
@@ -16,6 +17,6 @@ const CallbackPage = () => {
     });
   }, []);
 
-  return <div style={{color: 'white'}}>Loading...</div>;
+  return <SpinnerLoading />;
 };
 export default CallbackPage;

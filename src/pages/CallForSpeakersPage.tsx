@@ -12,6 +12,7 @@ import { loadData } from "../data/call-for-speakers/callforspeakers.action";
 import { StepSeccion } from "../models/StepSeccion";
 import StepSeccionTabContent from "../components/sections/components/StepSeccionTabContent";
 import SecondPersonalInformation from "../components/sections/SecondPersonalInformationSeccion";
+import SpinnerLoading from "../components/SpinnerLoading";
 
 interface CallForSpeakersProps {}
 
@@ -80,6 +81,7 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
         <div className="steps-content_container">
           <StepSeccionTabContent stepSeccion={getStepSeccion()} />
         </div>
+        {state.callForSpeakers.isLoading && <SpinnerLoading />}
     </div>
   );
 };

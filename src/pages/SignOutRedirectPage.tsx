@@ -1,6 +1,7 @@
 import { useAuth } from "oidc-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import SpinnerLoading from "../components/SpinnerLoading";
 import { useAppContext } from "../data/AppContext";
 import { setIsAuthenticated } from "../data/call-for-speakers/callforspeakers.action";
 
@@ -17,6 +18,6 @@ const SignOutRedirectPage = () => {
     });
   }, []);
 
-  return <>Loading...</>;
+  return <SpinnerLoading />;
 };
 export default SignOutRedirectPage;
