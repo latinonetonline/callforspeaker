@@ -125,11 +125,21 @@
     padding: 20px;
     border: 2px solid #e5e5e5;
     border-radius: 4px;
+    margin-bottom: 5px;
 
     & p {
       color: #757575;
       font-size: 14px;
       font-weight: 600;
+    }
+
+    & .speaker-info {
+      margin: 0;
+
+      & .form-holder:first-child {
+        align-self: center;
+        width: auto;
+      }
     }
   }
 
@@ -178,11 +188,6 @@
     & .speaker-info {
       flex-direction: column;
       margin: 0;
-
-      & .form-holder:first-child {
-        align-self: center;
-        width: auto;
-      }
     }
   }
 }

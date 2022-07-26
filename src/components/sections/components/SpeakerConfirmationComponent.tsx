@@ -14,7 +14,7 @@ const SpeakerConfirmationComponent: React.FC<
   return (
     <div className="summary-container">
       <div className="form-row speaker-info">
-        <div className="form-holder">
+        <div className="form-holder image-holder">
           <img
             width="200px"
             src={image}
