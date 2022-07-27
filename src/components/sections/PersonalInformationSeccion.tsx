@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../inputs/InputsStyles.scss";
 import ShortInputComponent from "../inputs/ShortInputComponent";
 import LongInputComponent from "../inputs/LongInputComponent";
@@ -14,6 +14,7 @@ import {
   setCurrentStep,
   updateFormState,
 } from "../../data/call-for-speakers/callforspeakers.action";
+import { useAuth } from "oidc-react";
 
 const regExpEmail =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -29,6 +30,16 @@ const PersonalInformationSeccion: React.FC<
     formState: { errors },
   } = methods;
   const { state, dispatch } = useAppContext();
+
+  const { userManager } = useAuth();
+
+  useEffect(() => {
+    if (!state.callForSpeakers.form.speakerEmail) {
+      userManager.getUser().then((user) => {
+        dispatch(updateFormState({ speakerEmail: user?.profile.email }));
+      });
+    }
+  }, []);
 
   const onValidSubmit = (data: PersonalInformationSeccionFormInput) => {
     console.log(data);

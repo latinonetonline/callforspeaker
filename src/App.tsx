@@ -11,7 +11,7 @@ const oidcConfig: AuthProviderProps = {
   authority: "https://ids.latinonet.online",
   clientId: "callforspeakers_dev",
   redirectUri: "http://localhost:3000/callback",
-  scope: "openid profile roles latinonetonline_api",
+  scope: "openid profile email roles latinonetonline_api",
   responseType: "id_token token",
   postLogoutRedirectUri: "http://localhost:3000/signout-redirect",
   autoSignIn: false,
