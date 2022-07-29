@@ -90,6 +90,7 @@ const PersonalInformationSeccion: React.FC<
                 placeholder="example@email.com"
                 required={true}
                 pattern={regExpEmail}
+                isDisabled={true}
                 error={!!errors.speakerEmail}
               />
             </div>

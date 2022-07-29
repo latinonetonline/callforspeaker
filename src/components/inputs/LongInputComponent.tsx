@@ -11,6 +11,7 @@ interface LongInputComponentProps {
   placeholder: string;
   required?: boolean;
   pattern?: RegExp;
+  isDisabled?: boolean;
 }
 
 const LongInputComponent: React.FC<LongInputComponentProps> = (props) => {
@@ -22,6 +23,7 @@ const LongInputComponent: React.FC<LongInputComponentProps> = (props) => {
     placeholder,
     required = false,
     pattern,
+    isDisabled = false,
     error = false,
   } = props;
 
@@ -32,6 +34,7 @@ const LongInputComponent: React.FC<LongInputComponentProps> = (props) => {
       <fieldset id={name + "-fieldset"} className={error ? "error" : ""}>
         <legend>{legend}</legend>
         <input
+          readOnly={isDisabled}
           defaultValue={value}
           type={inputType}
           className={`form-control`}
