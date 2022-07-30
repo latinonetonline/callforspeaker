@@ -15,6 +15,10 @@
     color: #999;
   }
 
+  & .disabled-input {
+    cursor: default;
+  }
+
   & input,
   & textarea {
     color: #333;
