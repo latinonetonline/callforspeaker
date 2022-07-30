@@ -37,7 +37,7 @@ const LongInputComponent: React.FC<LongInputComponentProps> = (props) => {
           readOnly={isDisabled}
           defaultValue={value}
           type={inputType}
-          className={`form-control`}
+          className={`form-control ${isDisabled ? 'disabled-input' : ''}`}
           placeholder={placeholder}
           {...register(name, { required: required, pattern: pattern })}
         />
