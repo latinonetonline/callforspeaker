@@ -27,6 +27,7 @@ const PersonalInformationSeccion: React.FC<
   const methods = useForm<PersonalInformationSeccionFormInput>();
   const {
     handleSubmit,
+    setValue,
     formState: { errors },
   } = methods;
   const { state, dispatch } = useAppContext();
@@ -37,6 +38,7 @@ const PersonalInformationSeccion: React.FC<
     if (!state.callForSpeakers.form.speakerEmail) {
       userManager.getUser().then((user) => {
         dispatch(updateFormState({ speakerEmail: user?.profile.email }));
+        setValue("speakerEmail", user?.profile.email!);
       });
     }
   }, []);
