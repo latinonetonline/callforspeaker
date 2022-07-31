@@ -15,6 +15,7 @@ import {
   updateFormState,
 } from "../../data/call-for-speakers/callforspeakers.action";
 import { loadSpeaker } from "../../data/speakers/speakers.action";
+import { useAuth } from "oidc-react";
 
 const regExpEmail =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -31,16 +32,22 @@ const PersonalInformationSeccion: React.FC<
     formState: { errors },
   } = methods;
   const { state, dispatch } = useAppContext();
-
+  const { userManager } = useAuth();
   useEffect(() => {
     dispatch(loadSpeaker);
+
+    if (!state.callForSpeakers.form.speakerEmail) {
+      userManager.getUser().then((user) => {
+        dispatch(updateFormState({ speakerEmail: user?.profile.email }));
+        setValue("speakerEmail", user?.profile.email!);
+      });
+    }
   }, []);
 
   useEffect(() => {
     if (state.speakers.current) {
       setValue("speakerName", state.speakers.current?.name);
       setValue("speakerLastname", state.speakers.current?.lastname);
-      setValue("speakerEmail", state.speakers.current?.email);
       // setValue("speakerPhoto", state.speakers.current?.photo)
       setValue("speakerTwitter", state.speakers.current?.twitter);
       setValue("speakerDescription", state.speakers.current?.description);
