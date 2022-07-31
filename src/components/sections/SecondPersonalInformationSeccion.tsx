@@ -79,6 +79,9 @@ const SecondPersonalInformationSeccion: React.FC<
                 pattern={regExpEmail}
                 error={!!errors.secondSpeakerEmail}
                 value={state.callForSpeakers.form.secondSpeakerEmail}
+                validate={(value) =>
+                  value?.toString() !== state.callForSpeakers.form.speakerEmail
+                }
               />
             </div>
             <div className="form-row">

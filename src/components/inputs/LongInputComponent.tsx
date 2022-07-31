@@ -12,6 +12,7 @@ interface LongInputComponentProps {
   required?: boolean;
   pattern?: RegExp;
   isDisabled?: boolean;
+  validate?: (value: string | boolean | Blob | Date | null) => boolean;
 }
 
 const LongInputComponent: React.FC<LongInputComponentProps> = (props) => {
@@ -25,6 +26,7 @@ const LongInputComponent: React.FC<LongInputComponentProps> = (props) => {
     pattern,
     isDisabled = false,
     error = false,
+    validate,
   } = props;
 
   const { register } = useFormContext<FormInput>();
@@ -37,9 +39,13 @@ const LongInputComponent: React.FC<LongInputComponentProps> = (props) => {
           readOnly={isDisabled}
           defaultValue={value}
           type={inputType}
-          className={`form-control ${isDisabled ? 'disabled-input' : ''}`}
+          className={`form-control ${isDisabled ? "disabled-input" : ""}`}
           placeholder={placeholder}
-          {...register(name, { required: required, pattern: pattern })}
+          {...register(name, {
+            required: required,
+            pattern: pattern,
+            validate: validate,
+          })}
         />
       </fieldset>
     </div>
