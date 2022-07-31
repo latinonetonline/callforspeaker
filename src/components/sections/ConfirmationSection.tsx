@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../data/AppContext";
 import useObjectURL from "../../hooks/useObjectURL";
 import ConfirmButton from "../buttons/ConfirmButton";
@@ -11,12 +11,20 @@ interface ConfirmationSectionProps {}
 
 const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
   const { state } = useAppContext();
+  const navigate = useNavigate();
   const { objectURL: speakerPhoto } = useObjectURL(
     state.callForSpeakers.form.speakerPhoto
   );
   const { objectURL: secondSpeakerPhoto } = useObjectURL(
     state.callForSpeakers.form.secondSpeakerPhoto
   );
+
+  const handleConfirm = () => {
+    const isConfirm = window.confirm("¿Desea confirmar su propuesta?");
+    if (isConfirm) {
+      navigate("thank-you");
+    }
+  };
 
   return (
     <div className="tab-content animate__animated animate__fadeIn">
@@ -99,8 +107,7 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
       <div className="navigation-buttons_container button_container">
         <div className="navigation-btn_container">
           <PrevButton />
-          {/* <ConfirmButton /> */}
-          <button><Link to="thank-you">BOTÓN</Link></button>
+          <ConfirmButton onClick={handleConfirm} />
         </div>
       </div>
     </div>

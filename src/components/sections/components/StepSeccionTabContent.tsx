@@ -22,39 +22,6 @@ const StepSeccionTabContent: React.FC<StepSeccionTabContentProps> = ({
     return state.callForSpeakers.currentStep === index + 1 ? className : "";
   };
 
-  const getButtons = () => {
-    if (state.callForSpeakers.currentStep === 1) {
-      return (
-        <>
-          {state.callForSpeakers.isAuthenticated ? (
-            <div className="navigation-btn_container">
-              <LogoutButton />
-              <NextButton />
-            </div>
-          ) : (
-            <LoginButton />
-          )}
-        </>
-      );
-    } else if (
-      state.callForSpeakers.steps.length === state.callForSpeakers.currentStep
-    ) {
-      return (
-        <div className="navigation-btn_container">
-          <PrevButton />
-          <ConfirmButton />
-        </div>
-      );
-    } else {
-      return (
-        <div className="navigation-btn_container">
-          <PrevButton />
-          <NextButton />
-        </div>
-      );
-    }
-  };
-
   return (
     <div className={`content ${getActiveClassName("active-content")}`}>
       <stepSeccion.seccion />
