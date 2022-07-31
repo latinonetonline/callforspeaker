@@ -1,7 +1,7 @@
 import { CallForSpeakersActions } from "./callforspeakers.action";
 import { CallForSpeakersState } from "./callForSpeakers.state";
 import update from "immutability-helper";
-import { format } from "path";
+import {initialState} from "../../data/state"
 
 export function callForSpeakersReducer(
   state: CallForSpeakersState,
@@ -36,5 +36,7 @@ export function callForSpeakersReducer(
           $splice: [[action.index, 1]],
         }),
       };
+    case "reset-state":
+      return initialState.callForSpeakers;
   }
 }

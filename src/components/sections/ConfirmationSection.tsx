@@ -10,7 +10,7 @@ import TalkConfirmationComponent from "./components/TalkConfirmationComponent";
 interface ConfirmationSectionProps {}
 
 const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
   const { objectURL: speakerPhoto } = useObjectURL(
     state.callForSpeakers.form.speakerPhoto
   );
