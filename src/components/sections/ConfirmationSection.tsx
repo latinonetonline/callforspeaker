@@ -6,6 +6,7 @@ import ConfirmButton from "../buttons/ConfirmButton";
 import PrevButton from "../buttons/PrevButton";
 import SpeakerConfirmationComponent from "./components/SpeakerConfirmationComponent";
 import TalkConfirmationComponent from "./components/TalkConfirmationComponent";
+import TermsAndConsCheckboxInput from "./components/TermsAndConsCheckoutInput";
 
 interface ConfirmationSectionProps {}
 
@@ -95,12 +96,21 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
             </div>
           </div>
         </div>
+
+        <div className="terms-cons_container">
+          <div className="form-row">
+            <TermsAndConsCheckboxInput />
+          </div>
+        </div>
+        
       </section>
       <div className="navigation-buttons_container button_container">
         <div className="navigation-btn_container">
           <PrevButton />
           {/* <ConfirmButton /> */}
-          <button><Link to="thank-you">BOTÓN</Link></button>
+          <button>
+            <Link to="thank-you">BOTÓN</Link>
+          </button>
         </div>
       </div>
     </div>
