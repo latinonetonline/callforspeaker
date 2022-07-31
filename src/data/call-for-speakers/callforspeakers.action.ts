@@ -60,6 +60,10 @@ export const removeStep = (index: number) =>
     type: "update-form-state",
     form,
   } as const);
+  export const resetState = () =>
+  ({
+    type: "reset-state",
+  } as const);
 
 export type CallForSpeakersActions =
   | ActionType<typeof setLoading>
@@ -69,4 +73,5 @@ export type CallForSpeakersActions =
   | ActionType<typeof setCurrentStep>
   | ActionType<typeof updateFormState>
   | ActionType<typeof insertStep>
+  | ActionType<typeof resetState>
   | ActionType<typeof removeStep>;

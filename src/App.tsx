@@ -6,6 +6,7 @@ import { AuthProvider, AuthProviderProps } from "oidc-react";
 import CallbackPage from "./pages/CallbackPage";
 import SignOutRedirectPage from "./pages/SignOutRedirectPage";
 import { AppContextProvider } from "./data/AppContext";
+import ThankYouPage from "./pages/ThankYouPage";
 
 const oidcConfig: AuthProviderProps = {
   authority: "https://ids.latinonet.online",
@@ -27,6 +28,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<CallForSpeakersPage />}></Route>
               <Route path="/callback" element={<CallbackPage />}></Route>
+              <Route path="/thank-you" element={<ThankYouPage />}></Route>
               <Route
                 path="/signout-redirect"
                 element={<SignOutRedirectPage />}
