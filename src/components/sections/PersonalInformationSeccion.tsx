@@ -54,10 +54,12 @@ const PersonalInformationSeccion: React.FC<
       setValue("speakerDescription", state.speakers.current?.description);
       setValue("speakerPhotoNew", false);
 
-      if (state.speakers.current?.photo) {
-        fetch(state.speakers.current?.photo)
-          .then((data) => data.blob())
-          .then((blob) => dispatch(updateFormState({ speakerPhoto: blob })));
+      if (!state.callForSpeakers.form.speakerPhoto) {
+        if (state.speakers.current?.photo) {
+          fetch(state.speakers.current?.photo)
+            .then((data) => data.blob())
+            .then((blob) => dispatch(updateFormState({ speakerPhoto: blob })));
+        }
       }
     }
   }, [state.speakers]);
