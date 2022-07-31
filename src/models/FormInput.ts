@@ -2,6 +2,8 @@ export type PersonalInformationSeccionFormInput = {
   speakerName: string;
   speakerLastname: string;
   speakerDescription: string;
+  speakerPhotoOriginal: string;
+  speakerPhotoNew: boolean;
   speakerPhoto: Blob | null;
   speakerTwitter: string;
   speakerEmail: string;

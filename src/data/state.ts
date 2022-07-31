@@ -36,6 +36,8 @@ export const initialState: AppState = {
       speakerLastname: "",
       speakerEmail: "",
       speakerPhoto: null,
+      speakerPhotoOriginal: "",
+      speakerPhotoNew: false,
       speakerDescription: "",
       speakerTwitter: "",
       secondSpeakerName: "",

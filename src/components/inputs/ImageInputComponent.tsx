@@ -16,6 +16,7 @@ interface ImageInputComponentProps {
   value: Blob | null;
   required?: boolean;
   error?: boolean;
+  onChange?: (value: Blob) => void;
 }
 
 const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
@@ -24,6 +25,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
   value,
   required = false,
   error = false,
+  onChange,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -38,6 +40,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
 
   useEffect(() => {
     if (value) {
+      setObject(value);
       setValue(name, value!);
     }
   }, [value]);
@@ -68,6 +71,7 @@ const ImageInputComponent: React.FC<ImageInputComponentProps> = ({
     cropper?.getCanvas()?.toBlob((blob) => {
       // setSrc(URL.createObjectURL(blob!));
       setValue(name, blob!);
+      onChange && onChange(blob!);
     });
     setShowModal(false);
   };

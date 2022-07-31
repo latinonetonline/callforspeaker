@@ -33,6 +33,7 @@ const PersonalInformationSeccion: React.FC<
   } = methods;
   const { state, dispatch } = useAppContext();
   const { userManager } = useAuth();
+
   useEffect(() => {
     dispatch(loadSpeaker);
 
@@ -48,9 +49,16 @@ const PersonalInformationSeccion: React.FC<
     if (state.speakers.current) {
       setValue("speakerName", state.speakers.current?.name);
       setValue("speakerLastname", state.speakers.current?.lastname);
-      // setValue("speakerPhoto", state.speakers.current?.photo)
+      setValue("speakerPhotoOriginal", state.speakers.current?.photo);
       setValue("speakerTwitter", state.speakers.current?.twitter);
       setValue("speakerDescription", state.speakers.current?.description);
+      setValue("speakerPhotoNew", false);
+
+      if (state.speakers.current?.photo) {
+        fetch(state.speakers.current?.photo)
+          .then((data) => data.blob())
+          .then((blob) => dispatch(updateFormState({ speakerPhoto: blob })));
+      }
     }
   }, [state.speakers]);
 
@@ -135,6 +143,7 @@ const PersonalInformationSeccion: React.FC<
                 value={state.callForSpeakers.form.speakerPhoto}
                 required={true}
                 error={!!errors.speakerPhoto}
+                onChange={(_) => setValue("speakerPhotoNew", true)}
               />
             </div>
             <div className="form-row">
