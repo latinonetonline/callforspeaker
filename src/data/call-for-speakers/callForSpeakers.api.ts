@@ -1,8 +1,8 @@
 import { config } from "../../config/EnvConfig";
+import { proposalsApi } from "../../services/apiClient";
 
 
 export const getUnavailableDates = async (): Promise<Date[]> => {
-  return await fetch(config.apiUrl + "/api/v1/webinars-module/Proposals/dates")
-  .then(data => data.json())
-  .then(response => (response.result.dates as string[]).map(x => new Date(x)));
+  return await proposalsApi.getDates()
+  .then(response => (response.data.result!.dates!).map(x => new Date(x)));
 };

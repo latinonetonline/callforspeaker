@@ -1,5 +1,6 @@
 import { callForSpeakersReducer } from "./call-for-speakers/callForSpeakers.reducer";
 import { combineReducers } from "./combineReducers";
+import { speakerReducer } from "./speakers/speakers.reducer";
 
 export const initialState: AppState = {
   callForSpeakers: {
@@ -51,10 +52,14 @@ export const initialState: AppState = {
       answer3: "",
     },
   },
+  speakers: {
+    current: undefined,
+  },
 };
 
 export const reducers = combineReducers({
   callForSpeakers: callForSpeakersReducer,
+  speakers: speakerReducer,
 });
 
 export type AppState = ReturnType<typeof reducers>;

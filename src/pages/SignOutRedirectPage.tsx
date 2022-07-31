@@ -13,7 +13,7 @@ const SignOutRedirectPage = () => {
   useEffect(() => {
     auth.userManager.signoutRedirectCallback().then((_) => {
       dispatch(setIsAuthenticated(false));
-
+      sessionStorage.removeItem("access_token");
       navigate("/");
     });
   }, []);

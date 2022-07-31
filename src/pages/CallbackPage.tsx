@@ -12,6 +12,7 @@ const CallbackPage = () => {
   const auth = useAuth();
   useEffect(() => {
     auth.userManager.signinRedirectCallback().then((user) => {
+      sessionStorage.setItem("access_token", user.access_token);
       dispatch(setIsAuthenticated(true));
       navigate("/");
     });
