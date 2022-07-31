@@ -1,9 +1,14 @@
 import React from "react";
+import { useAppContext } from "../data/AppContext";
 import "./ThankYouPage.scss";
 
 interface ThankYouPageProps {}
 
 const ThankYouPage: React.FC<ThankYouPageProps> = () => {
+  const { state } = useAppContext();
+  const firstSpeaker = state.callForSpeakers.form.speakerName;
+  const secondSpeaker = state.callForSpeakers.form.secondSpeakerName;
+
   return (
     <div id="thankyou">
       <div className="inner">
@@ -14,14 +19,14 @@ const ThankYouPage: React.FC<ThankYouPageProps> = () => {
             className="heading welcome"
             style={{ textAlign: "center" }}
           >
-            Muchas Gracias Por Postular Su Charla
+            Muchas Gracias {firstSpeaker} {secondSpeaker && `y ${secondSpeaker}`} Por Postular Su Charla
           </h1>
 
           <p style={{ marginTop: "50px", textAlign: "center" }}>
-            Pronto estaremos contactandonos con usted para devolverle feedback!
+            Pronto estaremos en contacto.
           </p>
           <p style={{ textAlign: "center" }}>
-            No olvide seguirnos en nuestras redes sociales 😉
+            No olvides seguirnos en nuestras redes sociales 😉
           </p>
 
           <div className="logos_container">

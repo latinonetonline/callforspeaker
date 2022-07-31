@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useAppContext } from "../../data/AppContext";
 import useObjectURL from "../../hooks/useObjectURL";
 import ConfirmButton from "../buttons/ConfirmButton";
@@ -98,7 +99,8 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
       <div className="navigation-buttons_container button_container">
         <div className="navigation-btn_container">
           <PrevButton />
-          <ConfirmButton />
+          {/* <ConfirmButton /> */}
+          <button><Link to="thank-you">BOTÓN</Link></button>
         </div>
       </div>
     </div>
