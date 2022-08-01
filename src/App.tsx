@@ -26,7 +26,7 @@ const App = () => {
     <AuthProvider {...oidcConfig}>
       <AppContextProvider>
         <div id="app_container">
-          <BrowserRouter basename={process.env.PUBLIC_URL}>
+          <BrowserRouter>
             <Routes>
               <Route path="/" element={<CallForSpeakersPage />}></Route>
               <Route path="/callback" element={<CallbackPage />}></Route>
