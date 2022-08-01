@@ -25,10 +25,10 @@ const stepSeccions: StepSeccion[] = [
     number: "02",
     seccion: PersonalInformation,
   },
-  {
-    number: "2.2",
-    seccion: SecondPersonalInformation,
-  },
+  // {
+  //   number: "2.2",
+  //   seccion: SecondPersonalInformation,
+  // },
   {
     number: "03",
     seccion: PresentationSection,

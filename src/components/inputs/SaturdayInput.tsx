@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 interface Month {
   name: string;
@@ -40,6 +40,26 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({
   unavailableDates = [],
 }) => {
   const [date, setDate] = useState(value ?? new Date());
+
+  useEffect(() => {
+    if (!value) {
+      const saturdays = getSaturdays(
+        date.getUTCMonth() + 1,
+        date.getUTCFullYear()
+      );
+
+      if (saturdays[0]) {
+        date.setUTCDate(parseInt(saturdays[0]));
+      } else {
+        date.setUTCDate(0);
+        onChange(null);
+        return;
+      }
+
+      setDate(new Date(date));
+      onChange(new Date(date));
+    }
+  }, []);
 
   const getMonths = (): Month[] =>
     monthNames.filter(

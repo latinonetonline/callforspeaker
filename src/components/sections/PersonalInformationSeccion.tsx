@@ -4,7 +4,6 @@ import ShortInputComponent from "../inputs/ShortInputComponent";
 import LongInputComponent from "../inputs/LongInputComponent";
 import TextareaInput from "../inputs/TextareaInput";
 import ImageInputComponent from "../inputs/ImageInputComponent";
-import SecondSpeakerCheckboxInput from "./components/SecondSpeakerCheckboxInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { PersonalInformationSeccionFormInput } from "../../models/FormInput";
 import NextButton from "../buttons/NextButton";
@@ -148,11 +147,11 @@ const PersonalInformationSeccion: React.FC<
                 onChange={(_) => setValue("speakerPhotoNew", true)}
               />
             </div>
-            <div className="form-row">
+            {/* <div className="form-row">
               <SecondSpeakerCheckboxInput
                 value={state.callForSpeakers.hasSecondSpeaker}
               />
-            </div>
+            </div> */}
           </section>
           <div className="navigation-buttons_container button_container">
             <div className="navigation-btn_container">
