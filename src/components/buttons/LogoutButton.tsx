@@ -18,7 +18,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = () => {
 
   return (
     <div onClick={handleLogout} className="prev-button">
-      <img src="/assets/logout.png" />
+      <img src="assets/logout.png" />
     </div>
   );
 };

@@ -9,7 +9,7 @@ interface NextButtonProps {
 const NextButton: React.FC<NextButtonProps> = ({ onClick, type }) => {
   return (
     <button type={type} onClick={onClick} className="next-button">
-      <img src="/assets/arrow-right.png" alt="" />
+      <img src="assets/arrow-right.png" alt="" />
     </button>
   );
 };

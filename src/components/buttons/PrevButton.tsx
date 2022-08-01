@@ -14,7 +14,7 @@ const PrevButton: React.FC<PrevButtonProps> = () => {
 
   return (
     <div onClick={handleClick} className="prev-button">
-      <img src="/assets/arrow-left.png" alt="" />
+      <img src="assets/arrow-left.png" alt="" />
     </div>
   );
 };

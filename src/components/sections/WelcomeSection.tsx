@@ -19,7 +19,7 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = () => {
     <div className="tab-content animate__animated animate__fadeIn">
       <section id="welcome-section">
         <img
-          src="/assets/logo.png"
+          src="assets/logo.png"
           alt=""
           width="176px"
         />

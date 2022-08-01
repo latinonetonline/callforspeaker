@@ -53,7 +53,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src="/assets/facebook-logo.png" alt="" />
+                <img src="assets/facebook-logo.png" alt="" />
               </a>
             </div>
             <div className="twitter-logo">
@@ -62,7 +62,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src="/assets/twitter-logo.png" alt="" />
+                <img src="assets/twitter-logo.png" alt="" />
               </a>
             </div>
           </div>
