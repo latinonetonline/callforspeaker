@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../data/AppContext";
 import useObjectURL from "../../hooks/useObjectURL";
 import ConfirmButton from "../buttons/ConfirmButton";
 import PrevButton from "../buttons/PrevButton";
+import TermsAndConsModal from "../TermsAndConsModal";
 import SpeakerConfirmationComponent from "./components/SpeakerConfirmationComponent";
 import TalkConfirmationComponent from "./components/TalkConfirmationComponent";
 import TermsAndConsCheckboxInput from "./components/TermsAndConsCheckoutInput";
@@ -11,6 +12,8 @@ import TermsAndConsCheckboxInput from "./components/TermsAndConsCheckoutInput";
 interface ConfirmationSectionProps {}
 
 const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const { state } = useAppContext();
   const { objectURL: speakerPhoto } = useObjectURL(
     state.callForSpeakers.form.speakerPhoto
@@ -18,6 +21,15 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
   const { objectURL: secondSpeakerPhoto } = useObjectURL(
     state.callForSpeakers.form.secondSpeakerPhoto
   );
+
+  const openModal = () => {
+    setModalIsOpen(true);
+    // console.log("MODAL ABIERTO")
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   return (
     <div className="tab-content animate__animated animate__fadeIn">
@@ -99,10 +111,9 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
 
         <div className="terms-cons_container">
           <div className="form-row">
-            <TermsAndConsCheckboxInput />
+            <TermsAndConsCheckboxInput openModal={openModal} />
           </div>
         </div>
-        
       </section>
       <div className="navigation-buttons_container button_container">
         <div className="navigation-btn_container">
@@ -113,6 +124,8 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
           </button>
         </div>
       </div>
+
+      <TermsAndConsModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
     </div>
   );
 };

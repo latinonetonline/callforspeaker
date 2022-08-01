@@ -1,13 +1,13 @@
-import CheckboxInput from "../../inputs/CheckboxInput";
-
 interface TermsAndConsCheckboxInputProps {
   error?: boolean;
   value?: boolean;
+  openModal: () => void;
 }
 
 const TermsAndConsCheckboxInput: React.FC<TermsAndConsCheckboxInputProps> = ({
   error,
   value,
+  openModal
 }) => {
   return (
     <>
@@ -26,7 +26,7 @@ const TermsAndConsCheckboxInput: React.FC<TermsAndConsCheckboxInputProps> = ({
           </label>
         </fieldset>
         <div
-          onClick={() => console.log("Lautaro")}
+          onClick={() => openModal()}
           className="terms-and-cons-clickeable"
         >
           términos y condiciones.
