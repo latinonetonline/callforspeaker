@@ -7,18 +7,20 @@ import CallbackPage from "./pages/CallbackPage";
 import SignOutRedirectPage from "./pages/SignOutRedirectPage";
 import { AppContextProvider } from "./data/AppContext";
 import ThankYouPage from "./pages/ThankYouPage";
+import { config } from "./config/EnvConfig";
 
 const oidcConfig: AuthProviderProps = {
   authority: "https://ids.latinonet.online",
-  clientId: "callforspeakers_dev",
-  redirectUri: "http://localhost:3000/callback",
+  clientId: config.clientId,
+  redirectUri: config.redirectUri,
   scope: "openid profile email email_user roles latinonetonline_api",
   responseType: "id_token token",
-  postLogoutRedirectUri: "http://localhost:3000/signout-redirect",
+  postLogoutRedirectUri: config.postLogoutRedirectUri,
   autoSignIn: false,
   loadUserInfo: true,
 };
 
+console.log("config", config);
 const App = () => {
   return (
     <AuthProvider {...oidcConfig}>
