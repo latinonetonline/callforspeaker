@@ -48,7 +48,7 @@ jobs:
       with:
           files: 'package.json'
       env:
-          homepage: "https://latinonet.online/callback"
+          homepage: "https://latinonet.online/callforspeakers"
        
 
     - name: Build
