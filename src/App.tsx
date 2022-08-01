@@ -8,6 +8,7 @@ import SignOutRedirectPage from "./pages/SignOutRedirectPage";
 import { AppContextProvider } from "./data/AppContext";
 import ThankYouPage from "./pages/ThankYouPage";
 import { config } from "./config/EnvConfig";
+import { env } from "process";
 
 const oidcConfig: AuthProviderProps = {
   authority: "https://ids.latinonet.online",
@@ -26,7 +27,7 @@ const App = () => {
     <AuthProvider {...oidcConfig}>
       <AppContextProvider>
         <div id="app_container">
-          <BrowserRouter>
+          <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes>
               <Route path="/" element={<CallForSpeakersPage />}></Route>
               <Route path="/callback" element={<CallbackPage />}></Route>
