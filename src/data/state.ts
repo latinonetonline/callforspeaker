@@ -9,6 +9,7 @@ export const initialState: AppState = {
     currentStep: 1,
     unavailableDates: [],
     isAuthenticated: false,
+    createProposalSuccess: false,
     steps: [
       {
         number: "01",
@@ -44,6 +45,8 @@ export const initialState: AppState = {
       secondSpeakerLastname: "",
       secondSpeakerEmail: "",
       secondSpeakerPhoto: null,
+      secondSpeakerPhotoOriginal: "",
+      secondSpeakerPhotoNew: false,
       secondSpeakerDescription: "",
       secondSpeakerTwitter: "",
       title: "",

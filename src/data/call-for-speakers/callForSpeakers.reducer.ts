@@ -1,7 +1,7 @@
 import { CallForSpeakersActions } from "./callforspeakers.action";
 import { CallForSpeakersState } from "./callForSpeakers.state";
 import update from "immutability-helper";
-import {initialState} from "../../data/state"
+import { initialState } from "../../data/state";
 
 export function callForSpeakersReducer(
   state: CallForSpeakersState,
@@ -18,15 +18,15 @@ export function callForSpeakersReducer(
       return { ...state, unavailableDates: action.dates };
     case "set-has-second-speaker":
       return { ...state, hasSecondSpeaker: action.hasSecondSpeaker };
+    case "set-create-proposal-success":
+      return { ...state, createProposalSuccess: action.isSuccess };
     case "update-form-state":
-      return { ...state, form: {...state.form, ...action.form }};
+      return { ...state, form: { ...state.form, ...action.form } };
     case "insert-step":
       return {
         ...state,
         steps: update(state.steps, {
-          $splice: [
-            [action.index, 1, action.step, state.steps[action.index]],
-          ],
+          $splice: [[action.index, 1, action.step, state.steps[action.index]]],
         }),
       };
     case "remove-step":

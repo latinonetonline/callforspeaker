@@ -180,25 +180,6 @@ export interface Link {
 /**
  * 
  * @export
- * @interface OperationResult
- */
-export interface OperationResult {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof OperationResult
-     */
-    'isSuccess'?: boolean;
-    /**
-     * 
-     * @type {ErrorResult}
-     * @memberof OperationResult
-     */
-    'error'?: ErrorResult;
-}
-/**
- * 
- * @export
  * @interface ProposalDateDto
  */
 export interface ProposalDateDto {
@@ -688,6 +669,31 @@ export interface UpdateUnavailableDateInput {
      * @memberof UpdateUnavailableDateInput
      */
     'reason'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface UriOperationResult
+ */
+export interface UriOperationResult {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UriOperationResult
+     */
+    'isSuccess'?: boolean;
+    /**
+     * 
+     * @type {ErrorResult}
+     * @memberof UriOperationResult
+     */
+    'error'?: ErrorResult;
+    /**
+     * 
+     * @type {string}
+     * @memberof UriOperationResult
+     */
+    'result'?: string | null;
 }
 /**
  * 
@@ -1469,7 +1475,7 @@ export const ImagesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadImage(file?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OperationResult>> {
+        async uploadImage(file?: any, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UriOperationResult>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadImage(file, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1489,7 +1495,7 @@ export const ImagesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadImage(file?: any, options?: any): AxiosPromise<OperationResult> {
+        uploadImage(file?: any, options?: any): AxiosPromise<UriOperationResult> {
             return localVarFp.uploadImage(file, options).then((request) => request(axios, basePath));
         },
     };

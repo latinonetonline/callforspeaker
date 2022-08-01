@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../data/AppContext";
+import { createProposal } from "../../data/call-for-speakers/callforspeakers.action";
 import useObjectURL from "../../hooks/useObjectURL";
 import ConfirmButton from "../buttons/ConfirmButton";
 import PrevButton from "../buttons/PrevButton";
@@ -10,7 +11,7 @@ import TalkConfirmationComponent from "./components/TalkConfirmationComponent";
 interface ConfirmationSectionProps {}
 
 const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
   const navigate = useNavigate();
   const { objectURL: speakerPhoto } = useObjectURL(
     state.callForSpeakers.form.speakerPhoto
@@ -22,9 +23,15 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
   const handleConfirm = () => {
     const isConfirm = window.confirm("¿Desea confirmar su propuesta?");
     if (isConfirm) {
-      navigate("thank-you");
+      dispatch(createProposal(state.callForSpeakers.form));
     }
   };
+
+  useEffect(() => {
+    if (state.callForSpeakers.createProposalSuccess) {
+      navigate("thank-you");
+    }
+  }, [state.callForSpeakers.createProposalSuccess]);
 
   return (
     <div className="tab-content animate__animated animate__fadeIn">

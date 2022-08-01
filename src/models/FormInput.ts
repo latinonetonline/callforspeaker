@@ -13,6 +13,8 @@ export type SecondPersonalInformationSeccionFormInput = {
   secondSpeakerName: string;
   secondSpeakerLastname: string;
   secondSpeakerDescription: string;
+  secondSpeakerPhotoOriginal: string;
+  secondSpeakerPhotoNew: boolean;
   secondSpeakerPhoto: Blob | null;
   secondSpeakerTwitter: string;
   secondSpeakerEmail: string;

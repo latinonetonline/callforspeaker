@@ -1,1420 +1,1424 @@
-
 {
-    "openapi": "3.0.1",
-    "info": {
-      "title": "LatinoNetOnline.Backend.V1 v1",
-      "description": "A application with Swagger, Swashbuckle, and API versioning.",
-      "contact": {
-        "name": "Lautaro Carro",
-        "email": "lautaro.carro@latinonet.online"
-      },
-      "license": {
-        "name": "Latino .NET Online",
-        "url": "https://latinonet.online"
-      },
-      "version": "1.0"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "LatinoNetOnline.Backend.V1 v1",
+    "description": "A application with Swagger, Swashbuckle, and API versioning.",
+    "contact": {
+      "name": "Lautaro Carro",
+      "email": "lautaro.carro@latinonet.online"
     },
-    "servers": [
-      {
-        "url": "https://api.latinonet.online"
+    "license": {
+      "name": "Latino .NET Online",
+      "url": "https://latinonet.online"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.latinonet.online"
+    }
+  ],
+  "paths": {
+    "/api/v1/notifications-module/Devices": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "name": "Users",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OperativeSystem",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
       }
-    ],
-    "paths": {
-      "/api/v1/notifications-module/Devices": {
-        "get": {
-          "tags": [
-            "Devices"
-          ],
-          "parameters": [
-            {
-              "name": "Users",
-              "in": "query",
+    },
+    "/api/v1/notifications-module/Devices/Subscribe": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "format": "uuid"
-                }
+                "$ref": "#/components/schemas/SubscribeDeviceInput"
               }
             },
-            {
-              "name": "Name",
-              "in": "query",
+            "text/json": {
               "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/SubscribeDeviceInput"
               }
             },
-            {
-              "name": "OperativeSystem",
-              "in": "query",
+            "application/*+json": {
               "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/SubscribeDeviceInput"
               }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/notifications-module/Devices/Subscribe": {
-        "post": {
-          "tags": [
-            "Devices"
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SubscribeDeviceInput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SubscribeDeviceInput"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SubscribeDeviceInput"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/notifications-module/Devices/GetVapidPublicKey": {
-        "get": {
-          "tags": [
-            "Devices"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/notifications-module/Devices/SendNotification": {
-        "post": {
-          "tags": [
-            "Devices"
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SendNotificationInput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SendNotificationInput"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SendNotificationInput"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/notifications-module/Devices/{id}": {
-        "delete": {
-          "tags": [
-            "Devices"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "format": "uuid"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/notifications-module/Devices/GenerateVapidKeys": {
-        "get": {
-          "tags": [
-            "Devices"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/links-module": {
-        "get": {
-          "tags": [
-            "Home"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/notifications-module": {
-        "get": {
-          "tags": [
-            "Home"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module": {
-        "get": {
-          "tags": [
-            "Home"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Images": {
-        "post": {
-          "tags": [
-            "Images"
-          ],
-          "operationId": "UploadImage",
-          "requestBody": {
-            "content": {
-              "multipart/form-data": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "file": {
-                      "type": "string",
-                      "format": "binary"
-                    }
-                  }
-                },
-                "encoding": {
-                  "file": {
-                    "style": "form"
-                  }
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/OperationResult"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/links-module/Links": {
-        "get": {
-          "tags": [
-            "Links"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
             }
           }
         },
-        "post": {
-          "tags": [
-            "Links"
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Link"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Link"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Link"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        },
-        "put": {
-          "tags": [
-            "Links"
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Link"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Link"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Link"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
-      },
-      "/api/v1/links-module/Links/{name}": {
-        "get": {
-          "tags": [
-            "Links"
-          ],
-          "parameters": [
-            {
-              "name": "name",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        },
-        "delete": {
-          "tags": [
-            "Links"
-          ],
-          "parameters": [
-            {
-              "name": "name",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
+      }
+    },
+    "/api/v1/notifications-module/Devices/GetVapidPublicKey": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
-      },
-      "/api/v1/webinars-module/Metricool/proposals/{proposalId}": {
-        "get": {
-          "tags": [
-            "Metricool"
-          ],
-          "parameters": [
-            {
-              "name": "proposalId",
-              "in": "path",
-              "required": true,
+      }
+    },
+    "/api/v1/notifications-module/Devices/SendNotification": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "string",
-                "format": "uuid"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Proposals": {
-        "get": {
-          "tags": [
-            "Proposals"
-          ],
-          "parameters": [
-            {
-              "name": "Title",
-              "in": "query",
-              "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/SendNotificationInput"
               }
             },
-            {
-              "name": "Date",
-              "in": "query",
+            "text/json": {
               "schema": {
-                "type": "string",
-                "format": "date-time"
+                "$ref": "#/components/schemas/SendNotificationInput"
               }
             },
-            {
-              "name": "IsActive",
-              "in": "query",
+            "application/*+json": {
               "schema": {
-                "type": "boolean"
-              }
-            },
-            {
-              "name": "Oldest",
-              "in": "query",
-              "schema": {
-                "type": "boolean"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        },
-        "post": {
-          "tags": [
-            "Proposals"
-          ],
-          "operationId": "CreateProposal",
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateProposalRequest"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateProposalRequest"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateProposalRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ProposalFullDtoOperationResult"
-                  }
-                }
+                "$ref": "#/components/schemas/SendNotificationInput"
               }
             }
           }
         },
-        "put": {
-          "tags": [
-            "Proposals"
-          ],
-          "requestBody": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications-module/Devices/{id}": {
+      "delete": {
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications-module/Devices/GenerateVapidKeys": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/links-module": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateProposalInput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateProposalInput"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateProposalInput"
+                  "type": "string"
                 }
               }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Proposals/{id}": {
-        "get": {
-          "tags": [
-            "Proposals"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "format": "uuid"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        },
-        "delete": {
-          "tags": [
-            "Proposals"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "format": "uuid"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Proposals/dates": {
-        "get": {
-          "tags": [
-            "Proposals"
-          ],
-          "operationId": "GetDates",
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ProposalDateDtoOperationResult"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Proposals/all": {
-        "delete": {
-          "tags": [
-            "Proposals"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Proposals/{id}/Photo": {
-        "post": {
-          "tags": [
-            "Proposals"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "format": "uuid"
-              }
-            }
-          ],
-          "requestBody": {
-            "content": {
-              "multipart/form-data": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "file": {
-                      "type": "string",
-                      "format": "binary"
-                    }
-                  }
-                },
-                "encoding": {
-                  "file": {
-                    "style": "form"
-                  }
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Proposals/Confirm": {
-        "post": {
-          "tags": [
-            "Proposals"
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ConfirmProposalInput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ConfirmProposalInput"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ConfirmProposalInput"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Proposals/UpdateNumbers": {
-        "put": {
-          "tags": [
-            "Proposals"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Proposals/{id}/Description": {
-        "get": {
-          "tags": [
-            "Proposals"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "format": "uuid"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Speakers": {
-        "get": {
-          "tags": [
-            "Speakers"
-          ],
-          "operationId": "GetAllSpeakers",
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/SpeakerDtoArrayOperationResult"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Speakers/Me": {
-        "get": {
-          "tags": [
-            "Speakers"
-          ],
-          "operationId": "GetSpeaker",
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/SpeakerDtoOperationResult"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Speakers/Search": {
-        "get": {
-          "tags": [
-            "Speakers"
-          ],
-          "operationId": "SearchSpeakers",
-          "parameters": [
-            {
-              "name": "search",
-              "in": "query",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/SpeakerDtoArrayOperationResult"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/UnavailableDates": {
-        "get": {
-          "tags": [
-            "UnavailableDates"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        },
-        "post": {
-          "tags": [
-            "UnavailableDates"
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateUnavailableDateInput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateUnavailableDateInput"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateUnavailableDateInput"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        },
-        "put": {
-          "tags": [
-            "UnavailableDates"
-          ],
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateUnavailableDateInput"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateUnavailableDateInput"
-                }
-              },
-              "application/*+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateUnavailableDateInput"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/UnavailableDates/{id}": {
-        "delete": {
-          "tags": [
-            "UnavailableDates"
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "format": "uuid"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Website/PastWebinars": {
-        "get": {
-          "tags": [
-            "Website"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
-      },
-      "/api/v1/webinars-module/Website/NextWebinar": {
-        "get": {
-          "tags": [
-            "Website"
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
             }
           }
         }
       }
     },
-    "components": {
-      "schemas": {
-        "ConfirmProposalInput": {
-          "type": "object",
-          "properties": {
-            "id": {
+    "/api/v1/notifications-module": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Images": {
+      "post": {
+        "tags": [
+          "Images"
+        ],
+        "operationId": "UploadImage",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UriOperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/links-module/Links": {
+      "get": {
+        "tags": [
+          "Links"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Links"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Link"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Link"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Link"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Links"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Link"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Link"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Link"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/links-module/Links/{name}": {
+      "get": {
+        "tags": [
+          "Links"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Links"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Metricool/proposals/{proposalId}": {
+      "get": {
+        "tags": [
+          "Metricool"
+        ],
+        "parameters": [
+          {
+            "name": "proposalId",
+            "in": "path",
+            "required": true,
+            "schema": {
               "type": "string",
               "format": "uuid"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Proposals": {
+      "get": {
+        "tags": [
+          "Proposals"
+        ],
+        "parameters": [
+          {
+            "name": "Title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           },
-          "additionalProperties": false
-        },
-        "CreateProposalRequest": {
-          "type": "object",
-          "properties": {
-            "speakers": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CreateSpeakerInput"
-              },
-              "nullable": true
-            },
-            "title": {
-              "type": "string",
-              "nullable": true
-            },
-            "description": {
-              "type": "string",
-              "nullable": true
-            },
-            "date": {
+          {
+            "name": "Date",
+            "in": "query",
+            "schema": {
               "type": "string",
               "format": "date-time"
-            },
-            "audienceAnswer": {
-              "type": "string",
-              "nullable": true
-            },
-            "knowledgeAnswer": {
-              "type": "string",
-              "nullable": true
-            },
-            "useCaseAnswer": {
-              "type": "string",
-              "nullable": true
             }
           },
-          "additionalProperties": false
-        },
-        "CreateSpeakerInput": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "nullable": true
-            },
-            "lastName": {
-              "type": "string",
-              "nullable": true
-            },
-            "email": {
-              "type": "string",
-              "nullable": true
-            },
-            "twitter": {
-              "type": "string",
-              "nullable": true
-            },
-            "description": {
-              "type": "string",
-              "nullable": true
-            },
-            "image": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "CreateUnavailableDateInput": {
-          "type": "object",
-          "properties": {
-            "date": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "reason": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "ErrorResult": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "Link": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "nullable": true
-            },
-            "url": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "OperationResult": {
-          "type": "object",
-          "properties": {
-            "isSuccess": {
+          {
+            "name": "IsActive",
+            "in": "query",
+            "schema": {
               "type": "boolean"
-            },
-            "error": {
-              "$ref": "#/components/schemas/ErrorResult"
             }
           },
-          "additionalProperties": false
-        },
-        "ProposalDateDto": {
-          "type": "object",
-          "properties": {
-            "dates": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "ProposalDateDtoOperationResult": {
-          "type": "object",
-          "properties": {
-            "isSuccess": {
+          {
+            "name": "Oldest",
+            "in": "query",
+            "schema": {
               "type": "boolean"
-            },
-            "error": {
-              "$ref": "#/components/schemas/ErrorResult"
-            },
-            "result": {
-              "$ref": "#/components/schemas/ProposalDateDto"
             }
-          },
-          "additionalProperties": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Proposals"
+        ],
+        "operationId": "CreateProposal",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProposalRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProposalRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProposalRequest"
+              }
+            }
+          }
         },
-        "ProposalDto": {
-          "type": "object",
-          "properties": {
-            "proposalId": {
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposalFullDtoOperationResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Proposals"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProposalInput"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProposalInput"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProposalInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Proposals/{id}": {
+      "get": {
+        "tags": [
+          "Proposals"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
               "type": "string",
               "format": "uuid"
-            },
-            "title": {
-              "type": "string",
-              "nullable": true
-            },
-            "description": {
-              "type": "string",
-              "nullable": true
-            },
-            "eventDate": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "creationTime": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "audienceAnswer": {
-              "type": "string",
-              "nullable": true
-            },
-            "knowledgeAnswer": {
-              "type": "string",
-              "nullable": true
-            },
-            "useCaseAnswer": {
-              "type": "string",
-              "nullable": true
-            },
-            "isActive": {
-              "type": "boolean"
-            },
-            "webinarNumber": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true
-            },
-            "status": {
-              "$ref": "#/components/schemas/WebinarStatus"
-            },
-            "meetup": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
-            },
-            "streamyard": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
-            },
-            "liveStreaming": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
-            },
-            "flyer": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
             }
-          },
-          "additionalProperties": false
-        },
-        "ProposalFullDto": {
-          "type": "object",
-          "properties": {
-            "proposal": {
-              "$ref": "#/components/schemas/ProposalDto"
-            },
-            "speakers": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/SpeakerDto"
-              },
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "ProposalFullDtoOperationResult": {
-          "type": "object",
-          "properties": {
-            "isSuccess": {
-              "type": "boolean"
-            },
-            "error": {
-              "$ref": "#/components/schemas/ErrorResult"
-            },
-            "result": {
-              "$ref": "#/components/schemas/ProposalFullDto"
-            }
-          },
-          "additionalProperties": false
-        },
-        "SendNotificationInput": {
-          "type": "object",
-          "properties": {
-            "devices": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "format": "uuid"
-              },
-              "nullable": true
-            },
-            "message": {
-              "type": "string",
-              "nullable": true
-            },
-            "url": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "SpeakerDto": {
-          "type": "object",
-          "properties": {
-            "speakerId": {
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Proposals"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
               "type": "string",
               "format": "uuid"
-            },
-            "name": {
-              "type": "string",
-              "nullable": true
-            },
-            "lastName": {
-              "type": "string",
-              "nullable": true
-            },
-            "email": {
-              "type": "string",
-              "nullable": true
-            },
-            "twitter": {
-              "type": "string",
-              "nullable": true
-            },
-            "description": {
-              "type": "string",
-              "nullable": true
-            },
-            "image": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
             }
-          },
-          "additionalProperties": false
-        },
-        "SpeakerDtoArrayOperationResult": {
-          "type": "object",
-          "properties": {
-            "isSuccess": {
-              "type": "boolean"
-            },
-            "error": {
-              "$ref": "#/components/schemas/ErrorResult"
-            },
-            "result": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/SpeakerDto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Proposals/dates": {
+      "get": {
+        "tags": [
+          "Proposals"
+        ],
+        "operationId": "GetDates",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProposalDateDtoOperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Proposals/all": {
+      "delete": {
+        "tags": [
+          "Proposals"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Proposals/{id}/Photo": {
+      "post": {
+        "tags": [
+          "Proposals"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
               },
-              "nullable": true
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
             }
-          },
-          "additionalProperties": false
+          }
         },
-        "SpeakerDtoOperationResult": {
-          "type": "object",
-          "properties": {
-            "isSuccess": {
-              "type": "boolean"
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Proposals/Confirm": {
+      "post": {
+        "tags": [
+          "Proposals"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmProposalInput"
+              }
             },
-            "error": {
-              "$ref": "#/components/schemas/ErrorResult"
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmProposalInput"
+              }
             },
-            "result": {
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmProposalInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Proposals/UpdateNumbers": {
+      "put": {
+        "tags": [
+          "Proposals"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Proposals/{id}/Description": {
+      "get": {
+        "tags": [
+          "Proposals"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Speakers": {
+      "get": {
+        "tags": [
+          "Speakers"
+        ],
+        "operationId": "GetAllSpeakers",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpeakerDtoArrayOperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Speakers/Me": {
+      "get": {
+        "tags": [
+          "Speakers"
+        ],
+        "operationId": "GetSpeaker",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpeakerDtoOperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Speakers/Search": {
+      "get": {
+        "tags": [
+          "Speakers"
+        ],
+        "operationId": "SearchSpeakers",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpeakerDtoArrayOperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/UnavailableDates": {
+      "get": {
+        "tags": [
+          "UnavailableDates"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UnavailableDates"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUnavailableDateInput"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUnavailableDateInput"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUnavailableDateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UnavailableDates"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUnavailableDateInput"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUnavailableDateInput"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUnavailableDateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/UnavailableDates/{id}": {
+      "delete": {
+        "tags": [
+          "UnavailableDates"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Website/PastWebinars": {
+      "get": {
+        "tags": [
+          "Website"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/webinars-module/Website/NextWebinar": {
+      "get": {
+        "tags": [
+          "Website"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConfirmProposalInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateProposalRequest": {
+        "type": "object",
+        "properties": {
+          "speakers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateSpeakerInput"
+            },
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "audienceAnswer": {
+            "type": "string",
+            "nullable": true
+          },
+          "knowledgeAnswer": {
+            "type": "string",
+            "nullable": true
+          },
+          "useCaseAnswer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateSpeakerInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitter": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUnavailableDateInput": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorResult": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProposalDateDto": {
+        "type": "object",
+        "properties": {
+          "dates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProposalDateDtoOperationResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorResult"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ProposalDateDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProposalDto": {
+        "type": "object",
+        "properties": {
+          "proposalId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "creationTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "audienceAnswer": {
+            "type": "string",
+            "nullable": true
+          },
+          "knowledgeAnswer": {
+            "type": "string",
+            "nullable": true
+          },
+          "useCaseAnswer": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "webinarNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/WebinarStatus"
+          },
+          "meetup": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "streamyard": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "liveStreaming": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "flyer": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProposalFullDto": {
+        "type": "object",
+        "properties": {
+          "proposal": {
+            "$ref": "#/components/schemas/ProposalDto"
+          },
+          "speakers": {
+            "type": "array",
+            "items": {
               "$ref": "#/components/schemas/SpeakerDto"
-            }
-          },
-          "additionalProperties": false
-        },
-        "SubscribeDeviceInput": {
-          "type": "object",
-          "properties": {
-            "pushEndpoint": {
-              "type": "string",
-              "nullable": true
             },
-            "pushP256DH": {
-              "type": "string",
-              "nullable": true
-            },
-            "pushAuth": {
-              "type": "string",
-              "nullable": true
-            },
-            "userId": {
-              "type": "string",
-              "format": "uuid",
-              "nullable": true
-            },
-            "userAgent": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "UpdateProposalInput": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "title": {
-              "type": "string",
-              "nullable": true
-            },
-            "description": {
-              "type": "string",
-              "nullable": true
-            },
-            "date": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "audienceAnswer": {
-              "type": "string",
-              "nullable": true
-            },
-            "knowledgeAnswer": {
-              "type": "string",
-              "nullable": true
-            },
-            "useCaseAnswer": {
-              "type": "string",
-              "nullable": true
-            },
-            "webinarNumber": {
-              "type": "integer",
-              "format": "int32",
-              "nullable": true
-            },
-            "meetup": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
-            },
-            "streamyard": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
-            },
-            "liveStreaming": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
-            },
-            "flyer": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
-            },
-            "speakers": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/UpdateSpeakerInput"
-              },
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "UpdateSpeakerInput": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "name": {
-              "type": "string",
-              "nullable": true
-            },
-            "lastName": {
-              "type": "string",
-              "nullable": true
-            },
-            "email": {
-              "type": "string",
-              "nullable": true
-            },
-            "twitter": {
-              "type": "string",
-              "nullable": true
-            },
-            "description": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "UpdateUnavailableDateInput": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "date": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "reason": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "WebinarStatus": {
-          "enum": [
-            0,
-            1
-          ],
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "securitySchemes": {
-        "oauth2": {
-          "type": "oauth2",
-          "flows": {
-            "authorizationCode": {
-              "authorizationUrl": "https://ids.latinonet.online/connect/authorize",
-              "tokenUrl": "https://ids.latinonet.online/connect/token",
-              "scopes": {
-                "latinonetonline_api": "latinonetonline_api",
-                "roles": "roles",
-                "openid": "openid"
-              }
-            }
+            "nullable": true
           }
         },
-        "Bearer": {
-          "type": "http",
-          "description": "Enter JWT Bearer token **_only_**",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
-        }
+        "additionalProperties": false
+      },
+      "ProposalFullDtoOperationResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorResult"
+          },
+          "result": {
+            "$ref": "#/components/schemas/ProposalFullDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SendNotificationInput": {
+        "type": "object",
+        "properties": {
+          "devices": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpeakerDto": {
+        "type": "object",
+        "properties": {
+          "speakerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitter": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpeakerDtoArrayOperationResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorResult"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpeakerDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpeakerDtoOperationResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorResult"
+          },
+          "result": {
+            "$ref": "#/components/schemas/SpeakerDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SubscribeDeviceInput": {
+        "type": "object",
+        "properties": {
+          "pushEndpoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "pushP256DH": {
+            "type": "string",
+            "nullable": true
+          },
+          "pushAuth": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "userAgent": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateProposalInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "audienceAnswer": {
+            "type": "string",
+            "nullable": true
+          },
+          "knowledgeAnswer": {
+            "type": "string",
+            "nullable": true
+          },
+          "useCaseAnswer": {
+            "type": "string",
+            "nullable": true
+          },
+          "webinarNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "meetup": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "streamyard": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "liveStreaming": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "flyer": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "speakers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateSpeakerInput"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateSpeakerInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "twitter": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateUnavailableDateInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UriOperationResult": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorResult"
+          },
+          "result": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebinarStatus": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
       }
     },
-    "security": [
-      {
-        "oauth2": [
-          
-        ]
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://ids.latinonet.online/connect/authorize",
+            "tokenUrl": "https://ids.latinonet.online/connect/token",
+            "scopes": {
+              "latinonetonline_api": "latinonetonline_api",
+              "roles": "roles",
+              "openid": "openid"
+            }
+          }
+        }
       },
-      {
-        "Bearer": [
-          
-        ]
+      "Bearer": {
+        "type": "http",
+        "description": "Enter JWT Bearer token **_only_**",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
-    ]
-  }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        
+      ]
+    },
+    {
+      "Bearer": [
+        
+      ]
+    }
+  ]
+}
