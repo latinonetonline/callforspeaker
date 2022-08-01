@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../data/AppContext";
 import {
   createProposal,
-  updateFormState,
 } from "../../data/call-for-speakers/callforspeakers.action";
 import { ConfirmSectionFormInput } from "../../models/FormInput";
 import useObjectURL from "../../hooks/useObjectURL";
