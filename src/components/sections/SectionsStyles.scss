@@ -143,6 +143,33 @@
     }
   }
 
+  & .terms-cons_container {
+    & .form-holder-2 {
+      padding: 0;
+      margin-top: 37px;
+      position: relative;
+      
+      & fieldset {
+        width: 400px;
+        margin: 0;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+      }
+
+      & .terms-and-cons-clickeable {
+        position: absolute;
+        bottom: 17px;
+        right: 70px;
+
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: #e45063;
+        cursor: pointer;
+      }
+    }
+  }
+
   & .word-break {
     // word-break: break-all;
   }

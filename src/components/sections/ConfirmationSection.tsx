@@ -1,18 +1,22 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../data/AppContext";
 import { createProposal } from "../../data/call-for-speakers/callforspeakers.action";
 import useObjectURL from "../../hooks/useObjectURL";
 import ConfirmButton from "../buttons/ConfirmButton";
 import PrevButton from "../buttons/PrevButton";
+import TermsAndConsModal from "../TermsAndConsModal";
 import SpeakerConfirmationComponent from "./components/SpeakerConfirmationComponent";
 import TalkConfirmationComponent from "./components/TalkConfirmationComponent";
+import TermsAndConsCheckboxInput from "./components/TermsAndConsCheckoutInput";
 
 interface ConfirmationSectionProps {}
 
 const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
   const { state, dispatch } = useAppContext();
   const navigate = useNavigate();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const { objectURL: speakerPhoto } = useObjectURL(
     state.callForSpeakers.form.speakerPhoto
   );
@@ -32,6 +36,14 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
       navigate("thank-you");
     }
   }, [state.callForSpeakers.createProposalSuccess]);
+  const openModal = () => {
+    setModalIsOpen(true);
+    // console.log("MODAL ABIERTO")
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   return (
     <div className="tab-content animate__animated animate__fadeIn">
@@ -110,6 +122,12 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
             </div>
           </div>
         </div>
+
+        <div className="terms-cons_container">
+          <div className="form-row">
+            <TermsAndConsCheckboxInput openModal={openModal} />
+          </div>
+        </div>
       </section>
       <div className="navigation-buttons_container button_container">
         <div className="navigation-btn_container">
@@ -117,6 +135,8 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
           <ConfirmButton onClick={handleConfirm} />
         </div>
       </div>
+
+      <TermsAndConsModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
     </div>
   );
 };
