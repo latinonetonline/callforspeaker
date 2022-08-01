@@ -42,7 +42,14 @@ jobs:
           clientId: "callforspeakers"
           redirectUri: "https://latinonet.online/callforspeakers/callback"
           postLogoutRedirectUri: "https://latinonet.online/callforspeakers/signout-redirect"
+          
 
+    - uses: microsoft/variable-substitution@v1 
+      with:
+          files: 'package.json'
+      env:
+          homepage: "https://latinonet.online/callback"
+       
 
     - name: Build
       env:
