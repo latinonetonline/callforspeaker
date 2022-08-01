@@ -38,7 +38,6 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
   }, [state.callForSpeakers.createProposalSuccess]);
   const openModal = () => {
     setModalIsOpen(true);
-    // console.log("MODAL ABIERTO")
   };
 
   const closeModal = () => {
@@ -126,7 +125,6 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
         <div className="terms-cons_container">
           <div className="form-row">
             <TermsAndConsCheckboxInput openModal={openModal} />
-            {/* <button onClick={() => closeModal()}>PRUEBA</button> */}
           </div>
         </div>
       </section>
