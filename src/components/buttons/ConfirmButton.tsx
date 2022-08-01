@@ -1,15 +1,13 @@
 import React from "react";
 import "./ButtonStyles.scss";
 
-interface ConfirmButtonProps {
-  onClick: () => void;
-}
+interface ConfirmButtonProps {}
 
-const ConfirmButton: React.FC<ConfirmButtonProps> = ({ onClick }) => {
+const ConfirmButton: React.FC<ConfirmButtonProps> = () => {
   return (
-    <div className="confirm-button" onClick={onClick}>
+    <button type="submit" className="confirm-button">
       <img src="/assets/check-icon.png" alt="" />
-    </div>
+    </button>
   );
 };
 

@@ -55,6 +55,7 @@ export const initialState: AppState = {
       answer1: "",
       answer2: "",
       answer3: "",
+      termsAndconditions: false
     },
   },
   speakers: {

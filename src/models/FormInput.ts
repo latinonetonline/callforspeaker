@@ -32,7 +32,12 @@ export type AdditionalInfoSectionFormInput = {
   answer3: string;
 };
 
+export type ConfirmSectionFormInput = {
+  termsAndconditions: boolean;
+}
+
 export type FormInput = PersonalInformationSeccionFormInput &
   SecondPersonalInformationSeccionFormInput &
   PresentationSectionFormInput &
-  AdditionalInfoSectionFormInput;
+  AdditionalInfoSectionFormInput &
+  ConfirmSectionFormInput;
