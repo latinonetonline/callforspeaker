@@ -126,6 +126,7 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
         <div className="terms-cons_container">
           <div className="form-row">
             <TermsAndConsCheckboxInput openModal={openModal} />
+            {/* <button onClick={() => closeModal()}>PRUEBA</button> */}
           </div>
         </div>
       </section>
