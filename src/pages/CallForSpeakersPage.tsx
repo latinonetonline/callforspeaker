@@ -8,11 +8,16 @@ import PresentationSection from "../components/sections/PresentationSection";
 import AdditionalInfoSection from "../components/sections/AdditionalInfoSection";
 import ConfirmationSection from "../components/sections/ConfirmationSection";
 import { useAppContext } from "../data/AppContext";
-import { loadData } from "../data/call-for-speakers/callforspeakers.action";
+import {
+  loadData,
+  setIsAuthenticated,
+} from "../data/call-for-speakers/callforspeakers.action";
 import { StepSeccion } from "../models/StepSeccion";
 import StepSeccionTabContent from "../components/sections/components/StepSeccionTabContent";
 import SecondPersonalInformation from "../components/sections/SecondPersonalInformationSeccion";
 import SpinnerLoading from "../components/SpinnerLoading";
+import { useAuth } from "oidc-react";
+import { useNavigate } from "react-router-dom";
 
 interface CallForSpeakersProps {}
 
@@ -45,10 +50,24 @@ const stepSeccions: StepSeccion[] = [
 
 const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
   const { state, dispatch } = useAppContext();
+  const auth = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(loadData);
+    if (!state.callForSpeakers.isAuthenticated) {
+      auth.userManager.signinRedirectCallback().then((user) => {
+        sessionStorage.setItem("access_token", user.access_token);
+        dispatch(setIsAuthenticated(true));
+        navigate("/");
+      });
+    }
   }, []);
+
+  useEffect(() => {
+    if (state.callForSpeakers.isAuthenticated) {
+      dispatch(loadData);
+    }
+  }, [state.callForSpeakers.isAuthenticated]);
 
   const getActiveClassName = (tabId: number, className: string) =>
     state.callForSpeakers.currentStep === tabId ? className : "";
@@ -78,10 +97,10 @@ const CallForSpeakers: React.FC<CallForSpeakersProps> = () => {
           ))}
         </ul>
       </div>
-        <div className="steps-content_container">
-          <StepSeccionTabContent stepSeccion={getStepSeccion()} />
-        </div>
-        {state.callForSpeakers.isLoading && <SpinnerLoading />}
+      <div className="steps-content_container">
+        <StepSeccionTabContent stepSeccion={getStepSeccion()} />
+      </div>
+      {state.callForSpeakers.isLoading && <SpinnerLoading />}
     </div>
   );
 };

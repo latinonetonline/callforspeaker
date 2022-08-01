@@ -40,7 +40,7 @@ jobs:
       env:
           apiUrl: "https://api.latinonet.online"
           clientId: "callforspeakers"
-          redirectUri: "https://latinonet.online/callforspeakers/callback"
+          redirectUri: "https://latinonet.online/callforspeakers"
           postLogoutRedirectUri: "https://latinonet.online/callforspeakers/signout-redirect"
           
 
