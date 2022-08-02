@@ -40,7 +40,6 @@ const SaturdayInput: React.FC<SaturdayInputProps> = ({
   unavailableDates = [],
 }) => {
   const [date, setDate] = useState(value ?? new Date());
-
   useEffect(() => {
     if (!value) {
       const saturdays = getSaturdays(

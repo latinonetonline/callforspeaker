@@ -10,7 +10,13 @@ import {
 export const getUnavailableDates = async (): Promise<Date[]> => {
   return await proposalsApi
     .getDates()
-    .then((response) => response.data.result!.dates!.map((x) => new Date(x)));
+    .then((response) => response.data.result!.dates!.map((x) => new Date(x)))
+    .then((unavailableDates) =>
+      unavailableDates.map((x) => {
+        x.setHours(0, 0, 0, 0);
+        return x;
+      })
+    );
 };
 
 export const uploadImage = async (blob: Blob): Promise<string> => {
