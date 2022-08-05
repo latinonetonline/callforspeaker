@@ -60,6 +60,7 @@ export const initialState: AppState = {
   },
   speakers: {
     current: undefined,
+    searchs: undefined,
   },
 };
 
