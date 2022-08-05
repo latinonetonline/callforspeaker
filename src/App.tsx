@@ -15,7 +15,7 @@ const oidcConfig: AuthProviderProps = {
   clientId: config.clientId,
   redirectUri: config.redirectUri,
   scope: "openid profile email email_user roles latinonetonline_api",
-  responseType: "id_token token",
+  responseType: "code",
   postLogoutRedirectUri: config.postLogoutRedirectUri,
   autoSignIn: false,
   loadUserInfo: true,
