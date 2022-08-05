@@ -13,15 +13,6 @@ import {
 } from "../../data/call-for-speakers/callforspeakers.action";
 import NextButton from "../buttons/NextButton";
 import PrevButton from "../buttons/PrevButton";
-import SelectSearch, {
-  DomProps,
-  OptionSnapshot,
-  SelectedOption,
-  SelectedOptionValue,
-} from "react-select-search";
-import { config } from "../../config/EnvConfig";
-import { Speaker } from "../../models/Speaker";
-import { searchSpeakers } from "../../data/speakers/speakers.api";
 import { setSearch } from "../../data/speakers/speakers.action";
 import SpeakerSearch from "../inputs/SpeakerSearch";
 
@@ -92,7 +83,7 @@ const SecondPersonalInformationSeccion: React.FC<
               </p>
             </div>
 
-            {selected ? (
+            {(selected || state.callForSpeakers.form.secondSpeakerEmail) ? (
               <>
                 <div className="form-row">
                   <ShortInputComponent
