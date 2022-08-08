@@ -47,8 +47,8 @@ const SpeakerSearch: React.FC<SpeakerSearchProps> = ({
         <span>
           <img
             alt=""
-            width="28"
-            height="28"
+            width="50"
+            height="50"
             src={(option as any).photo}
             style={{
               borderRadius: "50%",
@@ -96,7 +96,7 @@ const SpeakerSearch: React.FC<SpeakerSearchProps> = ({
         });
       }}
       search
-      placeholder="Selecciona un Speaker"
+      placeholder="Ingresa el nombre del Speaker"
       emptyMessage={renderEmplyMessage() as any}
     />
   );

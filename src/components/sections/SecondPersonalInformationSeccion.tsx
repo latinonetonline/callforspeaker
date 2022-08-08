@@ -155,7 +155,7 @@ const SecondPersonalInformationSeccion: React.FC<
               </>
             ) : (
               <>
-                <h3 className="heading">Busca un Speaker</h3>
+                <h3 className="heading">Encontrá a tu compañero</h3>
                 {speakerSeachMemo}
               </>
             )}
