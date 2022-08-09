@@ -28,6 +28,7 @@ const SecondPersonalInformationSeccion: React.FC<
   const [selected, setSelected] = useState(false);
   const {
     handleSubmit,
+    setValue,
     formState: { errors },
   } = methods;
   const { state, dispatch } = useAppContext();
@@ -55,6 +56,23 @@ const SecondPersonalInformationSeccion: React.FC<
                 secondSpeakerEmail: speaker.email,
               })
             );
+
+            setValue("secondSpeakerName", speaker.name);
+            setValue("secondSpeakerLastname", speaker.lastname);
+            setValue("secondSpeakerPhotoOriginal", speaker.photo);
+            setValue("secondSpeakerTwitter", speaker.twitter);
+            setValue("secondSpeakerDescription", speaker.description);
+            setValue("secondSpeakerPhotoNew", false);
+
+            if (!state.callForSpeakers.form.secondSpeakerPhoto) {
+              if (speaker?.photo) {
+                fetch(speaker?.photo)
+                  .then((data) => data.blob())
+                  .then((blob) =>
+                    dispatch(updateFormState({ secondSpeakerPhoto: blob }))
+                  );
+              }
+            }
           }
 
           setSelected(true);
@@ -83,7 +101,7 @@ const SecondPersonalInformationSeccion: React.FC<
               </p>
             </div>
 
-            {(selected || state.callForSpeakers.form.secondSpeakerEmail) ? (
+            {selected || state.callForSpeakers.form.secondSpeakerEmail ? (
               <>
                 <div className="form-row">
                   <ShortInputComponent
@@ -150,6 +168,7 @@ const SecondPersonalInformationSeccion: React.FC<
                     value={state.callForSpeakers.form.secondSpeakerPhoto}
                     required={true}
                     error={!!errors.secondSpeakerPhoto}
+                    onChange={(_) => setValue("secondSpeakerPhotoNew", true)}
                   />
                 </div>
               </>
