@@ -22,6 +22,8 @@ export function callForSpeakersReducer(
       return { ...state, createProposalSuccess: action.isSuccess };
     case "update-form-state":
       return { ...state, form: { ...state.form, ...action.form } };
+    case "set-error":
+      return { ...state, error: action.error };
     case "insert-step":
       return {
         ...state,

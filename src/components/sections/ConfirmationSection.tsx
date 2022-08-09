@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../data/AppContext";
 import {
   createProposal,
+  setError,
 } from "../../data/call-for-speakers/callforspeakers.action";
 import { ConfirmSectionFormInput } from "../../models/FormInput";
 import useObjectURL from "../../hooks/useObjectURL";
@@ -33,6 +34,13 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
     state.callForSpeakers.form.secondSpeakerPhoto
   );
 
+  useEffect(() => {
+    if (state.callForSpeakers.error) {
+      console.log(state.callForSpeakers.error);
+      dispatch(setError, undefined);
+    }
+  }, [state.callForSpeakers.error]);
+
   const onValidSubmit = (data: ConfirmSectionFormInput) => {
     console.log(data);
     handleConfirm();
@@ -50,7 +58,6 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
       navigate("thank-you");
     }
   }, [state.callForSpeakers.createProposalSuccess]);
-
 
   const openModal = () => {
     setModalIsOpen(true);
