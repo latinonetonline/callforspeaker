@@ -1,6 +1,7 @@
 import { User } from "oidc-react";
 import { FormInput } from "../../models/FormInput";
 import { Step } from "../../models/Step";
+import { ErrorMessage } from "../../models/ErrorMessage";
 
 export interface CallForSpeakersState {
   currentStep: number;
@@ -11,4 +12,5 @@ export interface CallForSpeakersState {
   steps: Step[];
   form: FormInput;
   createProposalSuccess: boolean;
+  error?: ErrorMessage;
 }

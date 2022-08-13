@@ -57,9 +57,11 @@ export const initialState: AppState = {
       answer3: "",
       termsAndconditions: false
     },
+    error: undefined
   },
   speakers: {
     current: undefined,
+    searchs: undefined,
   },
 };
 

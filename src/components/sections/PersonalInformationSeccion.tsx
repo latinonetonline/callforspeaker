@@ -15,6 +15,7 @@ import {
 } from "../../data/call-for-speakers/callforspeakers.action";
 import { loadSpeaker } from "../../data/speakers/speakers.action";
 import { useAuth } from "oidc-react";
+import SecondSpeakerCheckboxInput from "./components/SecondSpeakerCheckboxInput";
 
 const regExpEmail =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -147,11 +148,11 @@ const PersonalInformationSeccion: React.FC<
                 onChange={(_) => setValue("speakerPhotoNew", true)}
               />
             </div>
-            {/* <div className="form-row">
+            <div className="form-row">
               <SecondSpeakerCheckboxInput
                 value={state.callForSpeakers.hasSecondSpeaker}
               />
-            </div> */}
+            </div>
           </section>
           <div className="navigation-buttons_container button_container">
             <div className="navigation-btn_container">

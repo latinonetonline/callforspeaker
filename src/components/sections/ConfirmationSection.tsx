@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../data/AppContext";
 import {
   createProposal,
+  setError,
 } from "../../data/call-for-speakers/callforspeakers.action";
 import { ConfirmSectionFormInput } from "../../models/FormInput";
 import useObjectURL from "../../hooks/useObjectURL";
@@ -13,6 +14,7 @@ import TermsAndConsModal from "../TermsAndConsModal";
 import SpeakerConfirmationComponent from "./components/SpeakerConfirmationComponent";
 import TalkConfirmationComponent from "./components/TalkConfirmationComponent";
 import TermsAndConsCheckboxInput from "./components/TermsAndConsCheckoutInput";
+import Swal from 'sweetalert2'
 
 interface ConfirmationSectionProps {}
 
@@ -33,6 +35,18 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
     state.callForSpeakers.form.secondSpeakerPhoto
   );
 
+  useEffect(() => {
+    if (state.callForSpeakers.error) {
+      dispatch(setError, undefined);
+      Swal.fire({
+        title: state.callForSpeakers.error.title,
+        text: state.callForSpeakers.error.message,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+    }
+  }, [state.callForSpeakers.error]);
+
   const onValidSubmit = (data: ConfirmSectionFormInput) => {
     console.log(data);
     handleConfirm();
@@ -50,7 +64,6 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
       navigate("thank-you");
     }
   }, [state.callForSpeakers.createProposalSuccess]);
-
 
   const openModal = () => {
     setModalIsOpen(true);

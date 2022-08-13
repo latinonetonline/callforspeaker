@@ -1,11 +1,13 @@
 import { FormInput } from "../../models/FormInput";
 import { Step } from "../../models/Step";
+import { ErrorMessage } from "../../models/ErrorMessage";
 import { ActionType, DispatchObject } from "../types";
 import {
   createProposalApi,
   getUnavailableDates,
   uploadImage,
 } from "./callForSpeakers.api";
+import { ProposalFullDto } from "../../generated-sources/openapi";
 
 export const loadData =
   () => async (dispatch: React.Dispatch<DispatchObject>) => {
@@ -23,20 +25,38 @@ export const createProposal =
 
     if (form.speakerPhotoNew && form.speakerPhoto) {
       const result = await uploadImage(form.speakerPhoto);
-      form.speakerPhotoOriginal = result;
+      if (typeof result == "string") {
+        form.speakerPhotoOriginal = result;
+      }
+      if ((result as ErrorMessage).title) {
+        dispatch(setError(result as ErrorMessage));
+        dispatch(setLoading(false));
+        return;
+      }
     }
 
     if (form.secondSpeakerPhotoNew && form.secondSpeakerPhoto) {
       const result = await uploadImage(form.secondSpeakerPhoto);
-      form.secondSpeakerPhotoOriginal = result;
+      if (typeof result == "string") {
+        form.secondSpeakerPhotoOriginal = result;
+      }
+      if ((result as ErrorMessage).title) {
+        (result as ErrorMessage).title = "Error al subir la imagen del segundo speaker"
+        dispatch(setError(result as ErrorMessage));
+        dispatch(setLoading(false));
+        return;
+      }
     }
 
-    const proposal = await createProposalApi(form);
+    const result = await createProposalApi(form);
 
-    console.log("proposal", proposal);
+    console.log("proposal", result);
 
-    if (proposal?.proposal?.proposalId) {
+    if ((result as ProposalFullDto)?.proposal?.proposalId) {
       dispatch(finishCreateProposal(true));
+    }
+    if ((result as ErrorMessage).title) {
+      dispatch(setError(result as ErrorMessage));
     }
 
     dispatch(setLoading(false));
@@ -103,6 +123,12 @@ export const finishCreateProposal = (isSuccess: boolean) =>
     isSuccess,
   } as const);
 
+export const setError = (error?: ErrorMessage) =>
+  ({
+    type: "set-error",
+    error,
+  } as const);
+
 export const resetState = () =>
   ({
     type: "reset-state",
@@ -118,4 +144,5 @@ export type CallForSpeakersActions =
   | ActionType<typeof insertStep>
   | ActionType<typeof resetState>
   | ActionType<typeof finishCreateProposal>
+  | ActionType<typeof setError>
   | ActionType<typeof removeStep>;

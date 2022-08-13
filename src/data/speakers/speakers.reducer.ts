@@ -8,5 +8,7 @@ export function speakerReducer(
   switch (action.type) {
     case "set-speaker":
       return { ...state, current: action.speaker };
+    case "set-search":
+      return { ...state, searchs: action.speakers };
   }
 }
