@@ -14,6 +14,7 @@ import TermsAndConsModal from "../TermsAndConsModal";
 import SpeakerConfirmationComponent from "./components/SpeakerConfirmationComponent";
 import TalkConfirmationComponent from "./components/TalkConfirmationComponent";
 import TermsAndConsCheckboxInput from "./components/TermsAndConsCheckoutInput";
+import Swal from 'sweetalert2'
 
 interface ConfirmationSectionProps {}
 
@@ -36,8 +37,13 @@ const ConfirmationSection: React.FC<ConfirmationSectionProps> = () => {
 
   useEffect(() => {
     if (state.callForSpeakers.error) {
-      console.log(state.callForSpeakers.error);
       dispatch(setError, undefined);
+      Swal.fire({
+        title: state.callForSpeakers.error.title,
+        text: state.callForSpeakers.error.message,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
     }
   }, [state.callForSpeakers.error]);
 

@@ -28,7 +28,7 @@ export const uploadImage = async (blob: Blob): Promise<string | ErrorMessage> =>
       console.log("Error Subir Imagen:", error);
       return {
         title: "Error al subir la imagen",
-        message: error.data.Error.Code,
+        message: error?.data?.Error?.Code,
       };
     });
 };
@@ -75,7 +75,7 @@ export const createProposalApi = async (
       console.log("Error Cargar Charla:", error);
       return {
         title: "Error al cargar la charla",
-        message: error.data.Error.Code,
+        message: error?.data?.Error?.Code,
       };
     });
 };

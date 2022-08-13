@@ -30,6 +30,8 @@ export const createProposal =
       }
       if ((result as ErrorMessage).title) {
         dispatch(setError(result as ErrorMessage));
+        dispatch(setLoading(false));
+        return;
       }
     }
 
@@ -39,7 +41,10 @@ export const createProposal =
         form.secondSpeakerPhotoOriginal = result;
       }
       if ((result as ErrorMessage).title) {
+        (result as ErrorMessage).title = "Error al subir la imagen del segundo speaker"
         dispatch(setError(result as ErrorMessage));
+        dispatch(setLoading(false));
+        return;
       }
     }
 
