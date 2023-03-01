@@ -205,62 +205,73 @@ body {
 
 // MODAL DE TERMINOS Y CONDICIONES
 
-#terms-and-cons-modal {
-  display: flex;
-  flex-direction: column;
-  width: 800px;
-  height: 700px;
-  margin: auto;
-  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
-
-  & .close-modal-btn {
-    align-self: flex-end;
-
+.ReactModalPortal {
+  #terms-and-cons-modal {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    width: 800px;
+    margin: auto;
+    margin-top: 0px;
+    box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
 
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    font-weight: 600;
-    cursor: pointer;
-  }
+    & .close-modal-btn {
+      align-self: flex-end;
 
-  & h2 {
-    text-align: center;
-    text-decoration: underline;
-    font-family: "Open Sans", sans-serif;
-  }
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-  & ul {
-    padding: 50px 50px 0;
-    margin: 0;
-    font-family: "Open Sans", sans-serif;
-    font-size: 17px;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
-    & li {
-      margin-bottom: 30px;
+    & h2.title {
+      text-align: center;
+      text-decoration: underline;
+      font-family: "Open Sans", sans-serif;
+    }
 
-      & .example-text {
-        color: #757575;
-        margin: 10px 30px;
+    & p.disclaimer {
+      text-align: center;
+      margin-bottom: 0px;
+    }
+
+    & ul.list {
+      padding: 50px 50px 0;
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      font-size: 17px;
+
+      & li {
+        margin-bottom: 30px;
+
+        & .example-text {
+          color: #757575;
+          margin: 10px 30px;
+        }
+      }
+    }
+
+    & .maintenance-notification {
+      background: #ffd48a;
+      border-left: 5px solid #8a5700;
+
+      align-self: center;
+      width: 90%;
+      border-radius: 5px;
+      box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
+
+      & p {
+        color: #8a5700;
+        padding-left: 20px;
       }
     }
   }
 
-  & .maintenance-notification {
-    background: #ffd48a;
-    border-left: 5px solid #8a5700;
-
-    align-self: center;
-    width: 90%;
-    border-radius: 5px;
-    box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
-
-    & p {
-      color: #8a5700;
-      padding-left: 20px;
-    }
+  & .ReactModal__Overlay.ReactModal__Overlay--after-open {
+    overflow: hidden;
   }
 }

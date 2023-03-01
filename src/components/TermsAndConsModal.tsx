@@ -10,11 +10,11 @@ const TermsAndConsModal: React.FC<TermsAndConsModalProps> = ({
   modalIsOpen,
   closeModal,
 }) => {
-    const customStyles = {
-        content: {
-          borderRadius: '10px'
-        },
-      };
+  const customStyles = {
+    content: {
+      borderRadius: "10px",
+    },
+  };
   return (
     <>
       <ReactModal
@@ -26,12 +26,18 @@ const TermsAndConsModal: React.FC<TermsAndConsModalProps> = ({
         <div onClick={closeModal} className="close-modal-btn">
           X
         </div>
-        <h2>Terminos y Condiciones Call For Speakers:</h2>
-        <ul>
+        <h2 className="title">Terminos y Condiciones:</h2>
+        <p className="disclaimer">
+          Al participar en la comunidad Latino .NET Online, aceptas los
+          siguientes términos y condiciones:
+        </p>
+        <ul className="list">
           <li>
-            Los organizadores pueden llegar a cambiar el contenido de la
-            propuesta de ser necesario para hacerlo más vistoso o adaptado a las
-            redes (siempre manteniendo el tema principal).
+            <i>Modificación del contenido:</i> Los organizadores de la Comunidad
+            tienen el derecho de modificar el contenido de la propuesta de una
+            charla de ser necesario (título y descripción) para hacerlo más
+            vistoso para las redes sociales, sin embargo, no modificarán el
+            contenido esencial de la charla.
             <br />
             <br />
             <i>
@@ -47,13 +53,11 @@ const TermsAndConsModal: React.FC<TermsAndConsModalProps> = ({
             </i>
           </li>
           <li>
-            Los Webinars serán dados en el canal oficial de la comunidad. Aunque
-            también se pueden dar en simultaneo con otro canal mediante el
-            Streamyard del equipo de organización de Latino .NET Online
-          </li>
-          <li>
-            El título de la charla puede variar tanto en el flyer, en la
-            transmisión, en el evento de Meetup y/o en las redes sociales.
+            <i>Adaptación del contenido:</i> Los organizadores de la Comunidad
+            tienen el derecho de modificar el título de la charla para los
+            diferentes medios de difusión, incluyendo el flyer, en la
+            transmisión, en el evento de Meetup y/o en las redes sociales, sin
+            previo aviso.
             <br />
             <br />
             <i>
@@ -70,13 +74,34 @@ const TermsAndConsModal: React.FC<TermsAndConsModalProps> = ({
               </div>
             </i>
           </li>
+          <li>
+            <i>Difusión del contenido:</i> La Comunidad transmitirá los webinars
+            en su canal oficial de YouTube (Latino.NET Online), permitiendo
+            transmisión simultánea o en diferido en otro/s canal/es. La
+            Comunidad se reserva el derecho de grabar los webinars y utilizarlos
+            con fines de promoción, difusión y capacitación en el futuro.
+          </li>
+          <li>
+            <i>Propiedad del contenido:</i> La Comunidad se reserva el derecho
+            de utilizar cualquier contenido generado en el canal oficial para la
+            creación de nuevo contenido, incluyendo resúmenes, extractos,
+            recopilaciones, compilaciones y otros materiales de promoción y
+            difusión.
+          </li>
+          <li>
+            <i>Cambios en los términos y condiciones:</i> Los organizadores de
+            la Comunidad se reservan el derecho de modificar estos términos y
+            condiciones en cualquier momento. Se espera que los participantes
+            revisen periódicamente estos términos y condiciones para mantenerse
+            informados sobre cualquier cambio.
+          </li>
         </ul>
-        <div className="maintenance-notification">
+        {/* <div className="maintenance-notification">
           <p>
             Actualmente los terminos y condiciones se encuentran en
             mantenimiento
           </p>
-        </div>
+        </div> */}
       </ReactModal>
     </>
   );
